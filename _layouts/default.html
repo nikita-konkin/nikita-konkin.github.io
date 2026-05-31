@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.summary | default: page.description | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  </head>
+  <body>
+    {% include site_header.html %}
+    <main class="site-main">
+      <div class="container">
+        {{ content }}
+      </div>
+    </main>
+    {% include site_footer.html %}
+  </body>
+</html>

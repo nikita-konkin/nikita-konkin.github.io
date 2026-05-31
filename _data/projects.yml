@@ -1,0 +1,18 @@
+- slug: diploma_supplement_service
+  name: diploma_supplement_service
+  title: Сервис автоматизации приложений к дипломам
+  status: Public demo
+  description: Сервис для проверки Excel-ведомостей, подсветки проблемных данных и сборки XML-файлов для приложений к дипломам.
+  repo: https://github.com/nikita-konkin/diploma_supplement_service
+  demo: https://xn----etb9agicel.xn--p1ai/
+  stack:
+    - Java
+    - Python
+    - FastAPI
+    - pandas
+    - openpyxl
+    - Docker
+  highlights:
+    - Автоматическая проверка и подсветка проблемных ячеек в Excel.
+    - Генерация XML в целевом формате «КиберДиплом 3.5.1».
+    - Полиглот-архитектура с разделением API, обработки данных и XML-генерации.

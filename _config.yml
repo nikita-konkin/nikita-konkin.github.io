@@ -1,0 +1,38 @@
+title: Nikita Konkin
+tagline: Projects, public articles and engineering updates
+description: Персональный сайт с проектами, публичными статьями и заметками по разработке.
+url: "https://nikita-konkin.github.io"
+baseurl: "/my_articles"
+lang: ru
+timezone: Europe/Moscow
+markdown: kramdown
+permalink: pretty
+
+author:
+  name: Nikita Konkin
+  role: Full stack developer (or not?)
+
+social:
+  github: "https://github.com/nikita-konkin"
+
+collections:
+  articles:
+    output: true
+    permalink: /blog/:path/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page
+  - scope:
+      path: "_articles"
+      type: articles
+    values:
+      layout: article
+      author: Nikita Konkin
+      lang: ru
+
+exclude:
+  - README.md
+  - vendor
