@@ -5,7 +5,7 @@
 ## Структура
 
 ```text
-my_articles/
+nikita-konkin.github.io/
 ├── _config.yml                    # конфигурация GitHub Pages / Jekyll
 ├── _articles/                     # публичные статьи
 │   └── diploma_supplement_service/
