@@ -11,6 +11,8 @@ Desktop.ini
 # Temp
 *.tmp
 ~$*
+__pycache__/
+*.pyc
 
 # Jekyll
 _site/
