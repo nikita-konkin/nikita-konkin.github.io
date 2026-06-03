@@ -69,6 +69,29 @@ translation_of: 2026-06-03-slug.md
 - если сайт будет жить в репозитории `username.github.io`, установите `baseurl: ""`;
 - если сайт будет жить в проектном репозитории, оставьте `baseurl` равным имени репозитория.
 
+## Кросс-постинг в соцсети (VK / Telegram)
+
+Публикация статьи в VK (личная стена) и/или Telegram-канал запускается вручную
+через GitHub Actions → workflow **Social post** (`.github/workflows/social-post.yml`).
+
+Входные параметры воркфлоу:
+
+- `article` — путь к статье; пусто = последняя русская статья по дате;
+- `targets` — `vk telegram`, `vk` или `telegram`;
+- `dry_run` — предпросмотр без вызова API (по умолчанию включён).
+
+Нужные секреты репозитория (*Settings → Secrets and variables → Actions*):
+
+| Секрет | Назначение |
+| --- | --- |
+| `VK_ACCESS_TOKEN` | пользовательский токен со scope `wall` + `offline` |
+| `VK_OWNER_ID` | (необязательно) числовой id; без него постит на стену владельца токена |
+| `TELEGRAM_BOT_TOKEN` | токен бота от @BotFather |
+| `TELEGRAM_CHAT_ID` | `@канал` или числовой chat id |
+
+Постятся только русские оригиналы (английские версии и переводы пропускаются).
+Локальная проверка: `python scripts/social_post.py --dry-run`.
+
 ## Локальная проверка
 
 Если у вас настроен Jekyll:

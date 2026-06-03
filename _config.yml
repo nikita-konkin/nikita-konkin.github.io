@@ -15,6 +15,17 @@ author:
 social:
   github: "https://github.com/nikita-konkin"
 
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# jekyll-feed: publish the articles collection as an Atom feed at /feed.xml
+feed:
+  collections:
+    articles:
+      path: "/feed.xml"
+
 collections:
   articles:
     output: true

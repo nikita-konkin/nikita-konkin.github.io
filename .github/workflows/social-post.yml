@@ -1,0 +1,61 @@
+name: Social post
+
+# Manual cross-poster: publishes a Russian article to VK (personal wall) and/or
+# a Telegram channel. Trigger it from the Actions tab and fill in the inputs.
+#
+# Required repository secrets (Settings -> Secrets and variables -> Actions):
+#   VK_ACCESS_TOKEN     user token with `wall` + `offline` scopes
+#   VK_OWNER_ID         (optional) numeric user id; omit to post to the token owner
+#   TELEGRAM_BOT_TOKEN  bot token from @BotFather
+#   TELEGRAM_CHAT_ID    channel username (e.g. @my_channel) or numeric chat id
+on:
+  workflow_dispatch:
+    inputs:
+      article:
+        description: "Path to the article (blank = latest RU original)."
+        required: false
+        type: string
+      targets:
+        description: "Where to post."
+        required: true
+        default: "vk telegram"
+        type: choice
+        options:
+          - "vk telegram"
+          - "vk"
+          - "telegram"
+      dry_run:
+        description: "Preview only (do not call the APIs)."
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip pyyaml
+
+      - name: Post to social media
+        env:
+          VK_ACCESS_TOKEN: ${{ secrets.VK_ACCESS_TOKEN }}
+          VK_OWNER_ID: ${{ secrets.VK_OWNER_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/social_post.py \
+            ${{ inputs.article && format('--article {0}', inputs.article) || '' }} \
+            --targets ${{ inputs.targets }} \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
