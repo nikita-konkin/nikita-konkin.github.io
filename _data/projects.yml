@@ -1,8 +1,12 @@
 - slug: diploma_supplement_service
   name: diploma_supplement_service
   title: Сервис автоматизации приложений к дипломам
+  title_en: Diploma Supplement Automation Service
   status: Public demo
+  status_ru: Публичное демо
+  status_en: Public demo
   description: Сервис для проверки Excel-ведомостей, подсветки проблемных данных и сборки XML-файлов для приложений к дипломам.
+  description_en: A service for validating Excel grade sheets, highlighting problematic data, and assembling XML files for diploma supplements.
   repo: https://github.com/nikita-konkin/diploma_supplement_service
   demo: https://xn----etb9agicel.xn--p1ai/
   stack:
@@ -16,16 +20,26 @@
     - Автоматическая проверка и подсветка проблемных ячеек в Excel.
     - Генерация XML в целевом формате «КиберДиплом 3.5.1».
     - Полиглот-архитектура с разделением API, обработки данных и XML-генерации.
+  highlights_en:
+    - Automated validation and highlighting of problematic cells in Excel.
+    - XML generation in the target “CyberDiploma 3.5.1” format.
+    - Polyglot architecture with separate API, data-processing, and XML-generation layers.
 
 - slug: angry_tests
   name: yegor256/at
   title: "Angry Tests — принципы тестирования от Yegor Bugayenko"
+  title_en: "Angry Tests — testing principles by Yegor Bugayenko"
   status: "Reference / reading"
+  status_ru: "Материал / чтение"
+  status_en: "Reference / reading"
   description: "Подборка практических принципов автоматизированного тестирования: короткие тесты, фокус на баги, строгие assertions и инструменты для более сильной инженерной проверки."
+  description_en: "A practical collection of automated testing principles: short tests, bug-focused coverage, strict assertions, and stronger engineering feedback loops."
   repo: https://github.com/yegor256/at
-  repo_label: "Principles repo"
+  repo_label_ru: "Репозиторий принципов"
+  repo_label_en: "Principles repo"
   demo: https://www.yegor256.com/angry-tests.html
-  demo_label: "Book page"
+  demo_label_ru: "Страница книги"
+  demo_label_en: "Book page"
   stack:
     - Testing
     - Quality
@@ -37,3 +51,7 @@
     - "Принципы для fast и deep tests, flaky bug reproduction и custom matchers."
     - "Практические ориентиры по тому, как делать тесты короче, злее и полезнее."
     - "Ссылки на инструменты и подходы вроде jqwik, pitest, ArchUnit и fuzzing."
+  highlights_en:
+    - "Principles for fast and deep tests, flaky bug reproduction, and custom matchers."
+    - "Practical guidance on making tests shorter, stricter, and more useful."
+    - "References to tools and approaches such as jqwik, pitest, ArchUnit, and fuzzing."

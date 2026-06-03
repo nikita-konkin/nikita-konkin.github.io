@@ -1,0 +1,16 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% if current_lang == 'en' %}
+  {% assign articles = site.articles | where: "lang", "en" | sort: "date" | reverse %}
+  {% assign intro = 'This page collects the English versions of public articles and project updates. When a Russian original exists, the article page itself links back to it through the language switch.' %}
+{% else %}
+  {% assign articles = site.articles | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
+  {% assign intro = 'Здесь собраны оригинальные публикации. Если для статьи есть английская версия, ссылка на перевод появляется прямо в карточке.' %}
+{% endif %}
+
+<p class="section-note">{{ intro }}</p>
+
+<div class="card-grid" style="margin-top: 1.5rem;">
+  {% for article in articles %}
+    {% include article_card.html article=article %}
+  {% endfor %}
+</div>

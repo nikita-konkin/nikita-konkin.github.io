@@ -1,23 +1,98 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% assign translation_href = page.translation_url %}
+{% if current_lang == 'en' %}
+  {% assign home_path = '/en/' %}
+  {% assign projects_path = '/en/projects/' %}
+  {% assign blog_path = '/en/blog/' %}
+  {% assign about_path = '/en/about/' %}
+  {% assign brand_tagline = 'Projects, public articles, and engineering updates' %}
+  {% assign nav_label = 'Primary navigation' %}
+  {% assign home_label = 'Home' %}
+  {% assign approach_label = 'Approach' %}
+  {% assign project_label = 'Project' %}
+  {% assign writing_label = 'Writing' %}
+  {% assign contact_label = 'Contact' %}
+  {% assign projects_label = 'Projects' %}
+  {% assign blog_label = 'Blog' %}
+  {% assign about_label = 'About' %}
+  {% assign lang_switch_label = 'Language switch' %}
+{% else %}
+  {% assign home_path = '/' %}
+  {% assign projects_path = '/projects/' %}
+  {% assign blog_path = '/blog/' %}
+  {% assign about_path = '/about/' %}
+  {% assign brand_tagline = 'Проекты, публичные статьи и инженерные обновления' %}
+  {% assign nav_label = 'Основная навигация' %}
+  {% assign home_label = 'Главная' %}
+  {% assign approach_label = 'Подход' %}
+  {% assign project_label = 'Проект' %}
+  {% assign writing_label = 'Заметки' %}
+  {% assign contact_label = 'Контакт' %}
+  {% assign projects_label = 'Проекты' %}
+  {% assign blog_label = 'Блог' %}
+  {% assign about_label = 'Обо мне' %}
+  {% assign lang_switch_label = 'Переключение языка' %}
+{% endif %}
+
+{% if page.collection == 'articles' %}
+  {% if current_lang == 'en' and page.translation_of %}
+    {% assign article_translation = site.articles | where: "name", page.translation_of | first %}
+    {% if article_translation %}
+      {% assign translation_href = article_translation.url %}
+    {% endif %}
+  {% elsif current_lang == 'ru' %}
+    {% assign article_translation = site.articles | where: "translation_of", page.name | where: "lang", "en" | first %}
+    {% if article_translation %}
+      {% assign translation_href = article_translation.url %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% assign is_home = false %}
+{% if page.url == '/' or page.url == '/en/' %}
+  {% assign is_home = true %}
+{% endif %}
+
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="site-brand" href="{{ '/' | relative_url }}">
+    <a class="site-brand" href="{{ home_path | relative_url }}">
       <span class="site-brand__title">{{ site.title }}</span>
-      <span class="site-brand__tagline">{{ site.tagline }}</span>
+      <span class="site-brand__tagline">{{ brand_tagline }}</span>
     </a>
 
-    <nav class="site-nav" aria-label="Основная навигация">
-      {% if page.url == '/' %}
-        <a href="#approach">Подход</a>
-        <a href="#featured-work">Проект</a>
-        <a href="#writing">Заметки</a>
-        <a href="#contact">Контакт</a>
-      {% else %}
-        <a href="{{ '/' | relative_url }}">Главная</a>
-        <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}>Проекты</a>
-        <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Блог</a>
-        <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}aria-current="page"{% endif %}>Обо мне</a>
-      {% endif %}
-      <a class="site-nav__cta" href="{{ site.social.github }}">GitHub</a>
-    </nav>
+    <div class="site-header__controls">
+      <nav class="site-nav" aria-label="{{ nav_label }}">
+        {% if is_home %}
+          <a href="#approach">{{ approach_label }}</a>
+          <a href="#featured-work">{{ project_label }}</a>
+          <a href="#writing">{{ writing_label }}</a>
+          <a href="#contact">{{ contact_label }}</a>
+        {% else %}
+          <a href="{{ home_path | relative_url }}" {% if page.url == home_path %}aria-current="page"{% endif %}>{{ home_label }}</a>
+          <a href="{{ projects_path | relative_url }}" {% if page.url == projects_path %}aria-current="page"{% endif %}>{{ projects_label }}</a>
+          <a href="{{ blog_path | relative_url }}" {% if page.url == blog_path %}aria-current="page"{% endif %}>{{ blog_label }}</a>
+          <a href="{{ about_path | relative_url }}" {% if page.url == about_path %}aria-current="page"{% endif %}>{{ about_label }}</a>
+        {% endif %}
+        <a class="site-nav__cta" href="{{ site.social.github }}">GitHub</a>
+      </nav>
+
+      <div class="site-lang" aria-label="{{ lang_switch_label }}">
+        {% if current_lang == 'ru' %}
+          <span class="site-lang__current">RUS</span>
+        {% elsif translation_href %}
+          <a class="site-lang__link" href="{{ translation_href | relative_url }}">RUS</a>
+        {% else %}
+          <span class="site-lang__muted">RUS</span>
+        {% endif %}
+        <span class="site-lang__sep">/</span>
+        {% if current_lang == 'en' %}
+          <span class="site-lang__current">EN</span>
+        {% elsif translation_href %}
+          <a class="site-lang__link" href="{{ translation_href | relative_url }}">EN</a>
+        {% else %}
+          <span class="site-lang__muted">EN</span>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </header>

@@ -1,0 +1,69 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% assign title_key = 'title_' | append: current_lang %}
+{% assign status_key = 'status_' | append: current_lang %}
+{% assign description_key = 'description_' | append: current_lang %}
+{% assign highlights_key = 'highlights_' | append: current_lang %}
+{% assign repo_label_key = 'repo_label_' | append: current_lang %}
+{% assign demo_label_key = 'demo_label_' | append: current_lang %}
+
+{% if current_lang == 'en' %}
+  {% assign visible_articles = site.articles | where: "lang", "en" %}
+  {% assign updates_label = 'updates' %}
+  {% assign repo_default = 'Repository' %}
+  {% assign demo_default = 'Demo' %}
+  {% assign latest_article_label = 'Latest article' %}
+{% else %}
+  {% assign visible_articles = site.articles | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" %}
+  {% assign updates_label = 'публикаций' %}
+  {% assign repo_default = 'Репозиторий' %}
+  {% assign demo_default = 'Демо' %}
+  {% assign latest_article_label = 'Последняя статья' %}
+{% endif %}
+
+<div class="project-list">
+  {% for project in site.data.projects %}
+    {% assign project_articles = visible_articles | where: "project", project.slug | sort: "date" | reverse %}
+    {% assign latest_article = project_articles | first %}
+    {% assign project_title = project[title_key] | default: project.title %}
+    {% assign project_status = project[status_key] | default: project.status %}
+    {% assign project_description = project[description_key] | default: project.description %}
+    {% assign project_highlights = project[highlights_key] | default: project.highlights %}
+    {% assign project_repo_label = project[repo_label_key] | default: repo_default %}
+    {% assign project_demo_label = project[demo_label_key] | default: demo_default %}
+    <section class="project-card" id="{{ project.slug }}">
+      <div class="project-card__meta">
+        <span>{{ project_status }}</span>
+        <span>{{ project_articles.size }} {{ updates_label }}</span>
+      </div>
+
+      <h2>{{ project_title }}</h2>
+      <p>{{ project_description }}</p>
+
+      <div class="tag-list" style="margin-top: 1rem;">
+        {% for item in project.stack %}
+          <span class="tag">{{ item }}</span>
+        {% endfor %}
+      </div>
+
+      {% if project_highlights and project_highlights.size > 0 %}
+        <ul class="project-card__highlights">
+          {% for item in project_highlights %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class="project-card__links">
+        {% if project.repo %}
+          <a class="button button--small" href="{{ project.repo }}">{{ project_repo_label }}</a>
+        {% endif %}
+        {% if project.demo %}
+          <a class="button button--small" href="{{ project.demo }}">{{ project_demo_label }}</a>
+        {% endif %}
+        {% if latest_article %}
+          <a class="button button--small" href="{{ latest_article.url | relative_url }}">{{ latest_article_label }}</a>
+        {% endif %}
+      </div>
+    </section>
+  {% endfor %}
+</div>

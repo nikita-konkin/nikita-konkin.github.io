@@ -1,9 +1,30 @@
 ---
 layout: default
 ---
+{% assign current_lang = page.lang | default: site.lang %}
 {% assign project = site.data.projects | where: "slug", page.project | first %}
 {% assign translations = site.articles | where: "translation_of", page.name %}
-{% assign related_articles = site.articles | where: "project", page.project | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
+{% assign related_articles = site.articles | where: "project", page.project | where: "lang", current_lang | sort: "date" | reverse %}
+{% assign repo_label_key = 'repo_label_' | append: current_lang %}
+{% assign demo_label_key = 'demo_label_' | append: current_lang %}
+
+{% if current_lang == 'en' %}
+  {% assign project_label = 'Project' %}
+  {% assign repo_default = 'Repository' %}
+  {% assign demo_default = 'Demo' %}
+  {% assign versions_label = 'Language versions:' %}
+  {% assign original_label = 'Original' %}
+  {% assign tags_label = 'Tags' %}
+  {% assign related_label = 'More project updates' %}
+{% else %}
+  {% assign project_label = 'Проект' %}
+  {% assign repo_default = 'Репозиторий' %}
+  {% assign demo_default = 'Демо' %}
+  {% assign versions_label = 'Языковые версии:' %}
+  {% assign original_label = 'Оригинал' %}
+  {% assign tags_label = 'Теги' %}
+  {% assign related_label = 'Другие обновления по проекту' %}
+{% endif %}
 
 {% if page.translation_of %}
   {% assign original_article = site.articles | where: "name", page.translation_of | first %}
@@ -31,28 +52,35 @@ layout: default
 
     {% if project %}
       <div class="article-links">
-        <a class="button button--small" href="{{ '/projects/' | relative_url }}#{{ project.slug }}">Проект</a>
+        {% if current_lang == 'en' %}
+          {% assign project_path = '/en/projects/' %}
+        {% else %}
+          {% assign project_path = '/projects/' %}
+        {% endif %}
+        <a class="button button--small" href="{{ project_path | relative_url }}#{{ project.slug }}">{{ project_label }}</a>
         {% if project.repo %}
-          <a class="button button--small" href="{{ project.repo }}">{{ project.repo_label | default: "Repository" }}</a>
+          <a class="button button--small" href="{{ project.repo }}">{{ project[repo_label_key] | default: repo_default }}</a>
         {% endif %}
         {% if project.demo %}
-          <a class="button button--small" href="{{ project.demo }}">{{ project.demo_label | default: "Demo" }}</a>
+          <a class="button button--small" href="{{ project.demo }}">{{ project[demo_label_key] | default: demo_default }}</a>
         {% endif %}
       </div>
     {% endif %}
 
     {% if translations.size > 0 or original_article %}
       <div class="translation-box">
-        <strong>Языковые версии:</strong>
-        {% if original_article %}
-          <a href="{{ original_article.url | relative_url }}">Оригинал ({{ original_article.lang | upcase }})</a>
+        <strong>{{ versions_label }}</strong>
+        {% if current_lang == 'en' %}
+          {% if original_article %}
+            <a href="{{ original_article.url | relative_url }}">{{ original_label }} ({{ original_article.lang | upcase }})</a>
+          {% endif %}
+          <span>{{ page.lang | upcase }}</span>
         {% else %}
           <span>{{ page.lang | upcase }}</span>
+          {% for translated in translations %}
+            <a href="{{ translated.url | relative_url }}">{{ translated.lang | upcase }}</a>
+          {% endfor %}
         {% endif %}
-
-        {% for translated in translations %}
-          <a href="{{ translated.url | relative_url }}">{{ translated.lang | upcase }}</a>
-        {% endfor %}
       </div>
     {% endif %}
   </header>
@@ -63,7 +91,7 @@ layout: default
 
   {% if page.tags and page.tags.size > 0 %}
     <section class="section section--compact">
-      <h2>Теги</h2>
+      <h2>{{ tags_label }}</h2>
       <div class="tag-list">
         {% for tag in page.tags %}
           <span class="tag">{{ tag }}</span>
@@ -75,7 +103,7 @@ layout: default
   {% if related_articles.size > 0 %}
     <section class="section section--compact">
       <div class="section__head">
-        <h2>Другие обновления по проекту</h2>
+        <h2>{{ related_label }}</h2>
       </div>
       <div class="card-grid">
         {% assign shown_related = 0 %}

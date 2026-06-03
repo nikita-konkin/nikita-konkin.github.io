@@ -14,15 +14,30 @@ PUBLIC_PAGES = [
     ROOT / "projects.html",
     ROOT / "about.md",
     ROOT / "404.md",
+    ROOT / "en" / "index.html",
+    ROOT / "en" / "blog.html",
+    ROOT / "en" / "projects.html",
+    ROOT / "en" / "about.md",
+    ROOT / "en" / "404.html",
 ]
 TEMPLATE_FILES = [
     ROOT / "_includes" / "site_header.html",
     ROOT / "_includes" / "article_card.html",
+    ROOT / "_includes" / "page_landing.html",
+    ROOT / "_includes" / "page_projects.html",
+    ROOT / "_includes" / "page_blog.html",
     ROOT / "_layouts" / "article.html",
 ]
 DATA_FILES = [
     ROOT / "_config.yml",
     ROOT / "_data" / "projects.yml",
+]
+TRANSLATED_PAGE_PAIRS = [
+    (ROOT / "index.html", ROOT / "en" / "index.html", "/en/", "/"),
+    (ROOT / "blog.html", ROOT / "en" / "blog.html", "/en/blog/", "/blog/"),
+    (ROOT / "projects.html", ROOT / "en" / "projects.html", "/en/projects/", "/projects/"),
+    (ROOT / "about.md", ROOT / "en" / "about.md", "/en/about/", "/about/"),
+    (ROOT / "404.md", ROOT / "en" / "404.html", "/en/404.html", "/404.html"),
 ]
 MOJIBAKE_MARKERS = ("Ð", "Ñ", "â€”", "â†’", "â€œ", "â€", "Â«", "Â»", "ï¸")
 
@@ -44,15 +59,36 @@ def test_public_pages_have_title_and_description() -> None:
         meta = _front_matter(path)
         assert meta.get("title"), f"{path.relative_to(ROOT)} needs a title"
         assert meta.get("description"), f"{path.relative_to(ROOT)} needs a description"
+        assert meta.get("lang") in {"ru", "en"}, (
+            f"{path.relative_to(ROOT)} must declare ru/en language metadata"
+        )
+        assert meta.get("translation_url"), (
+            f"{path.relative_to(ROOT)} must expose a translation_url for the header switch"
+        )
+
+
+@pytest.mark.smoke
+def test_page_translation_pairs_are_reciprocal() -> None:
+    for ru_path, en_path, ru_translation_url, en_translation_url in TRANSLATED_PAGE_PAIRS:
+        ru_meta = _front_matter(ru_path)
+        en_meta = _front_matter(en_path)
+        assert ru_meta["lang"] == "ru", f"{ru_path.relative_to(ROOT)} must stay Russian"
+        assert en_meta["lang"] == "en", f"{en_path.relative_to(ROOT)} must stay English"
+        assert ru_meta["translation_url"] == ru_translation_url, (
+            f"{ru_path.relative_to(ROOT)} must point to {ru_translation_url}"
+        )
+        assert en_meta["translation_url"] == en_translation_url, (
+            f"{en_path.relative_to(ROOT)} must point back to {en_translation_url}"
+        )
 
 
 @pytest.mark.smoke
 def test_homepage_sections_match_navigation_anchors() -> None:
-    homepage = _read_text(ROOT / "index.html")
+    homepage = _read_text(ROOT / "_includes" / "page_landing.html")
     header = _read_text(ROOT / "_includes" / "site_header.html")
     sections = ("approach", "featured-work", "writing", "contact")
     for section in sections:
-        assert f'id="{section}"' in homepage, f"index.html must expose #{section}"
+        assert f'id="{section}"' in homepage, f"page_landing.html must expose #{section}"
         assert f'href="#{section}"' in header, f"site header must link to #{section}"
 
 

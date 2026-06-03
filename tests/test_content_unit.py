@@ -48,13 +48,27 @@ def test_projects_have_required_contract_fields() -> None:
         assert project.get("slug"), "Each project needs a slug"
         assert project.get("name"), f"{project!r} must have a machine-readable name"
         assert project.get("title"), f"{project!r} must have a public title"
+        assert project.get("title_en"), f"{project['slug']} must have an English title"
         assert project.get("description"), f"{project['slug']} must have a description"
+        assert project.get("description_en"), f"{project['slug']} must have an English description"
+        assert project.get("status_ru"), f"{project['slug']} must have a Russian status"
+        assert project.get("status_en"), f"{project['slug']} must have an English status"
         assert isinstance(project.get("stack"), list) and project["stack"], (
             f"{project['slug']} must declare a non-empty stack"
         )
         assert project.get("repo") or project.get("demo"), (
             f"{project['slug']} must have at least one public link"
         )
+        if project.get("highlights"):
+            assert isinstance(project["highlights"], list), (
+                f"{project['slug']} highlights must stay a list"
+            )
+            assert isinstance(project.get("highlights_en"), list), (
+                f"{project['slug']} must have English highlights"
+            )
+            assert len(project["highlights"]) == len(project["highlights_en"]), (
+                f"{project['slug']} highlight counts must stay aligned across languages"
+            )
         for key in ("repo", "demo"):
             if project.get(key):
                 assert str(project[key]).startswith("https://"), (
@@ -64,6 +78,14 @@ def test_projects_have_required_contract_fields() -> None:
             assert project.get("repo"), f"{project['slug']} repo_label needs a repo URL"
         if project.get("demo_label"):
             assert project.get("demo"), f"{project['slug']} demo_label needs a demo URL"
+        for ru_key, en_key, url_key in (
+            ("repo_label_ru", "repo_label_en", "repo"),
+            ("demo_label_ru", "demo_label_en", "demo"),
+        ):
+            if project.get(ru_key) or project.get(en_key):
+                assert project.get(ru_key), f"{project['slug']} must define {ru_key}"
+                assert project.get(en_key), f"{project['slug']} must define {en_key}"
+                assert project.get(url_key), f"{project['slug']} {en_key} requires {url_key}"
 
 
 @pytest.mark.unit
@@ -97,4 +119,3 @@ def test_translation_links_point_to_existing_articles() -> None:
             assert source in article_names, (
                 f"{path.relative_to(ROOT)} points to missing translation source '{source}'"
             )
-

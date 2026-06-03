@@ -3,47 +3,7 @@ layout: page
 title: Проекты
 description: Текущие проекты, ссылки и последние обновления.
 permalink: /projects/
+lang: ru
+translation_url: /en/projects/
 ---
-{% assign original_articles = site.articles | where_exp: "item", "item.translation_of == nil" %}
-
-<div class="project-list">
-  {% for project in site.data.projects %}
-    {% assign project_articles = original_articles | where: "project", project.slug | sort: "date" | reverse %}
-    {% assign latest_article = project_articles | first %}
-    <section class="project-card" id="{{ project.slug }}">
-      <div class="project-card__meta">
-        <span>{{ project.status }}</span>
-        <span>{{ project_articles.size }} публикаций</span>
-      </div>
-
-      <h2>{{ project.title }}</h2>
-      <p>{{ project.description }}</p>
-
-      <div class="tag-list" style="margin-top: 1rem;">
-        {% for item in project.stack %}
-          <span class="tag">{{ item }}</span>
-        {% endfor %}
-      </div>
-
-      {% if project.highlights and project.highlights.size > 0 %}
-        <ul class="project-card__highlights">
-          {% for item in project.highlights %}
-            <li>{{ item }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-
-      <div class="project-card__links">
-        {% if project.repo %}
-          <a class="button button--small" href="{{ project.repo }}">{{ project.repo_label | default: "Repository" }}</a>
-        {% endif %}
-        {% if project.demo %}
-          <a class="button button--small" href="{{ project.demo }}">{{ project.demo_label | default: "Demo" }}</a>
-        {% endif %}
-        {% if latest_article %}
-          <a class="button button--small" href="{{ latest_article.url | relative_url }}">Последняя статья</a>
-        {% endif %}
-      </div>
-    </section>
-  {% endfor %}
-</div>
+{% include page_projects.html %}

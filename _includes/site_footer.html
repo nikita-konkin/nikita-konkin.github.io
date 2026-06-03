@@ -1,7 +1,17 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% if current_lang == 'en' %}
+  {% assign footer_summary = 'Public articles and project updates.' %}
+  {% assign footer_note = 'Initial site adaptation was prepared with OpenAI Codex.' %}
+  {% assign footer_profile = 'GitHub profile' %}
+{% else %}
+  {% assign footer_summary = 'Публичные статьи и обновления по проектам.' %}
+  {% assign footer_note = 'Первичная адаптация сайта выполнена с помощью OpenAI Codex.' %}
+  {% assign footer_profile = 'GitHub профиль' %}
+{% endif %}
 <footer class="site-footer">
   <div class="container site-footer__inner">
-    <p>© {{ "now" | date: "%Y" }} {{ site.author.name }}. Публичные статьи и обновления по проектам.</p>
-    <p>Первичная адаптация сайта выполнена с помощью OpenAI Codex.</p>
-    <p><a href="{{ site.social.github }}">GitHub profile</a></p>
+    <p>© {{ "now" | date: "%Y" }} {{ site.author.name }}. {{ footer_summary }}</p>
+    <p>{{ footer_note }}</p>
+    <p><a href="{{ site.social.github }}">{{ footer_profile }}</a></p>
   </div>
 </footer>

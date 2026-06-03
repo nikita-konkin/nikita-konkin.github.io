@@ -3,15 +3,7 @@ layout: page
 title: Блог
 description: Публичные статьи и обновления по проектам.
 permalink: /blog/
+lang: ru
+translation_url: /en/blog/
 ---
-{% assign articles = site.articles | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
-
-<p class="section-note">
-  Здесь собраны оригинальные публикации. Если для статьи есть английская версия, ссылка на перевод появляется прямо в карточке.
-</p>
-
-<div class="card-grid" style="margin-top: 1.5rem;">
-  {% for article in articles %}
-    {% include article_card.html article=article %}
-  {% endfor %}
-</div>
+{% include page_blog.html %}

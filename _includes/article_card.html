@@ -1,6 +1,18 @@
 {% assign article = include.article %}
 {% assign project = site.data.projects | where: "slug", article.project | first %}
-{% assign translations = site.articles | where: "translation_of", article.name %}
+{% assign current_lang = page.lang | default: article.lang | default: site.lang %}
+{% assign title_key = 'title_' | append: current_lang %}
+{% assign project_title = project[title_key] | default: project.title %}
+{% if article.translation_of %}
+  {% assign counterpart = site.articles | where: "name", article.translation_of | first %}
+{% else %}
+  {% assign counterpart = site.articles | where: "translation_of", article.name | first %}
+{% endif %}
+{% if current_lang == 'en' %}
+  {% assign read_label = 'Read →' %}
+{% else %}
+  {% assign read_label = 'Читать →' %}
+{% endif %}
 
 <article class="card">
   <div class="card__meta">
@@ -9,7 +21,7 @@
       <span>{{ article.type }}</span>
     {% endif %}
     {% if project %}
-      <span>{{ project.title }}</span>
+      <span>{{ project_title }}</span>
     {% endif %}
   </div>
 
@@ -24,11 +36,11 @@
   <div class="card__footer">
     <div class="tag-list">
       <span class="tag">{{ article.lang | upcase }}</span>
-      {% for translated in translations %}
-        <a class="tag" href="{{ translated.url | relative_url }}">{{ translated.lang | upcase }}</a>
-      {% endfor %}
+      {% if counterpart and counterpart.lang != article.lang %}
+        <a class="tag" href="{{ counterpart.url | relative_url }}">{{ counterpart.lang | upcase }}</a>
+      {% endif %}
     </div>
 
-    <a class="text-link" href="{{ article.url | relative_url }}">Читать →</a>
+    <a class="text-link" href="{{ article.url | relative_url }}">{{ read_label }}</a>
   </div>
 </article>
