@@ -35,10 +35,10 @@ permalink: /projects/
 
       <div class="project-card__links">
         {% if project.repo %}
-          <a class="button button--small" href="{{ project.repo }}">Repository</a>
+          <a class="button button--small" href="{{ project.repo }}">{{ project.repo_label | default: "Repository" }}</a>
         {% endif %}
         {% if project.demo %}
-          <a class="button button--small" href="{{ project.demo }}">Demo</a>
+          <a class="button button--small" href="{{ project.demo }}">{{ project.demo_label | default: "Demo" }}</a>
         {% endif %}
         {% if latest_article %}
           <a class="button button--small" href="{{ latest_article.url | relative_url }}">Последняя статья</a>

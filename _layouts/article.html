@@ -33,10 +33,10 @@ layout: default
       <div class="article-links">
         <a class="button button--small" href="{{ '/projects/' | relative_url }}#{{ project.slug }}">Проект</a>
         {% if project.repo %}
-          <a class="button button--small" href="{{ project.repo }}">Repository</a>
+          <a class="button button--small" href="{{ project.repo }}">{{ project.repo_label | default: "Repository" }}</a>
         {% endif %}
         {% if project.demo %}
-          <a class="button button--small" href="{{ project.demo }}">Demo</a>
+          <a class="button button--small" href="{{ project.demo }}">{{ project.demo_label | default: "Demo" }}</a>
         {% endif %}
       </div>
     {% endif %}

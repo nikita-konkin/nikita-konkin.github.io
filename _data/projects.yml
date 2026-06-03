@@ -16,3 +16,24 @@
     - Автоматическая проверка и подсветка проблемных ячеек в Excel.
     - Генерация XML в целевом формате «КиберДиплом 3.5.1».
     - Полиглот-архитектура с разделением API, обработки данных и XML-генерации.
+
+- slug: angry_tests
+  name: yegor256/at
+  title: Angry Tests — принципы тестирования от Yegor Bugayenko
+  status: Reference / reading
+  description: Подборка практических принципов автоматизированного тестирования: короткие тесты, фокус на баги, строгие assertions и инструменты для более сильной инженерной проверки.
+  repo: https://github.com/yegor256/at
+  repo_label: Principles repo
+  demo: https://www.yegor256.com/angry-tests.html
+  demo_label: Book page
+  stack:
+    - Testing
+    - Quality
+    - JUnit
+    - Hamcrest
+    - Property-based testing
+    - Mutation testing
+  highlights:
+    - Принципы для fast и deep tests, flaky bug reproduction и custom matchers.
+    - Практические ориентиры по тому, как делать тесты короче, злее и полезнее.
+    - Ссылки на инструменты и подходы вроде jqwik, pitest, ArchUnit и fuzzing.

@@ -5,17 +5,17 @@
       <span class="site-brand__tagline">{{ site.tagline }}</span>
     </a>
 
-    <nav class="site-nav" aria-label="ÐžÑÐ½Ð¾Ð²Ð½Ð°Ñ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ñ">
+    <nav class="site-nav" aria-label="Основная навигация">
       {% if page.url == '/' %}
-        <a href="#approach">ÐŸÐ¾Ð´Ñ…Ð¾Ð´</a>
-        <a href="#featured-work">ÐŸÑ€Ð¾ÐµÐºÑ‚</a>
-        <a href="#writing">Ð—Ð°Ð¼ÐµÑ‚ÐºÐ¸</a>
-        <a href="#contact">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚</a>
+        <a href="#approach">Подход</a>
+        <a href="#featured-work">Проект</a>
+        <a href="#writing">Заметки</a>
+        <a href="#contact">Контакт</a>
       {% else %}
-        <a href="{{ '/' | relative_url }}">Ð“Ð»Ð°Ð²Ð½Ð°Ñ</a>
-        <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}>ÐŸÑ€Ð¾ÐµÐºÑ‚Ñ‹</a>
-        <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Ð‘Ð»Ð¾Ð³</a>
-        <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}aria-current="page"{% endif %}>ÐžÐ±Ð¾ Ð¼Ð½Ðµ</a>
+        <a href="{{ '/' | relative_url }}">Главная</a>
+        <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}>Проекты</a>
+        <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Блог</a>
+        <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}aria-current="page"{% endif %}>Обо мне</a>
       {% endif %}
       <a class="site-nav__cta" href="{{ site.social.github }}">GitHub</a>
     </nav>
