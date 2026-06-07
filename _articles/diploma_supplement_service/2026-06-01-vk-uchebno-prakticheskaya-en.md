@@ -52,7 +52,7 @@ fill = PatternFill(start_color="FFC7CE",
 for row in ws.iter_rows():
     for cell in row:
         if cell.value in (None, "", "!", "?"):
-            cell.fill = fill   # flagged a problem
+            cell.fill = fill # highlighted the problem
 ```
 
 The technique is simple, but it is exactly what saves hours of manual checking: the reviewer only needs to inspect the highlighted cells rather than the whole file.
