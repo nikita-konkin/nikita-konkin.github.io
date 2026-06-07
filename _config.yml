@@ -30,6 +30,9 @@ collections:
   articles:
     output: true
     permalink: /blog/:path/
+  reviews:
+    output: true
+    permalink: /ai-review/:path/
 
 defaults:
   - scope:
@@ -42,6 +45,12 @@ defaults:
     values:
       layout: article
       author: Nikita Konkin
+      lang: ru
+  - scope:
+      path: "_reviews"
+      type: reviews
+    values:
+      layout: review
       lang: ru
 
 exclude:

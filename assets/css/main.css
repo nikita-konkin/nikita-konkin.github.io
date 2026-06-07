@@ -711,6 +711,51 @@ h4,
   border: 1px solid rgba(125, 141, 120, 0.14);
 }
 
+.ai-disclaimer {
+  margin: 1.25rem 0 0;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-small);
+  background: rgba(199, 143, 103, 0.12);
+  border: 1px solid rgba(157, 107, 67, 0.22);
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.paper-card {
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-small);
+  background: rgba(255, 248, 239, 0.78);
+  border: 1px solid var(--border);
+}
+
+.paper-card__label {
+  margin: 0 0 0.45rem;
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.paper-card__title {
+  margin: 0;
+  font-family: "Prata", Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.paper-card__meta {
+  margin: 0.4rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.paper-card .text-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+}
+
 .prose {
   color: var(--text);
 }

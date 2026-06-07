@@ -1,0 +1,22 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% if current_lang == 'en' %}
+  {% assign reviews = site.reviews | where: "lang", "en" | sort: "date" | reverse %}
+  {% assign intro = 'This section collects AI-generated analyses of my scientific papers — a short summary, the strengths, the weak spots, and concrete suggestions. Each review reflects the opinion of an AI model (Claude, Anthropic); it is not peer review and may contain mistakes.' %}
+  {% assign empty_msg = 'No AI reviews have been published yet.' %}
+{% else %}
+  {% assign reviews = site.reviews | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
+  {% assign intro = 'Здесь собраны разборы моих научных работ, сделанные ИИ: краткое резюме, сильные стороны, слабые места и конкретные предложения. Каждый разбор отражает мнение ИИ-модели (Claude, Anthropic); это не научное рецензирование, и он может содержать ошибки.' %}
+  {% assign empty_msg = 'Пока не опубликовано ни одного разбора.' %}
+{% endif %}
+
+<p class="section-note">{{ intro }}</p>
+
+{% if reviews.size > 0 %}
+  <div class="card-grid" style="margin-top: 1.5rem;">
+    {% for review in reviews %}
+      {% include review_card.html review=review %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="section-note" style="margin-top: 1.5rem;">{{ empty_msg }}</p>
+{% endif %}
