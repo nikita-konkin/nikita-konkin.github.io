@@ -1,6 +1,7 @@
 ---
 title: "Tea Taste: как превратить дегустацию чая в воспроизводимые данные"
 project: tea_taste
+pair: tea-taste-service
 platform: VK
 type: Технический разбор
 date: 2026-06-07

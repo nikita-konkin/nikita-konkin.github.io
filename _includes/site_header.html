@@ -34,19 +34,13 @@
   {% assign lang_switch_label = 'Переключение языка' %}
 {% endif %}
 
-{% if page.collection == 'articles' %}
-  {% if current_lang == 'en' and page.translation_of %}
-    {% assign translation_target = page.translation_of %}
-    {% assign article_translation = site.articles | where_exp: "item", "item.name == translation_target" | first %}
-    {% if article_translation %}
-      {% assign translation_href = article_translation.url %}
+{% if page.collection == 'articles' and page.pair %}
+  {% assign pair_versions = site.articles | where: "pair", page.pair %}
+  {% for pair_version in pair_versions %}
+    {% if pair_version.lang != current_lang %}
+      {% assign translation_href = pair_version.url %}
     {% endif %}
-  {% elsif current_lang == 'ru' %}
-    {% assign article_translation = site.articles | where: "translation_of", page.name | where: "lang", "en" | first %}
-    {% if article_translation %}
-      {% assign translation_href = article_translation.url %}
-    {% endif %}
-  {% endif %}
+  {% endfor %}
 {% endif %}
 
 {% assign is_home = false %}

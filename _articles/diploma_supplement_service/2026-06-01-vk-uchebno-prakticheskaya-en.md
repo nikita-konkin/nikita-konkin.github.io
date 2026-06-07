@@ -1,6 +1,7 @@
 ---
 title: "How to Build a Document Automation Service from Three Languages: A Practical Breakdown"
 project: diploma_supplement_service
+pair: diploma-uchebno-prakticheskaya
 platform: VK
 type: Technical breakdown
 date: 2026-06-01
