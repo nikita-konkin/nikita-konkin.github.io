@@ -62,7 +62,7 @@ for row in ws.iter_rows():
 for cell in row:
 if cell.value in (None, "", "!", "?"):
 cell.fill = fill # highlighted the problem
-``
+```
 
 Simple, but this saves hours of manual verification. The employee doesn't look at the entire file, but only at the red cells ✅
 
