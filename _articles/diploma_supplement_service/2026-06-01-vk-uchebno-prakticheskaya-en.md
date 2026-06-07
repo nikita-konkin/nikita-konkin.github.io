@@ -2,53 +2,43 @@
 title: "How to Build a Document Automation Service from Three Languages: A Practical Breakdown"
 project: diploma_supplement_service
 platform: VK
-type: Educational / hands-on article
+type: Technical breakdown
 date: 2026-06-01
 lang: en
 authors:
   - Nikita Konkin
-  - Claude (Anthropic) — co-author
 summary: "A practical look at a polyglot service architecture for Excel validation, XML generation, and Docker-based deployment."
 translation_of: 2026-06-01-vk-uchebno-prakticheskaya.md
 links:
   demo: "https://xn----etb9agicel.xn--p1ai/"
   repo: "https://github.com/nikita-konkin/diploma_supplement_service"
-tags: [programming, backend, python, java, docker, microservices, fastapi, learning]
+tags: [programming, backend, python, java, docker, microservices, fastapi]
 ---
 
-🎓 **How to Build a Document Automation Service from Three Languages: A Practical Breakdown**
+Modern server-side systems are increasingly designed not as a single application but as a set of small, independent services written in different languages and tied together by a common protocol. Using a service that automates diploma supplements as an example, this breakdown looks at the engineering decisions behind such a "polyglot" architecture and why it is justified for an applied task.
 
-Hi! Today we'll use a real project to look at how modern "polyglot" services are built — where different parts of the system are written in different languages yet work together as a single whole. As an example, we'll take our service that automates diploma supplements. This will be useful for anyone learning backend development, microservices, and Docker. Let's go 👇
+## The problem
 
----
+The underlying work is routine: take an Excel grade sheet with subjects, hours, and grades, check it for errors, and export it into a strict XML format. Manual processing is slow and error-prone, so the process is worth automating.
 
-**📌 The problem**
+The task splits into two scenarios:
 
-There's a routine task: take an Excel file with subjects, hours, and grades, check it for errors, and export it into a strict machine-readable XML format. Doing it by hand is slow and error-prone. So let's automate it.
+- assembling a pivot table with highlighted problematic cells;
+- generating an XML document from a given template.
 
-We split the task into two scenarios:
-- build a **pivot table** and highlight problematic cells;
-- generate an **XML document** from a template.
+## Architecture: why three modules instead of one
 
----
+The system is deliberately split into three independent services rather than a single monolithic application.
 
-**🧩 Architecture: why three modules instead of one**
+- **java-api** — the entry gateway. It accepts HTTP requests and routes tasks. It is built on the lightweight Takes framework: a minimalist layer is sufficient for a gateway, whereas full-weight Spring would be excessive.
+- **python-engine** — the table-processing module, built on FastAPI together with pandas and openpyxl. It reads the Excel file, detects inconsistencies, and marks problematic cells with color.
+- **python-xml-engine** — an XML generator that works from a template, also on FastAPI.
 
-The main takeaway of this lesson: you don't have to write everything in a single application. We split the system into three independent services:
+This separation has a practical payoff: each module can be developed and restarted independently. Python is used where it is strong at data processing, Java in the role of a reliable API layer. Each language is applied to its intended purpose.
 
-🔹 **java-api** — the "front door." It accepts HTTP requests and decides where to route the task. Built on the lightweight **Takes** framework (not heavy Spring — a minimalist approach is plenty for a gateway).
+## Example: highlighting errors in Excel
 
-🔹 **python-engine** — the brain for tables. **FastAPI + pandas + openpyxl**: it reads the Excel file, looks for inconsistencies, and fills the "sick" cells with color.
-
-🔹 **python-xml-engine** — an XML generator that works from a template, also on FastAPI.
-
-Why this way? 👉 Each module can be developed and restarted independently. Python is strong at data processing (pandas!), Java at a reliable API layer. We take the best of each language.
-
----
-
-**🔍 Hands-on snippet: how to highlight an error in Excel**
-
-The most illustrative part is the cell-validation logic. Using `openpyxl`, we walk through the file and fill anything suspicious (empty values, the `!` and `?` symbols) with red:
+The most illustrative fragment is the cell-validation logic. Using openpyxl, the service walks through the file and fills suspicious values with color: empty cells and the `!` and `?` symbols.
 
 ```python
 from openpyxl import load_workbook
@@ -64,42 +54,28 @@ for row in ws.iter_rows():
             cell.fill = fill   # flagged a problem
 ```
 
-Simple, but this is exactly what saves a person hours of manual checking. The employee looks only at the red cells, not the whole file ✅
+The technique is simple, but it is exactly what saves hours of manual checking: the reviewer only needs to inspect the highlighted cells rather than the whole file.
 
----
+## Docker: launch with a single command
 
-**🐳 Docker: launch with a single command**
-
-Three services = three potential headaches with environment setup. The solution is Docker Compose. All modules are described in `docker-compose.yml`, communicate inside one network, and everything spins up like this:
+Three services mean three potential points of failure when setting up the environment. Docker Compose removes that complexity: all modules are described in `docker-compose.yml`, run on a shared network, and start with a single command.
 
 ```sh
 docker-compose up --build
 ```
 
-No "works on my machine," no manual installation of Java and Python. This is an important skill: **packaging a project so it runs for anyone on the first try.**
+This eliminates the "works only on my machine" situation and the manual installation of Java and Python. Here, a reproducible environment is not a convenience but a requirement for an applied service.
 
----
+## Takeaways
 
-**💡 What to take away from this breakdown**
+1. A large task is best split into independent services.
+2. Languages can be combined, choosing the right tool for each sub-task.
+3. The pandas and openpyxl pairing is effective for working with Excel.
+4. Docker Compose turns a heterogeneous stack into one reproducible project.
 
-1. A big task is best split into independent services.
-2. Languages can be mixed — pick the right tool for the job.
-3. `pandas` + `openpyxl` is a powerful combo for working with Excel.
-4. Docker Compose turns a "zoo of technologies" into one runnable project.
+## Availability
 
----
+The project is open source under the MIT license and available without registration or restrictions: you can run the live demo, deploy the service locally, or study the source code.
 
-**🌍 The service is open to everyone**
-
-The project is fully open source under the MIT license — **anyone is welcome to use it**, with no registration or restrictions. You can try the live demo, deploy it yourself, or take the code apart for learning.
-
-🔗 Demo: пгту-ртф.рф (https://xn----etb9agicel.xn--p1ai/)
-💻 Source code: https://github.com/nikita-konkin/diploma_supplement_service
-
-Have you tried building projects from several languages? Share in the comments 💬
-
----
-
-✍️ *Authors: Nikita Konkin in co-authorship with Claude (Anthropic).*
-
-#programming #backend #python #java #docker #microservices #fastapi #learning
+- Demo: [пгту-ртф.рф](https://xn----etb9agicel.xn--p1ai/)
+- Source code: [github.com/nikita-konkin/diploma_supplement_service](https://github.com/nikita-konkin/diploma_supplement_service)

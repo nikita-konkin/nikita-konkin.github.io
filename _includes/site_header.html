@@ -10,7 +10,7 @@
   {% assign home_label = 'Home' %}
   {% assign approach_label = 'Approach' %}
   {% assign project_label = 'Project' %}
-  {% assign writing_label = 'Writing' %}
+  {% assign writing_label = 'Blog' %}
   {% assign contact_label = 'Contact' %}
   {% assign projects_label = 'Projects' %}
   {% assign blog_label = 'Blog' %}
@@ -26,7 +26,7 @@
   {% assign home_label = 'Главная' %}
   {% assign approach_label = 'Подход' %}
   {% assign project_label = 'Проект' %}
-  {% assign writing_label = 'Заметки' %}
+  {% assign writing_label = 'Блог' %}
   {% assign contact_label = 'Контакт' %}
   {% assign projects_label = 'Проекты' %}
   {% assign blog_label = 'Блог' %}
@@ -36,7 +36,8 @@
 
 {% if page.collection == 'articles' %}
   {% if current_lang == 'en' and page.translation_of %}
-    {% assign article_translation = site.articles | where: "name", page.translation_of | first %}
+    {% assign translation_target = page.translation_of %}
+    {% assign article_translation = site.articles | where_exp: "item", "item.name == translation_target" | first %}
     {% if article_translation %}
       {% assign translation_href = article_translation.url %}
     {% endif %}
