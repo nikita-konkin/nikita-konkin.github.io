@@ -25,3 +25,21 @@ jobs:
 
       - name: Run unit and smoke tests
         run: pytest -q
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Build the site
+        run: bundle exec jekyll build --trace
+        env:
+          JEKYLL_ENV: production

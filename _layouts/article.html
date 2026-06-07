@@ -27,7 +27,8 @@ layout: default
 {% endif %}
 
 {% if page.translation_of %}
-  {% assign original_article = site.articles | where: "name", page.translation_of | first %}
+  {% assign translation_target = page.translation_of %}
+  {% assign original_article = site.articles | where_exp: "item", "item.name == translation_target" | first %}
 {% endif %}
 
 <article class="article">

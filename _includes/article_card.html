@@ -4,7 +4,8 @@
 {% assign title_key = 'title_' | append: current_lang %}
 {% assign project_title = project[title_key] | default: project.title %}
 {% if article.translation_of %}
-  {% assign counterpart = site.articles | where: "name", article.translation_of | first %}
+  {% assign counterpart_target = article.translation_of %}
+  {% assign counterpart = site.articles | where_exp: "item", "item.name == counterpart_target" | first %}
 {% else %}
   {% assign counterpart = site.articles | where: "translation_of", article.name | first %}
 {% endif %}

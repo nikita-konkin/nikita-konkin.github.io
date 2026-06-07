@@ -55,3 +55,32 @@
     - "Principles for fast and deep tests, flaky bug reproduction, and custom matchers."
     - "Practical guidance on making tests shorter, stricter, and more useful."
     - "References to tools and approaches such as jqwik, pitest, ArchUnit, and fuzzing."
+
+- slug: tea_taste
+  name: tea-taste
+  title: "Tea Taste — цифровой журнал дегустации чая"
+  title_en: "Tea Taste — a digital tea-tasting journal"
+  status: "В разработке"
+  status_ru: "В разработке"
+  status_en: "Work in progress"
+  description: "Веб-приложение для структурированной дегустации чая: фиксирует параметры заваривания и сенсорные впечатления по проливам, превращая субъективную оценку в воспроизводимую запись."
+  description_en: "A web app for structured tea tasting: it records brewing parameters and sensory impressions across infusions, turning a subjective evaluation into a reproducible record."
+  repo: https://github.com/nikita-konkin/tea-taste-frontend
+  repo_label_ru: "Репозиторий (фронтенд)"
+  repo_label_en: "Repository (frontend)"
+  stack:
+    - React
+    - MUI
+    - Node.js
+    - Express
+    - MongoDB
+    - JWT
+    - Docker
+  highlights:
+    - "Многошаговая форма дегустации с черновиком в localStorage."
+    - "Модель проливов: аромат и вкус фиксируются по стадиям, у каждого пролива своя оценка и таймер."
+    - "REST API на Express и MongoDB с JWT-аутентификацией и публичной лентой дегустаций."
+  highlights_en:
+    - "A multi-step tasting form with a localStorage draft."
+    - "An infusion model: aroma and taste are recorded in stages, each infusion has its own rating and timer."
+    - "An Express and MongoDB REST API with JWT authentication and a public tasting feed."
