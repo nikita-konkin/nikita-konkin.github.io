@@ -52,7 +52,7 @@ layout: default
     {% endif %}
 
     {% if page.authors and page.authors.size > 0 %}
-      <p class="article-header__authors">✍️ {{ page.authors | join: " · " }}</p>
+      <p class="article-header__authors">{{ page.authors | join: " · " }}</p>
     {% endif %}
 
     {% if project %}
