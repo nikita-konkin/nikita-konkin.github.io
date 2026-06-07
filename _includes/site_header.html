@@ -4,6 +4,7 @@
   {% assign home_path = '/en/' %}
   {% assign projects_path = '/en/projects/' %}
   {% assign blog_path = '/en/blog/' %}
+  {% assign ai_review_path = '/en/ai-review/' %}
   {% assign about_path = '/en/about/' %}
   {% assign brand_tagline = 'Projects, public articles, and engineering updates' %}
   {% assign nav_label = 'Primary navigation' %}
@@ -14,12 +15,14 @@
   {% assign contact_label = 'Contact' %}
   {% assign projects_label = 'Projects' %}
   {% assign blog_label = 'Blog' %}
+  {% assign ai_review_label = 'AI review' %}
   {% assign about_label = 'About' %}
   {% assign lang_switch_label = 'Language switch' %}
 {% else %}
   {% assign home_path = '/' %}
   {% assign projects_path = '/projects/' %}
   {% assign blog_path = '/blog/' %}
+  {% assign ai_review_path = '/ai-review/' %}
   {% assign about_path = '/about/' %}
   {% assign brand_tagline = 'Проекты, публичные статьи и инженерные обновления' %}
   {% assign nav_label = 'Основная навигация' %}
@@ -30,12 +33,17 @@
   {% assign contact_label = 'Контакт' %}
   {% assign projects_label = 'Проекты' %}
   {% assign blog_label = 'Блог' %}
+  {% assign ai_review_label = 'AI о работах' %}
   {% assign about_label = 'Обо мне' %}
   {% assign lang_switch_label = 'Переключение языка' %}
 {% endif %}
 
-{% if page.collection == 'articles' and page.pair %}
-  {% assign pair_versions = site.articles | where: "pair", page.pair %}
+{% if page.pair %}
+  {% if page.collection == 'reviews' %}
+    {% assign pair_versions = site.reviews | where: "pair", page.pair %}
+  {% else %}
+    {% assign pair_versions = site.articles | where: "pair", page.pair %}
+  {% endif %}
   {% for pair_version in pair_versions %}
     {% if pair_version.lang != current_lang %}
       {% assign translation_href = pair_version.url %}
@@ -61,11 +69,13 @@
           <a href="#approach">{{ approach_label }}</a>
           <a href="#featured-work">{{ project_label }}</a>
           <a href="#writing">{{ writing_label }}</a>
+          <a href="{{ ai_review_path | relative_url }}">{{ ai_review_label }}</a>
           <a href="#contact">{{ contact_label }}</a>
         {% else %}
           <a href="{{ home_path | relative_url }}" {% if page.url == home_path %}aria-current="page"{% endif %}>{{ home_label }}</a>
           <a href="{{ projects_path | relative_url }}" {% if page.url == projects_path %}aria-current="page"{% endif %}>{{ projects_label }}</a>
           <a href="{{ blog_path | relative_url }}" {% if page.url == blog_path %}aria-current="page"{% endif %}>{{ blog_label }}</a>
+          <a href="{{ ai_review_path | relative_url }}" {% if page.url == ai_review_path %}aria-current="page"{% endif %}>{{ ai_review_label }}</a>
           <a href="{{ about_path | relative_url }}" {% if page.url == about_path %}aria-current="page"{% endif %}>{{ about_label }}</a>
         {% endif %}
         <a class="site-nav__cta" href="{{ site.social.github }}">GitHub</a>
