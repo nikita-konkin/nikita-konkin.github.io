@@ -55,13 +55,13 @@ from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 
 fill = PatternFill(start_color="FFC7CE",
-end_color="FFC7CE",
-fill_type="solid")
+                   end_color="FFC7CE",
+                   fill_type="solid")
 
 for row in ws.iter_rows():
-for cell in row:
-if cell.value in (None, "", "!", "?"):
-cell.fill = fill # highlighted the problem
+    for cell in row:
+        if cell.value in (None, "", "!", "?"):
+            cell.fill = fill # highlighted the problem
 ```
 
 Simple, but this saves hours of manual verification. The employee doesn't look at the entire file, but only at the red cells ✅
