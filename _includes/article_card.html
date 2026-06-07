@@ -3,11 +3,14 @@
 {% assign current_lang = page.lang | default: article.lang | default: site.lang %}
 {% assign title_key = 'title_' | append: current_lang %}
 {% assign project_title = project[title_key] | default: project.title %}
-{% if article.translation_of %}
-  {% assign counterpart_target = article.translation_of %}
-  {% assign counterpart = site.articles | where_exp: "item", "item.name == counterpart_target" | first %}
-{% else %}
-  {% assign counterpart = site.articles | where: "translation_of", article.name | first %}
+{% assign counterpart = nil %}
+{% if article.pair %}
+  {% assign pair_versions = site.articles | where: "pair", article.pair %}
+  {% for pair_version in pair_versions %}
+    {% if pair_version.lang != article.lang %}
+      {% assign counterpart = pair_version %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
 {% if current_lang == 'en' %}
   {% assign read_label = 'Read →' %}

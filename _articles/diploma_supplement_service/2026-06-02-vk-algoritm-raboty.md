@@ -1,6 +1,7 @@
 ---
 title: "От Excel-ведомости до XML: как сервис собирает приложение к диплому по шагам"
 project: diploma_supplement_service
+pair: diploma-algoritm-raboty
 platform: VK
 type: Технический разбор (алгоритм)
 date: 2026-06-02

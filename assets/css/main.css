@@ -320,8 +320,8 @@ h4,
 .article-header h1,
 .landing-cta h2 {
   margin: 0;
-  line-height: 1;
-  font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+  line-height: 1.05;
+  font-size: clamp(1.9rem, 3.2vw, 2.9rem);
   text-wrap: balance;
 }
 
@@ -858,7 +858,7 @@ h4,
   .page-header h1,
   .article-header h1,
   .landing-cta h2 {
-    font-size: clamp(2.2rem, 10vw, 3.3rem);
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
   }
 
   .section__head h2,

@@ -1,6 +1,7 @@
 ---
 title: "Как собрать сервис автоматизации документов из трёх языков: практический разбор"
 project: diploma_supplement_service
+pair: diploma-uchebno-prakticheskaya
 platform: VK
 type: Технический разбор
 date: 2026-06-01

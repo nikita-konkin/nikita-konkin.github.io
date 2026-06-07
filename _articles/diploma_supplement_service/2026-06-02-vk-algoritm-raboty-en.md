@@ -1,6 +1,7 @@
 ---
 title: "From an Excel Sheet to XML: How the Service Builds a Diploma Supplement Step by Step"
 project: diploma_supplement_service
+pair: diploma-algoritm-raboty
 platform: VK
 type: Technical breakdown (algorithm)
 date: 2026-06-02

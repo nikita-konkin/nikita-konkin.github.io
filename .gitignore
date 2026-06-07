@@ -19,3 +19,6 @@ _site/
 .jekyll-cache/
 .sass-cache/
 .bundle/
+
+# Local Ruby toolchain lock (resolved from the github-pages gem)
+Gemfile.lock

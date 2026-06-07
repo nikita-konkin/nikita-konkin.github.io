@@ -1,6 +1,7 @@
 ---
 title: "Tea Taste: Turning a Tea Tasting into Reproducible Data"
 project: tea_taste
+pair: tea-taste-service
 platform: VK
 type: Technical breakdown
 date: 2026-06-07
