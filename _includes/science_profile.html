@@ -1,0 +1,45 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% if current_lang == 'en' %}
+  {% assign sp_eyebrow = 'Scientometric snapshot' %}
+  {% assign sp_meta = 'Volga State University of Technology, Yoshkar-Ola · Electronics & Radio Engineering · since 2013' %}
+  {% assign sp_link = 'Full profile on eLibrary' %}
+  {% assign sp_s1 = 'Publications (eLibrary)' %}
+  {% assign sp_s2 = 'Citations' %}
+  {% assign sp_s3 = 'h-index (RSCI)' %}
+  {% assign sp_s4 = 'Papers in the RSCI core' %}
+  {% assign sp_s5 = 'Co-authors' %}
+  {% assign sp_s6 = 'Most-cited paper' %}
+  {% assign sp_s6v = '27 citations' %}
+  {% assign sp_ids = 'AuthorID 930081 · SPIN 7862-9926' %}
+{% else %}
+  {% assign sp_eyebrow = 'Наукометрический срез' %}
+  {% assign sp_meta = 'Поволжский государственный технологический университет, Йошкар-Ола · Электроника и радиотехника · с 2013 года' %}
+  {% assign sp_link = 'Полный профиль на eLibrary' %}
+  {% assign sp_s1 = 'Публикаций (eLibrary)' %}
+  {% assign sp_s2 = 'Цитирований' %}
+  {% assign sp_s3 = 'Индекс Хирша (РИНЦ)' %}
+  {% assign sp_s4 = 'Работ в ядре РИНЦ' %}
+  {% assign sp_s5 = 'Соавторов' %}
+  {% assign sp_s6 = 'Самая цитируемая' %}
+  {% assign sp_s6v = '27 цитирований' %}
+  {% assign sp_ids = 'AuthorID 930081 · SPIN 7862-9926' %}
+{% endif %}
+
+<aside class="science-profile">
+  <p class="science-profile__eyebrow">{{ sp_eyebrow }}</p>
+  <p class="science-profile__meta">{{ sp_meta }}</p>
+
+  <div class="science-profile__stats">
+    <div class="science-stat"><span class="science-stat__value">92</span><span class="science-stat__label">{{ sp_s1 }}</span></div>
+    <div class="science-stat"><span class="science-stat__value">140</span><span class="science-stat__label">{{ sp_s2 }}</span></div>
+    <div class="science-stat"><span class="science-stat__value">6</span><span class="science-stat__label">{{ sp_s3 }}</span></div>
+    <div class="science-stat"><span class="science-stat__value">12</span><span class="science-stat__label">{{ sp_s4 }}</span></div>
+    <div class="science-stat"><span class="science-stat__value">27</span><span class="science-stat__label">{{ sp_s5 }}</span></div>
+    <div class="science-stat"><span class="science-stat__value">{{ sp_s6v }}</span><span class="science-stat__label">{{ sp_s6 }}</span></div>
+  </div>
+
+  <p class="science-profile__foot">
+    <a class="text-link" href="https://elibrary.ru/author_profile.asp?authorid=930081">{{ sp_link }} →</a>
+    <span class="science-profile__ids">{{ sp_ids }}</span>
+  </p>
+</aside>
