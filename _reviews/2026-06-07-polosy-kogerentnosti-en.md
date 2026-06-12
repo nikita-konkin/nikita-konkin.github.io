@@ -1,5 +1,5 @@
 ---
-title: "AI review: methods and software for studying the coherence bandwidth of trans-ionospheric radio channels"
+title: "Methods and software for studying the coherence bandwidth of trans-ionospheric radio channels"
 pair: polosy-kogerentnosti
 lang: en
 date: 2026-06-07
@@ -8,6 +8,7 @@ summary: "An engineering paper: an automated pipeline and animated diagnostic ma
 paper_title: "Methods and software for studying the coherence bandwidth of trans-ionospheric radio channels"
 paper_authors: "Ivanov V.A., Ivanov D.V., Ryabova N.V., Ryabova M.I., Chernov A.A., Konkin N.A."
 paper_year: 2016
+paper_date: "2016"
 paper_venue: "Systems of Synchronization, Generation and Processing of Signals, No. 4, 2016"
 paper_link: "https://www.elibrary.ru/item.asp?id=28127432"
 tags: [ionosphere, radio-sounding, GNSS, data-processing, software]
