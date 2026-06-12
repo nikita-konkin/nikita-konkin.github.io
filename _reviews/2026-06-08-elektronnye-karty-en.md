@@ -1,5 +1,5 @@
 ---
-title: "AI review: a program complex for building electronic diagnostic maps of the coherence bandwidth of an HF radio channel"
+title: "A program complex for building electronic diagnostic maps of the coherence bandwidth of an HF radio channel"
 pair: elektronnye-karty
 lang: en
 date: 2026-06-08
@@ -8,6 +8,7 @@ summary: "The CriMiCo'2016 conference paper — a fuller version of the coherenc
 paper_title: "A program complex for building electronic diagnostic maps of the coherence bandwidth of an HF radio channel"
 paper_authors: "Ivanov V.A., Konkin N.A., Chernov A.A., Ryabova M.I."
 paper_year: 2016
+paper_date: "September 2016"
 paper_venue: "Proceedings of CriMiCo'2016 — 26th Int. Conference on Microwave & Telecommunication Technology, Sevastopol"
 paper_link: "https://elibrary.ru/item.asp?id=29787129"
 tags: [ionosphere, radio-sounding, GNSS, coherence-bandwidth, modelling, software]

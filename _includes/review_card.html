@@ -13,25 +13,18 @@
 
 {% if current_lang == 'en' %}
   {% assign read_label = 'Read →' %}
-  {% assign kind_label = 'AI review' %}
 {% else %}
   {% assign read_label = 'Читать →' %}
-  {% assign kind_label = 'AI-обзор' %}
 {% endif %}
 
 <article class="card">
   <div class="card__meta">
-    <span>{{ review.date | date: "%d.%m.%Y" }}</span>
-    <span>{{ kind_label }}</span>
+    {% if review.paper_date %}<span>{{ review.paper_date }}</span>{% elsif review.paper_year %}<span>{{ review.paper_year }}</span>{% endif %}
   </div>
 
   <h3 class="card__title">
     <a href="{{ review.url | relative_url }}">{{ review.title }}</a>
   </h3>
-
-  {% if review.paper_title %}
-    <p class="card__summary"><strong>{{ review.paper_title }}</strong></p>
-  {% endif %}
 
   <p class="card__summary">
     {{ review.summary | default: review.excerpt | strip_html | strip_newlines | truncate: 180 }}

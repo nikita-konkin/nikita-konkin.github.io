@@ -1,5 +1,5 @@
 ---
-title: "AI review: methods and algorithms for studying the coherence bandwidth of oblique and trans-ionospheric sounding of the Earth's ionosphere"
+title: "Methods and algorithms for studying the coherence bandwidth of oblique and trans-ionospheric sounding of the Earth's ionosphere"
 pair: metodiki-algoritmy
 lang: en
 date: 2026-06-09
@@ -8,6 +8,7 @@ summary: "The consolidated version of the work, bringing together both strands o
 paper_title: "Methods and algorithms for studying the coherence bandwidth of oblique and trans-ionospheric sounding of the Earth's ionosphere"
 paper_authors: "Ivanov V.A., Ivanov D.V., Ryabova N.V., Ryabova M.I., Chernov A.A., Konkin N.A."
 paper_year: 2016
+paper_date: "2016"
 paper_link: "https://elibrary.ru/item.asp?id=26519283"
 tags: [ionosphere, radio-sounding, GNSS, coherence-bandwidth, modelling, software]
 ---
