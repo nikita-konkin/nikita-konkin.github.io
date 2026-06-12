@@ -56,6 +56,35 @@
     - "Practical guidance on making tests shorter, stricter, and more useful."
     - "References to tools and approaches such as jqwik, pitest, ArchUnit, and fuzzing."
 
+- slug: ict_platform
+  name: ict
+  title: "ICT — платформа обработки данных ионосферного зондирования"
+  title_en: "ICT — an ionospheric sounding data-processing platform"
+  status: "В разработке"
+  status_ru: "В разработке"
+  status_en: "Work in progress"
+  description: "Сквозной конвейер обработки данных GNSS: от архивов RINEX к полному электронному содержанию, полосам когерентности, картам и аналитике. Набор контейнеризованных сервисов с веб-оркестратором и API-доступом к данным."
+  description_en: "An end-to-end GNSS data-processing pipeline: from RINEX archives to total electron content, coherence bands, maps, and analytics. A set of containerised services with a web orchestrator and an API for data access."
+  repo: https://github.com/nikita-konkin/ict-hub
+  repo_label_ru: "Репозиторий (оркестратор)"
+  repo_label_en: "Repository (orchestrator)"
+  stack:
+    - Python
+    - FastAPI
+    - HTMX
+    - DuckDB
+    - Parquet
+    - Docker
+    - nginx
+  highlights:
+    - "Сквозной путь данных: RINEX → TEC → полоса когерентности → карты и статистика."
+    - "Веб-оркестратор контейнерных конвертеров с потоковыми логами и аудитом запусков."
+    - "Аналитический backend на DuckDB поверх Parquet с экспортом в JSON/CSV/XLSX и графиками."
+  highlights_en:
+    - "An end-to-end data path: RINEX → TEC → coherence band → maps and statistics."
+    - "A web orchestrator for containerised converters with streaming logs and a run audit."
+    - "A DuckDB analytics backend over Parquet with JSON/CSV/XLSX export and plotting."
+
 - slug: tea_taste
   name: tea-taste
   title: "Tea Taste — цифровой журнал дегустации чая"
