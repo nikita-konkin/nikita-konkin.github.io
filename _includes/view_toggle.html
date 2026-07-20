@@ -1,0 +1,35 @@
+<div class="view-toggle" role="group" aria-label="{{ include.view_label }}" data-view-toggle="{{ include.storage_key }}">
+  <button type="button" class="view-toggle__btn" data-view-btn="list" aria-pressed="true">{{ include.list_label }}</button>
+  <button type="button" class="view-toggle__btn" data-view-btn="tiles" aria-pressed="false">{{ include.tiles_label }}</button>
+</div>
+
+<script>
+(function () {
+  var toggle = document.querySelector('[data-view-toggle="{{ include.storage_key }}"]');
+  var grid = document.querySelector('[data-card-grid="{{ include.storage_key }}"]');
+  if (!grid || !toggle) return;
+
+  var STORAGE_KEY = '{{ include.storage_key }}';
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  var view = saved === 'tiles' ? 'tiles' : 'list';
+
+  function applyView(next) {
+    grid.classList.toggle('card-grid--list', next === 'list');
+    var buttons = toggle.querySelectorAll('[data-view-btn]');
+    for (var i = 0; i < buttons.length; i += 1) {
+      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-view-btn') === next));
+    }
+  }
+
+  applyView(view);
+
+  toggle.addEventListener('click', function (event) {
+    var btn = event.target.closest('[data-view-btn]');
+    if (!btn) return;
+    view = btn.getAttribute('data-view-btn');
+    applyView(view);
+    try { localStorage.setItem(STORAGE_KEY, view); } catch (e) {}
+  });
+})();
+</script>

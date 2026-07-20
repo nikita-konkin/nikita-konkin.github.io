@@ -3,18 +3,29 @@
   {% assign reviews = site.reviews | where: "lang", "en" | sort: "date" | reverse %}
   {% assign intro = 'My published scientific papers, each with a short analysis — a summary, the strengths, the weak spots, and concrete suggestions.' %}
   {% assign empty_msg = 'Nothing published here yet.' %}
+  {% assign view_label = 'View' %}
+  {% assign list_label = 'List' %}
+  {% assign tiles_label = 'Tiles' %}
 {% else %}
   {% assign reviews = site.reviews | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
   {% assign intro = 'Мои опубликованные научные работы — каждая с коротким разбором: резюме, сильные стороны, слабые места и конкретные предложения.' %}
   {% assign empty_msg = 'Пока ничего не опубликовано.' %}
+  {% assign view_label = 'Вид' %}
+  {% assign list_label = 'Список' %}
+  {% assign tiles_label = 'Плитки' %}
 {% endif %}
 
 {% include science_profile.html %}
 
-<p class="section-note">{{ intro }}</p>
+<div class="list-toolbar">
+  <p class="section-note">{{ intro }}</p>
+  {% if reviews.size > 0 %}
+    {% include view_toggle.html storage_key="reviewView" view_label=view_label list_label=list_label tiles_label=tiles_label %}
+  {% endif %}
+</div>
 
 {% if reviews.size > 0 %}
-  <div class="card-grid" style="margin-top: 1.5rem;">
+  <div class="card-grid card-grid--list" data-card-grid="reviewView" style="margin-top: 1.5rem;">
     {% for review in reviews %}
       {% include review_card.html review=review %}
     {% endfor %}

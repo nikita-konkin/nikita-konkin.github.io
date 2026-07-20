@@ -690,7 +690,15 @@ h4,
 
 .card-grid--list .card__title {
   flex: 1 1 260px;
+  min-width: 0;
   margin-bottom: 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.card-grid--list .card__title a {
+  display: block;
+  overflow-wrap: break-word;
 }
 
 .card-grid--list .card__summary {
