@@ -1,11 +1,11 @@
 {% assign current_lang = page.lang | default: site.lang %}
 {% if current_lang == 'en' %}
   {% assign reviews = site.reviews | where: "lang", "en" | sort: "date" | reverse %}
-  {% assign intro = 'My published scientific papers, each with a short analysis — a summary, the strengths, the weak spots, and concrete suggestions — prepared with the help of Claude (Anthropic).' %}
+  {% assign intro = 'My published scientific papers, each with a short analysis — a summary, the strengths, the weak spots, and concrete suggestions.' %}
   {% assign empty_msg = 'Nothing published here yet.' %}
 {% else %}
   {% assign reviews = site.reviews | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
-  {% assign intro = 'Мои опубликованные научные работы — каждая с коротким разбором: резюме, сильные стороны, слабые места и конкретные предложения, подготовленным с помощью Claude (Anthropic).' %}
+  {% assign intro = 'Мои опубликованные научные работы — каждая с коротким разбором: резюме, сильные стороны, слабые места и конкретные предложения.' %}
   {% assign empty_msg = 'Пока ничего не опубликовано.' %}
 {% endif %}
 
