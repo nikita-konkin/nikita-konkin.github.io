@@ -32,7 +32,7 @@ collections:
     permalink: /blog/:path/
   reviews:
     output: true
-    permalink: /ai-review/:path/
+    permalink: /science/:path/
 
 defaults:
   - scope:
