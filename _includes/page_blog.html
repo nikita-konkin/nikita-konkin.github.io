@@ -15,45 +15,11 @@
 
 <div class="list-toolbar">
   <p class="section-note">{{ intro }}</p>
-  <div class="view-toggle" role="group" aria-label="{{ view_label }}" data-view-toggle>
-    <button type="button" class="view-toggle__btn" data-view-btn="list" aria-pressed="true">{{ list_label }}</button>
-    <button type="button" class="view-toggle__btn" data-view-btn="tiles" aria-pressed="false">{{ tiles_label }}</button>
-  </div>
+  {% include view_toggle.html storage_key="articleView" view_label=view_label list_label=list_label tiles_label=tiles_label %}
 </div>
 
-<div class="card-grid card-grid--list" data-article-grid style="margin-top: 1.5rem;">
+<div class="card-grid card-grid--list" data-card-grid="articleView" style="margin-top: 1.5rem;">
   {% for article in articles %}
     {% include article_card.html article=article %}
   {% endfor %}
 </div>
-
-<script>
-(function () {
-  var grid = document.querySelector('[data-article-grid]');
-  var toggle = document.querySelector('[data-view-toggle]');
-  if (!grid || !toggle) return;
-
-  var STORAGE_KEY = 'articleView';
-  var saved = null;
-  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-  var view = saved === 'tiles' ? 'tiles' : 'list';
-
-  function applyView(next) {
-    grid.classList.toggle('card-grid--list', next === 'list');
-    var buttons = toggle.querySelectorAll('[data-view-btn]');
-    for (var i = 0; i < buttons.length; i += 1) {
-      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-view-btn') === next));
-    }
-  }
-
-  applyView(view);
-
-  toggle.addEventListener('click', function (event) {
-    var btn = event.target.closest('[data-view-btn]');
-    if (!btn) return;
-    view = btn.getAttribute('data-view-btn');
-    applyView(view);
-    try { localStorage.setItem(STORAGE_KEY, view); } catch (e) {}
-  });
-})();
-</script>
