@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang }}">
+<html lang="{{ page.lang | default: site.lang }}"{% if page.view_key %} data-view="list"{% endif %}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,6 +63,16 @@
         apply(dark);
         try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
       };
+
+      {% if page.view_key %}
+      // Card layout is decided here rather than after the grid is parsed, so a
+      // visitor who picked tiles does not get a list painted first.
+      var viewKey = {{ page.view_key | jsonify }};
+      var view = null;
+      try { view = localStorage.getItem(viewKey); } catch (e) {}
+      root.dataset.view = view === 'tiles' ? 'tiles' : 'list';
+      window.__viewKey = viewKey;
+      {% endif %}
     })();
     </script>
   </head>
@@ -74,5 +84,45 @@
       </div>
     </main>
     {% include site_footer.html %}
+
+    {% comment %} Kramdown emits a bare <table>, so the scroll container has to be
+    added here. Only tables that actually overflow become focusable, otherwise this
+    would add a tab stop that goes nowhere. {% endcomment %}
+    {% assign table_label = 'Таблица, прокручивается по горизонтали' %}
+    {% if page.lang == 'en' %}{% assign table_label = 'Table, scrolls horizontally' %}{% endif %}
+    <script>
+    (function () {
+      var tables = document.querySelectorAll('.prose > table');
+      if (!tables.length) return;
+
+      var label = {{ table_label | jsonify }};
+      var regions = [];
+
+      Array.prototype.forEach.call(tables, function (table) {
+        var region = document.createElement('div');
+        region.className = 'table-scroll';
+        table.parentNode.insertBefore(region, table);
+        region.appendChild(table);
+        regions.push(region);
+      });
+
+      function refresh() {
+        regions.forEach(function (region) {
+          if (region.scrollWidth > region.clientWidth) {
+            region.setAttribute('role', 'region');
+            region.setAttribute('tabindex', '0');
+            region.setAttribute('aria-label', label);
+          } else {
+            region.removeAttribute('role');
+            region.removeAttribute('tabindex');
+            region.removeAttribute('aria-label');
+          }
+        });
+      }
+
+      refresh();
+      window.addEventListener('resize', refresh);
+    })();
+    </script>
   </body>
 </html>
