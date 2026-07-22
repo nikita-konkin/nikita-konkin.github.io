@@ -55,4 +55,5 @@ defaults:
 
 exclude:
   - README.md
+  - assets/fonts/README.md
   - vendor
