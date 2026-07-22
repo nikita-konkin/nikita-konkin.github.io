@@ -29,6 +29,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -118,6 +120,7 @@ h4,
 .site-brand__title {
   font-family: "Prata", Georgia, serif;
   letter-spacing: -0.02em;
+  overflow-wrap: break-word;
 }
 
 .container {
@@ -191,8 +194,7 @@ h4,
   font-weight: 600;
 }
 
-.site-nav a[aria-current="page"],
-.site-nav a:hover {
+.site-nav a[aria-current="page"] {
   color: var(--text);
   background: rgba(255, 248, 239, 0.86);
 }
@@ -373,22 +375,10 @@ h4,
   box-shadow: 0 6px 18px rgba(72, 52, 36, 0.04);
 }
 
-.button:hover {
-  transform: translateY(-1px);
-  border-color: rgba(157, 107, 67, 0.35);
-  background: rgba(255, 251, 246, 0.98);
-  color: var(--accent-deep);
-}
-
 .button--primary {
   border-color: transparent;
   background: linear-gradient(135deg, var(--accent) 0%, var(--clay) 100%);
   color: #fffaf4;
-}
-
-.button--primary:hover {
-  color: #fffaf4;
-  background: linear-gradient(135deg, var(--accent-deep) 0%, var(--clay) 100%);
 }
 
 .button--small {
@@ -600,12 +590,6 @@ h4,
   box-shadow: var(--shadow-soft);
 }
 
-.landing-link-card:hover,
-.card:hover,
-.project-card:hover {
-  transform: translateY(-2px);
-}
-
 .landing-link-card strong {
   color: var(--text);
   font-size: 1.02rem;
@@ -656,10 +640,6 @@ h4,
   font-weight: 600;
   cursor: pointer;
   transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
-}
-
-.view-toggle__btn:hover {
-  color: var(--accent-deep);
 }
 
 .view-toggle__btn[aria-pressed="true"] {
@@ -714,6 +694,8 @@ h4,
   .card-grid--list .card {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.95rem 1.1rem;
   }
 
   .card-grid--list .card__meta {
@@ -723,6 +705,30 @@ h4,
   .card-grid--list .card__footer {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .card-grid--list .card__footer .tag-list {
+    margin-top: 0;
+  }
+
+  .list-toolbar .view-toggle {
+    flex: 1 1 100%;
+  }
+
+  .view-toggle__btn {
+    flex: 1 1 0;
+    justify-content: center;
+    min-height: 2.75rem;
+  }
+
+  .tag {
+    min-height: 2rem;
+  }
+
+  .card__footer .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
   }
 }
 
@@ -961,6 +967,10 @@ h4,
   margin-top: 0.45rem;
 }
 
+.prose a {
+  overflow-wrap: anywhere;
+}
+
 .prose blockquote {
   margin-left: 0;
   padding: 1rem 1.15rem;
@@ -1018,6 +1028,35 @@ h4,
 
 .landing-cta p {
   max-width: 40rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover {
+    color: var(--text);
+    background: rgba(255, 248, 239, 0.86);
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(157, 107, 67, 0.35);
+    background: rgba(255, 251, 246, 0.98);
+    color: var(--accent-deep);
+  }
+
+  .button--primary:hover {
+    color: #fffaf4;
+    background: linear-gradient(135deg, var(--accent-deep) 0%, var(--clay) 100%);
+  }
+
+  .landing-link-card:hover,
+  .card:hover,
+  .project-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .view-toggle__btn:hover {
+    color: var(--accent-deep);
+  }
 }
 
 @keyframes drift {
@@ -1101,6 +1140,20 @@ h4,
 
   .site-main {
     padding-top: 1rem;
+  }
+
+  .science-profile {
+    padding: 1.1rem 1.15rem;
+  }
+
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  .site-header {
+    backdrop-filter: none;
+    background: rgba(248, 241, 232, 0.96);
   }
 }
 
