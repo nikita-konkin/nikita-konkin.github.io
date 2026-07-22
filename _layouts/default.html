@@ -21,11 +21,18 @@
     {% feed_meta %}
 
     <meta name="theme-color" content="#f4ede3">
-    <meta name="theme-color" content="#1c1a17" media="(prefers-color-scheme: dark)">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+
+    {% comment %} Fonts are self-hosted (assets/fonts/README.md). Preload only the
+    subset this page's language actually needs; the rest load on demand. {% endcomment %}
+    {% assign font_subset = 'cyrillic' %}
+    {% if page.lang == 'en' %}{% assign font_subset = 'latin' %}{% endif %}
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/manrope-' | append: font_subset | append: '.woff2' | relative_url }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/prata-' | append: font_subset | append: '.woff2' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+    {% comment %} Set before first paint so the collapsed mobile nav does not flash
+    open for no-JS-capable-but-slow loads. {% endcomment %}
+    <script>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     {% include site_header.html %}

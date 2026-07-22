@@ -1,3 +1,68 @@
+/* Self-hosted from Google Fonts (SIL OFL 1.1) - see assets/fonts/README.md.
+   Manrope is a variable font: one file per subset covers weights 200-800. */
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/manrope-cyrillic-ext.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/manrope-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/manrope-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/manrope-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Prata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/prata-cyrillic-ext.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+  font-family: "Prata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/prata-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Prata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/prata-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --bg: #f4ede3;
   --bg-strong: #e9dece;
@@ -203,6 +268,50 @@ h4,
   border: 1px solid var(--border);
   background: rgba(255, 248, 239, 0.72);
   color: var(--text);
+}
+
+.site-nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 248, 239, 0.72);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.site-nav-toggle__icon {
+  position: relative;
+  display: block;
+  width: 1.05rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.site-nav-toggle__icon::before,
+.site-nav-toggle__icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: currentColor;
+}
+
+.site-nav-toggle__icon::before {
+  top: -0.34rem;
+}
+
+.site-nav-toggle__icon::after {
+  top: 0.34rem;
 }
 
 .site-lang {
@@ -911,6 +1020,11 @@ h4,
   color: var(--accent-deep);
 }
 
+.science-stat__value--text {
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
 .science-stat__label {
   font-size: 0.82rem;
   color: var(--text-muted);
@@ -1076,21 +1190,59 @@ h4,
   }
 
   .section__head,
-  .site-header__inner,
   .site-footer__inner {
     flex-direction: column;
     align-items: flex-start;
   }
 
+  .site-header__inner {
+    gap: 0.75rem;
+    padding: 0.7rem 0;
+  }
+
   .site-header__controls {
+    gap: 0.5rem;
+  }
+
+  .js .site-nav-toggle {
+    display: inline-flex;
+  }
+
+  .js .site-nav {
+    display: none;
+  }
+
+  .js .site-header--nav-open .site-nav {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.6rem 1rem 0.9rem;
+    background: rgba(248, 241, 232, 0.98);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .js .site-header--nav-open .site-nav a {
+    justify-content: flex-start;
+    min-height: 2.9rem;
+  }
+
+  html:not(.js) .site-header__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  html:not(.js) .site-header__controls {
     width: 100%;
-    flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
   }
 
-  .site-nav {
+  html:not(.js) .site-nav {
     justify-content: flex-start;
   }
 }
@@ -1154,6 +1306,28 @@ h4,
   .site-header {
     backdrop-filter: none;
     background: rgba(248, 241, 232, 0.96);
+  }
+
+  .site-brand__tagline {
+    display: none;
+  }
+
+  .site-brand__title {
+    font-size: 1.2rem;
+  }
+
+  .landing-hero,
+  .landing-section,
+  .section,
+  .landing-cta {
+    scroll-margin-top: 5rem;
+  }
+
+  .prose table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
   }
 }
 

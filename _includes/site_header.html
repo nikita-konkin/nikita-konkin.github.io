@@ -18,6 +18,7 @@
   {% assign science_label = 'Science work' %}
   {% assign about_label = 'About' %}
   {% assign lang_switch_label = 'Language switch' %}
+  {% assign menu_label = 'Menu' %}
 {% else %}
   {% assign home_path = '/' %}
   {% assign projects_path = '/projects/' %}
@@ -36,6 +37,7 @@
   {% assign science_label = 'Научные работы' %}
   {% assign about_label = 'Обо мне' %}
   {% assign lang_switch_label = 'Переключение языка' %}
+  {% assign menu_label = 'Меню' %}
 {% endif %}
 
 {% if page.pair %}
@@ -64,7 +66,12 @@
     </a>
 
     <div class="site-header__controls">
-      <nav class="site-nav" aria-label="{{ nav_label }}">
+      <button type="button" class="site-nav-toggle" aria-expanded="false" aria-controls="site-nav">
+        <span class="site-nav-toggle__icon" aria-hidden="true"></span>
+        {{ menu_label }}
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="{{ nav_label }}">
         {% if is_home %}
           <a href="#approach">{{ approach_label }}</a>
           <a href="#featured-work">{{ project_label }}</a>
@@ -101,3 +108,33 @@
     </div>
   </div>
 </header>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  var toggle = header && header.querySelector('.site-nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!header || !toggle || !nav) return;
+
+  function setOpen(open) {
+    header.classList.toggle('site-header--nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  nav.addEventListener('click', function (event) {
+    if (event.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!header.contains(event.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') setOpen(false);
+  });
+})();
+</script>
