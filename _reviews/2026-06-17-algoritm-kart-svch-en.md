@@ -35,8 +35,8 @@ This is an abstract, so the limits are natural to the format rather than shortco
 - **No validation or map characteristics.** The spatial and temporal resolution are not stated, and there is no comparison against an independent measurement nor an error estimate.
 - **An incremental, tool-level addition.** Relative to the group's earlier work, what looks new here is mainly the packaging and naming of the tool rather than the method itself.
 
-## Questions for the author
+## Heuristic
 
-- What specifically in the processing and recalculation is particular to the microwave band, compared with the earlier general formulation?
-- What are the spatial and temporal resolution of the "iMap" maps, and were they compared against direct measurements?
-- How are the IRI and MapTec data combined and mutually calibrated in the third stage?
+- An abstract may omit a derivation, but it must name the source that carries it; otherwise the key link in the argument is taken on trust.
+- Changing the frequency band is a substantive claim only when the text states what in the processing depends on it. Otherwise it is a change of framing, not of method.
+- A tool that has been given a name is not yet a new method. Instrumental and methodological increments are worth separating explicitly — it protects the work from inflated expectations.

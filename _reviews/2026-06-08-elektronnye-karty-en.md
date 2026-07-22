@@ -46,8 +46,8 @@ The conference-proceedings format imposes natural limits, so these notes are abo
 - Disclose the choice of the coefficient in the bandwidth formula and the way the variable TEC component is estimated.
 - Where possible, replace GUI automation with programmatic interfaces to make the pipeline more robust.
 
-## Questions for the authors
+## Heuristic
 
-- How closely do the model and measured ionograms agree quantitatively — is there an estimate of the frequency and delay discrepancy?
-- What is the coverage of the coherence-bandwidth maps, and how are regions without GNSS data handled?
-- How does the sensitivity to the constant TEC component taken from IRI affect the final bandwidth values?
+- Model and measured ionograms agreeing "by eye" is not a result: the discrepancy belongs in numbers, in frequency and in delay, or the comparison cannot be reproduced.
+- A map has to be read together with its coverage: regions without data should stay visible as gaps rather than being silently filled by interpolation.
+- If a modelled quantity taken from a reference model enters the calculation, the sensitivity of the result to it is a required part of the report, not an optional refinement.
