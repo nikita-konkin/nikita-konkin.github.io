@@ -19,6 +19,7 @@
   {% assign about_label = 'About' %}
   {% assign lang_switch_label = 'Language switch' %}
   {% assign menu_label = 'Menu' %}
+  {% assign theme_label = 'Toggle dark theme' %}
 {% else %}
   {% assign home_path = '/' %}
   {% assign projects_path = '/projects/' %}
@@ -38,6 +39,7 @@
   {% assign about_label = 'Обо мне' %}
   {% assign lang_switch_label = 'Переключение языка' %}
   {% assign menu_label = 'Меню' %}
+  {% assign theme_label = 'Переключить тёмную тему' %}
 {% endif %}
 
 {% if page.pair %}
@@ -88,6 +90,16 @@
         <a class="site-nav__cta" href="{{ site.social.github }}">GitHub</a>
       </nav>
 
+      <button type="button" class="theme-toggle" aria-pressed="false" aria-label="{{ theme_label }}" title="{{ theme_label }}">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.1 14.6A8.3 8.3 0 0 1 9.4 3.9a8.4 8.4 0 1 0 10.7 10.7z"/>
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4.1"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.4 5.4l1.7 1.7M16.9 16.9l1.7 1.7M18.6 5.4l-1.7 1.7M7.1 16.9l-1.7 1.7"/>
+        </svg>
+      </button>
+
       <div class="site-lang" aria-label="{{ lang_switch_label }}">
         {% if current_lang == 'ru' %}
           <span class="site-lang__current">RUS</span>
@@ -135,6 +147,22 @@
 
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') setOpen(false);
+  });
+})();
+
+(function () {
+  var button = document.querySelector('.theme-toggle');
+  if (!button || !window.__setTheme) return;
+
+  function sync() {
+    button.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+  }
+
+  sync();
+
+  button.addEventListener('click', function () {
+    window.__setTheme(document.documentElement.dataset.theme !== 'dark');
+    sync();
   });
 })();
 </script>

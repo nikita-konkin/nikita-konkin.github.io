@@ -30,9 +30,41 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/prata-' | append: font_subset | append: '.woff2' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
-    {% comment %} Set before first paint so the collapsed mobile nav does not flash
-    open for no-JS-capable-but-slow loads. {% endcomment %}
-    <script>document.documentElement.classList.add('js');</script>
+    {% comment %} Runs before first paint: picks the theme (explicit choice beats the
+    OS preference) and marks the document as scripted, so the collapsed mobile nav
+    never flashes open and the page never flashes the wrong theme. {% endcomment %}
+    <script>
+    (function () {
+      var root = document.documentElement;
+      var LIGHT = '#f4ede3';
+      var DARK = '#191510';
+
+      function apply(dark) {
+        root.dataset.theme = dark ? 'dark' : 'light';
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? DARK : LIGHT);
+      }
+
+      function stored() {
+        try { return localStorage.getItem('theme'); } catch (e) { return null; }
+      }
+
+      var query = window.matchMedia('(prefers-color-scheme: dark)');
+      var choice = stored();
+      apply(choice === 'dark' || (choice !== 'light' && query.matches));
+      root.classList.add('js');
+
+      // Follow the OS only while the visitor has not picked a theme themselves.
+      query.addEventListener('change', function (event) {
+        if (!stored()) apply(event.matches);
+      });
+
+      window.__setTheme = function (dark) {
+        apply(dark);
+        try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+      };
+    })();
+    </script>
   </head>
   <body>
     {% include site_header.html %}
