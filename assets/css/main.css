@@ -934,7 +934,14 @@ h4,
 }
 
 :root[data-view="list"] .card-grid .card__summary {
-  display: none;
+  order: 1;
+  flex: 1 1 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  font-size: 0.95rem;
 }
 
 :root[data-view="list"] .card-grid .card__footer {
@@ -968,11 +975,9 @@ h4,
   }
 
   :root[data-view="list"] .card-grid .card__summary {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    order: 0;
     -webkit-line-clamp: 3;
     line-clamp: 3;
-    overflow: hidden;
   }
 
   .list-toolbar .view-toggle {
@@ -1019,6 +1024,10 @@ h4,
   border-radius: 999px;
   background: rgba(var(--c-accent), 0.08);
   color: var(--accent-deep);
+}
+
+.card__meta span {
+  border-radius: 5px;
 }
 
 .card__title,
