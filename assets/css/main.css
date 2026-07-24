@@ -1303,6 +1303,38 @@ h4,
   color: var(--text-muted);
 }
 
+.project-card__references {
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+.project-card__references-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.project-card__references ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.project-card__references li {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.project-card__references a {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
 .landing-project__summary {
   margin-top: 0.75rem;
   font-size: 1.05rem;

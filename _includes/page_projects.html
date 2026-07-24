@@ -12,12 +12,14 @@
   {% assign repo_default = 'Repository' %}
   {% assign demo_default = 'Demo' %}
   {% assign latest_article_label = 'Latest article' %}
+  {% assign references_label = 'Similar projects' %}
 {% else %}
   {% assign visible_articles = site.articles | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" %}
   {% assign updates_label = 'публикаций' %}
   {% assign repo_default = 'Репозиторий' %}
   {% assign demo_default = 'Демо' %}
   {% assign latest_article_label = 'Последняя статья' %}
+  {% assign references_label = 'Похожие проекты' %}
 {% endif %}
 
 <div class="project-list">
@@ -64,6 +66,22 @@
           <a class="button button--small" href="{{ latest_article.url | relative_url }}">{{ latest_article_label }}</a>
         {% endif %}
       </div>
+
+      {% if project.references and project.references.size > 0 %}
+        <div class="project-card__references">
+          <p class="project-card__references-label">{{ references_label }}</p>
+          <ul>
+            {% for ref in project.references %}
+              {% assign ref_note = ref.note %}
+              {% if current_lang == 'en' %}{% assign ref_note = ref.note_en | default: ref.note %}{% endif %}
+              <li>
+                <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.label }}</a>
+                {% if ref_note %}<span> — {{ ref_note }}</span>{% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     </section>
   {% endfor %}
 </div>
