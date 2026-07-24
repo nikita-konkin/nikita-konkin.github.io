@@ -996,6 +996,10 @@ h4,
     min-height: 2rem;
   }
 
+  .tag-filter__btn {
+    min-height: 2.25rem;
+  }
+
   .card__footer .text-link {
     display: inline-flex;
     align-items: center;
@@ -1068,6 +1072,63 @@ h4,
   color: var(--tag-text);
   border: 1px solid rgba(var(--c-sage), 0.16);
   font-size: 0.86rem;
+}
+
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.tag-filter__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(var(--c-sage), 0.12);
+  color: var(--tag-text);
+  border: 1px solid rgba(var(--c-sage), 0.16);
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.tag-filter__btn[aria-pressed="true"] {
+  background: rgba(var(--c-accent), 0.14);
+  border-color: rgba(var(--c-accent), 0.3);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+/* Chips that act as links/filters: kill the prose underline, keep the chip look. */
+.tag--link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.tag.is-active {
+  background: rgba(var(--c-accent), 0.16);
+  border-color: rgba(var(--c-accent), 0.32);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+/* The filter hides non-matching cards via [hidden]; .project-card sets no display
+   of its own, but keep this explicit so a future display rule cannot unhide them. */
+.project-card[hidden] {
+  display: none !important;
+}
+
+.tag-empty {
+  margin: 0.5rem 0 0;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-small);
+  background: rgba(var(--c-sage), 0.1);
+  border: 1px solid rgba(var(--c-sage), 0.14);
+  color: var(--text-muted);
 }
 
 .page-shell,
@@ -1382,6 +1443,12 @@ h4,
   }
 
   .view-toggle__btn:hover {
+    color: var(--accent-deep);
+  }
+
+  .tag-filter__btn:hover,
+  .tag--link:hover {
+    border-color: rgba(var(--c-accent), 0.35);
     color: var(--accent-deep);
   }
 
