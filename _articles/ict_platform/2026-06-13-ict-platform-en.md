@@ -6,6 +6,7 @@ translation_of: 2026-06-13-ict-platform.md
 platform: Web
 type: Technical overview
 date: 2026-06-13
+source_rev: aa4783748915ad1a5ab67311393adbfbe7b52715
 lang: en
 authors:
   - Nikita Konkin

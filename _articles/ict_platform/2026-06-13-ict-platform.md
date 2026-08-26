@@ -5,6 +5,7 @@ pair: ict-platform
 platform: Web
 type: Технический разбор
 date: 2026-06-13
+source_rev: aa4783748915ad1a5ab67311393adbfbe7b52715
 lang: ru
 authors:
   - Никита Конкин
