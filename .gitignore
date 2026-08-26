@@ -22,3 +22,11 @@ _site/
 
 # Local Ruby toolchain lock (resolved from the github-pages gem)
 Gemfile.lock
+
+# Local clone map for scripts/project_scan.py (machine-specific paths)
+scripts/repos.local.yml
+
+# Downloaded paper PDFs: source material for the review pipeline, not site
+# content. Redistribution rights are the publisher's, so they stay local.
+# pdf/pdf_links.txt IS tracked - the links are the part worth keeping.
+pdf/*.pdf

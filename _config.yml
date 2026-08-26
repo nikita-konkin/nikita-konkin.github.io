@@ -53,6 +53,25 @@ defaults:
       layout: review
       lang: ru
 
+# Jekyll REPLACES its built-in exclude list when this key is set, so the stock
+# entries (Gemfile, vendor/*, caches) have to be repeated here alongside ours.
+# Without them the Ruby toolchain and the test suite are copied into _site and
+# served on the live domain.
 exclude:
+  # Repo docs and local toolchain
   - README.md
-  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - gemfiles
+  # Test suite and publishing scripts - source only, never served
+  - tests/
+  - notes/
+  - pdf/
+  - scripts/
+  - pytest.ini
+  - .pytest_cache/
+  # Jekyll defaults, restored
+  - .sass-cache/
+  - .jekyll-cache/
+  - node_modules/
+  - vendor/
