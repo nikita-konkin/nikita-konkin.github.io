@@ -6,12 +6,13 @@
 # session, so nothing here can be fetched automatically - this file IS the copy
 # of record, and scripts/papers_scan.py checks it against what is on disk.
 #
+# Entries are sorted by id; `review:` is what says whether a paper is written
+# up, so do not rely on where an entry sits in the file.
+#
 # `pdf: null`    - no local copy yet.
 # `review: null` - not yet written up; this is the science backlog.
 # Fields left null are genuinely unknown, not yet filled in: the metadata was
 # read out of the PDF text, and these papers do not name their venue in it.
-
-# --- Reviewed ---------------------------------------------------------------
 
 - id: 26519283
   link: "https://elibrary.ru/item.asp?id=26519283"
@@ -58,40 +59,38 @@
   pdf: null
   review: 2026-06-17-algoritm-kart-svch
 
-# --- Backlog: PDF on disk, review not written --------------------------------
-
 - id: 41467774
   link: "https://elibrary.ru/item.asp?id=41467774"
   title: "Ступенчатая перестройка рабочей частоты для панорамного SDR ионозонда"
   authors: "Конкин Н.А. (научный руководитель: Рябова Н.В.)"
   venue: null
-  year: null
+  year: 2019
   pages: "150–152"
   udk: "621.396.67"
   pdf: elibrary_41467774_18857400.pdf
-  review: null
+  review: 2026-07-21-stupenchataya-perestroyka
 
 - id: 41468023
   link: "https://elibrary.ru/item.asp?id=41468023"
   title: "Исследование полос когерентности при трансионосферном зондировании"
   authors: "Конкин Н.А. (научный руководитель: Чернов А.А.)"
   venue: null
-  year: null
+  year: 2019
   pages: "425–427"
   udk: "621.371"
   pdf: elibrary_41468023_20414712.pdf
-  review: null
+  review: 2026-07-22-issledovanie-polos-zondirovanie
 
 - id: 42831881
   link: "https://elibrary.ru/item.asp?id=42831881"
   title: "Определение оптимальной полосы частот канала для систем спутниковой связи на основе диагностических карт полос когерентности"
   authors: "Конкин Н.А., Кислицын А.А."
   venue: null
-  year: null
+  year: 2020
   pages: "186–188"
   udk: "621.391.01"
   pdf: elibrary_42831881_75026376.pdf
-  review: null
+  review: 2026-07-23-optimalnaya-polosa-chastot
 
 - id: 48079621
   link: "https://elibrary.ru/item.asp?id=48079621"
@@ -113,4 +112,4 @@
   pages: "252–254"
   udk: "537.86"
   pdf: elibrary_48079625_64925820.pdf
-  review: null
+  review: 2026-07-20-modelirovanie-kart-pes

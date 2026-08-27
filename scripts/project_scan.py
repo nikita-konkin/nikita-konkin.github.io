@@ -185,13 +185,16 @@ def scan(config: dict, author: str | None, all_authors: bool) -> list[dict]:
         anchor_labels, scanned = [], 0
 
         for name, raw_path in clones.items():
-            label = name or slug
+            # Only name the clone when there is more than one; otherwise the label
+            # just repeats the project name that print_table already prints.
+            label = name if name else slug
+            prefix = f"{label}: " if name else ""
             part: dict = {"clone": label, "status": "", "new": None, "yours": None, "anchor": None}
             repo = Path(raw_path).expanduser()
 
             if not (repo / ".git").is_dir():
                 part["status"] = "path missing"
-                row["warnings"].append(f"{label}: {repo} is not a git repository")
+                row["warnings"].append(f"{prefix}{repo} is not a git repository")
                 row["clones"].append(part)
                 continue
 
@@ -201,19 +204,19 @@ def scan(config: dict, author: str | None, all_authors: bool) -> list[dict]:
             _, origin = git(repo, "remote", "get-url", "origin")
             part["origin"] = origin
             if owner and origin and owner not in origin.lower():
-                row["warnings"].append(f"{label}: origin is not yours ({origin}) - verify before writing")
+                row["warnings"].append(f"{prefix}origin is not yours ({origin}) - verify before writing")
 
             rev = revs.get(name) or (revs.get("") if len(clones) == 1 else None)
             if not rev:
                 part["status"] = "no anchor"
-                row["warnings"].append(f"{label}: no article declares a source_rev for this clone")
+                row["warnings"].append(f"{prefix}no article declares a source_rev for this clone")
                 row["clones"].append(part)
                 continue
 
             if not rev_exists(repo, rev):
                 part["status"] = "anchor missing"
                 row["warnings"].append(
-                    f"{label}: {rev[:7]} is not in this repo - history rewritten, or wrong clone"
+                    f"{prefix}{rev[:7]} is not in this repo - history rewritten, or wrong clone"
                 )
                 row["clones"].append(part)
                 continue
@@ -235,7 +238,7 @@ def scan(config: dict, author: str | None, all_authors: bool) -> list[dict]:
 
             if every and mine and len(mine) / len(every) < 0.25:
                 row["warnings"].append(
-                    f"{label}: only {len(mine)} of {len(every)} commits are yours - likely a fork"
+                    f"{prefix}only {len(mine)} of {len(every)} commits are yours - likely a fork"
                 )
 
         if not scanned:
