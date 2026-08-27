@@ -1,0 +1,30 @@
+# Local clone map for scripts/project_scan.py.
+#
+# Copy this file to scripts/repos.local.yml and point it at your own clones.
+# repos.local.yml is git-ignored, so machine-specific absolute paths never reach
+# the public repository.
+
+# Your GitHub handle. The scanner warns when a repo's origin belongs to someone
+# else, so that a fork's upstream activity is never mistaken for your own work.
+owner: your-github-handle
+
+# Commit author filter, matched against both name and email.
+author: Your Name
+
+# Project slug (must match a slug in _data/projects.yml) -> local clone path.
+repos:
+  some_project: /path/to/some_project
+
+  # A project split across several repositories maps to named clones instead.
+  # The article's `source_rev` is then a mapping keyed by these same names:
+  #
+  #   source_rev:
+  #     some-api: <sha>
+  #     some-frontend: <sha>
+  #
+  split_project:
+    some-api: /path/to/some-api
+    some-frontend: /path/to/some-frontend
+
+  # Projects with no local clone can simply be omitted; the scanner reports them
+  # as "no local clone" rather than failing.

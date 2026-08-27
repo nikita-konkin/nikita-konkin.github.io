@@ -5,6 +5,7 @@ pair: diploma-uchebno-prakticheskaya
 platform: VK
 type: Technical breakdown
 date: 2026-06-01
+source_rev: 7a0bd5cfe524785615b9b73cd6a045be3f47012e
 lang: en
 authors:
   - Nikita Konkin

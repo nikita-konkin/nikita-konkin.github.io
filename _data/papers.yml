@@ -1,0 +1,116 @@
+# Register of publications, keyed by eLibrary item id.
+#
+# The id is the join key across three places: the link (item.asp?id=<id>), the
+# local PDF (pdf/elibrary_<id>_*.pdf) and the review that discusses the paper
+# (_reviews/<slug>.md, matched through its paper_link). eLibrary is behind a
+# session, so nothing here can be fetched automatically - this file IS the copy
+# of record, and scripts/papers_scan.py checks it against what is on disk.
+#
+# `pdf: null`    - no local copy yet.
+# `review: null` - not yet written up; this is the science backlog.
+# Fields left null are genuinely unknown, not yet filled in: the metadata was
+# read out of the PDF text, and these papers do not name their venue in it.
+
+# --- Reviewed ---------------------------------------------------------------
+
+- id: 26519283
+  link: "https://elibrary.ru/item.asp?id=26519283"
+  title: "Методики и алгоритмы исследования полос когерентности при наклонном и трансионосферном зондировании ионосферы Земли"
+  authors: "Иванов В.А., Иванов Д.В., Рябова Н.В., Рябова М.И., Чернов А.А., Конкин Н.А."
+  venue: null
+  year: 2016
+  pdf: null
+  review: 2026-06-09-metodiki-algoritmy
+
+- id: 28127432
+  link: "https://elibrary.ru/item.asp?id=28127432"
+  title: "Методики и программное обеспечение для исследования полос когерентности трансионосферных радиоканалов"
+  authors: "Иванов В.А., Иванов Д.В., Рябова Н.В., Рябова М.И., Чернов А.А., Конкин Н.А."
+  venue: "Системы синхронизации, формирования и обработки сигналов, № 4, 2016"
+  year: 2016
+  pdf: null
+  review: 2026-06-07-polosy-kogerentnosti
+
+- id: 29787129
+  link: "https://elibrary.ru/item.asp?id=29787129"
+  title: "Комплекс программ построения электронных диагностических карт полос когерентности ВЧ радиоканала"
+  authors: "Иванов В.А., Конкин Н.А., Чернов А.А., Рябова М.И."
+  venue: "Proceedings of CriMiCo'2016 — 26th Int. Conference «Microwave & Telecommunication Technology», Севастополь"
+  year: 2016
+  pdf: null
+  review: 2026-06-08-elektronnye-karty
+
+- id: 32287865
+  link: "https://elibrary.ru/item.asp?id=32287865"
+  title: "Анализ математических приближений для оценки частотной фазовой дисперсии широкополосных трансионосферных каналов связи. Картографирование полосы когерентности"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Рябова М.И., Кислицын А.А., Чернов А.А., Конкин Н.А."
+  venue: null
+  year: 2017
+  pdf: null
+  review: 2026-06-17-priblizheniya-dispersii
+
+- id: 35229514
+  link: "https://elibrary.ru/item.asp?id=35229514"
+  title: "Алгоритм моделирования карт полос когерентности для трансионосферных радиоканалов СВЧ-диапазона"
+  authors: "Конкин Н.А., Кислицын А.А."
+  venue: null
+  year: 2018
+  pdf: null
+  review: 2026-06-17-algoritm-kart-svch
+
+# --- Backlog: PDF on disk, review not written --------------------------------
+
+- id: 41467774
+  link: "https://elibrary.ru/item.asp?id=41467774"
+  title: "Ступенчатая перестройка рабочей частоты для панорамного SDR ионозонда"
+  authors: "Конкин Н.А. (научный руководитель: Рябова Н.В.)"
+  venue: null
+  year: null
+  pages: "150–152"
+  udk: "621.396.67"
+  pdf: elibrary_41467774_18857400.pdf
+  review: null
+
+- id: 41468023
+  link: "https://elibrary.ru/item.asp?id=41468023"
+  title: "Исследование полос когерентности при трансионосферном зондировании"
+  authors: "Конкин Н.А. (научный руководитель: Чернов А.А.)"
+  venue: null
+  year: null
+  pages: "425–427"
+  udk: "621.371"
+  pdf: elibrary_41468023_20414712.pdf
+  review: null
+
+- id: 42831881
+  link: "https://elibrary.ru/item.asp?id=42831881"
+  title: "Определение оптимальной полосы частот канала для систем спутниковой связи на основе диагностических карт полос когерентности"
+  authors: "Конкин Н.А., Кислицын А.А."
+  venue: null
+  year: null
+  pages: "186–188"
+  udk: "621.391.01"
+  pdf: elibrary_42831881_75026376.pdf
+  review: null
+
+- id: 48079621
+  link: "https://elibrary.ru/item.asp?id=48079621"
+  title: "Экспериментальная оценка ключевых параметров множества парциальных каналов КВ-связи с использованием USRP платформы"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Бельгибаев Р.Р., Конкин Н.А."
+  venue: "БШФФ-2019, секция C «Диагностика естественных неоднородных сред и математическое моделирование»"
+  year: 2019
+  pages: "241–244"
+  udk: "551.510.535, 621.396.24"
+  pdf: elibrary_48079621_67467782.pdf
+  review: null
+
+- id: 48079625
+  link: "https://elibrary.ru/item.asp?id=48079625"
+  title: "Моделирование карт полос когерентности на основе экспериментальных оценок значений полного электронного содержания ионосферы"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Рябова М.И., Кислицын А.А., Конкин Н.А."
+  venue: "БШФФ-2019, секция C «Диагностика естественных неоднородных сред и математическое моделирование»"
+  year: 2019
+  pages: "252–254"
+  udk: "537.86"
+  pdf: elibrary_48079625_64925820.pdf
+  review: null

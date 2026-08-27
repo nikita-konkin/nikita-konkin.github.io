@@ -25,3 +25,11 @@ _site/
 
 # Local Ruby toolchain lock (resolved from the github-pages gem)
 Gemfile.lock
+
+# Local clone map for scripts/project_scan.py (machine-specific paths)
+scripts/repos.local.yml
+
+# Paper PDFs are tracked and published: the author holds the rights to them.
+# Re-downloading from eLibrary mints a fresh filename for the same paper, so
+# only the copy named in _data/papers.yml is committed; run papers_scan.py to
+# find duplicates before adding anything here.

@@ -5,6 +5,9 @@ pair: tea-taste-update
 platform: VK
 type: Технический разбор
 date: 2026-07-21
+source_rev:
+  tea-taste-api: 3272e20b8dd66371b0995bf4158943e005b8ee05
+  tea-taste-frontend: 58745d6a0cab2439ae57e76da1c35d16bf2a6a9b
 lang: ru
 authors:
   - Никита Конкин

@@ -5,6 +5,7 @@ pair: diploma-algoritm-raboty
 platform: VK
 type: Technical breakdown (algorithm)
 date: 2026-06-02
+source_rev: 7a0bd5cfe524785615b9b73cd6a045be3f47012e
 lang: en
 authors:
   - Nikita Konkin
