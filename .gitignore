@@ -14,9 +14,6 @@ Desktop.ini
 __pycache__/
 *.pyc
 
-# Source PDFs of the papers being reviewed - kept locally, not published.
-pdf/
-
 # Jekyll
 _site/
 .jekyll-cache/
@@ -33,3 +30,9 @@ scripts/repos.local.yml
 # Re-downloading from eLibrary mints a fresh filename for the same paper, so
 # only the copy named in _data/papers.yml is committed; run papers_scan.py to
 # find duplicates before adding anything here.
+#
+# These three are byte-identical re-downloads of papers already committed
+# under another name. Publishing them would serve the same paper at two URLs.
+pdf/elibrary_41467774_35862862.pdf
+pdf/elibrary_41468023_60025918.pdf
+pdf/elibrary_48079625_30236489.pdf
