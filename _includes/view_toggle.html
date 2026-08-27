@@ -6,30 +6,29 @@
 <script>
 (function () {
   var toggle = document.querySelector('[data-view-toggle="{{ include.storage_key }}"]');
-  var grid = document.querySelector('[data-card-grid="{{ include.storage_key }}"]');
-  if (!grid || !toggle) return;
+  if (!toggle) return;
 
+  var root = document.documentElement;
   var STORAGE_KEY = '{{ include.storage_key }}';
-  var saved = null;
-  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-  var view = saved === 'tiles' ? 'tiles' : 'list';
 
-  function applyView(next) {
-    grid.classList.toggle('card-grid--list', next === 'list');
+  // The layout itself is applied by the head script via root's data-view, so
+  // this only has to keep the buttons in step and record the choice.
+  function sync() {
+    var view = root.dataset.view === 'tiles' ? 'tiles' : 'list';
     var buttons = toggle.querySelectorAll('[data-view-btn]');
     for (var i = 0; i < buttons.length; i += 1) {
-      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-view-btn') === next));
+      buttons[i].setAttribute('aria-pressed', String(buttons[i].getAttribute('data-view-btn') === view));
     }
   }
 
-  applyView(view);
+  sync();
 
   toggle.addEventListener('click', function (event) {
     var btn = event.target.closest('[data-view-btn]');
     if (!btn) return;
-    view = btn.getAttribute('data-view-btn');
-    applyView(view);
-    try { localStorage.setItem(STORAGE_KEY, view); } catch (e) {}
+    root.dataset.view = btn.getAttribute('data-view-btn');
+    sync();
+    try { localStorage.setItem(STORAGE_KEY, root.dataset.view); } catch (e) {}
   });
 })();
 </script>

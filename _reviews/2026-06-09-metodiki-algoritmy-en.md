@@ -34,7 +34,7 @@ The two strands are joined by a carefully described processing pipeline: convert
 
 The main avenue for development is quantitative validation: alongside the visual agreement of ionograms and the example maps, numerical agreement metrics against independent measurements would be valuable. That would turn a convincing qualitative picture into a strictly measurable one.
 
-## Questions for the authors
+## Heuristic
 
-- How closely do the model and measured ionograms agree quantitatively?
-- What is the spatial and temporal resolution of the coherence-bandwidth maps?
+- A model is confirmed by a number, not by a picture: comparing ionograms requires an explicit metric of discrepancy, otherwise agreement remains an impression.
+- The resolution of a map defines the class of problems it is fit for. Until it is stated, any claim of applicability stays general and untestable.

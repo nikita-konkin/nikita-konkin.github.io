@@ -36,8 +36,8 @@ The paper closes with an experimental part: coherence bandwidth is defined as th
 - **Sensitivity to the ionosphere model.** The generality of the result rests on a simplified two-parameter model (∫N ≈ Nm·H). It would help to show how well the collapse to relative frequency survives for realistic NeQuick profiles, not only for the idealised layer.
 - **Maps shown but not yet validated.** As in the companion work, the regional maps lack a quantitative comparison against an independent measurement — even at a single point and in a single time window.
 
-## Questions for the authors
+## Heuristic
 
-- What is the residual phase error at the stated boundaries of validity for the approximations (f̂ ≈ 6 and 4.5)?
-- How robust is the relative-frequency normalisation when moving from the two-parameter model to real electron-density profiles?
-- What are the spatial and temporal resolution of the coherence-bandwidth maps, and were they compared against direct measurements?
+- A boundary of validity should come with a price attached: the residual error at the boundary is more informative than the boundary itself, because it is what decides whether the approximation suits a given task.
+- Normalising by a characteristic scale transfers a result between regions only within the model that produced it; moving to real profiles requires its own check rather than extension by default.
+- A map obtained by calculation remains a hypothesis until it is compared against a direct measurement, however careful the calculation itself.

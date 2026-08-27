@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang }}">
+<html lang="{{ page.lang | default: site.lang }}"{% if page.view_key %} data-view="list"{% endif %}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,11 +39,60 @@
     {% feed_meta %}
 
     <meta name="theme-color" content="#f4ede3">
-    <meta name="theme-color" content="#1c1a17" media="(prefers-color-scheme: dark)">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+
+    {% comment %} Fonts are self-hosted (assets/fonts/README.md). Preload only the
+    subset this page's language actually needs; the rest load on demand. {% endcomment %}
+    {% assign font_subset = 'cyrillic' %}
+    {% if page.lang == 'en' %}{% assign font_subset = 'latin' %}{% endif %}
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/manrope-' | append: font_subset | append: '.woff2' | relative_url }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/prata-' | append: font_subset | append: '.woff2' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+    {% comment %} Runs before first paint: picks the theme (explicit choice beats the
+    OS preference) and marks the document as scripted, so the collapsed mobile nav
+    never flashes open and the page never flashes the wrong theme. {% endcomment %}
+    <script>
+    (function () {
+      var root = document.documentElement;
+      var LIGHT = '#f4ede3';
+      var DARK = '#191510';
+
+      function apply(dark) {
+        root.dataset.theme = dark ? 'dark' : 'light';
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? DARK : LIGHT);
+      }
+
+      function stored() {
+        try { return localStorage.getItem('theme'); } catch (e) { return null; }
+      }
+
+      var query = window.matchMedia('(prefers-color-scheme: dark)');
+      var choice = stored();
+      apply(choice === 'dark' || (choice !== 'light' && query.matches));
+      root.classList.add('js');
+
+      // Follow the OS only while the visitor has not picked a theme themselves.
+      query.addEventListener('change', function (event) {
+        if (!stored()) apply(event.matches);
+      });
+
+      window.__setTheme = function (dark) {
+        apply(dark);
+        try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+      };
+
+      {% if page.view_key %}
+      // Card layout is decided here rather than after the grid is parsed, so a
+      // visitor who picked tiles does not get a list painted first.
+      var viewKey = {{ page.view_key | jsonify }};
+      var view = null;
+      try { view = localStorage.getItem(viewKey); } catch (e) {}
+      root.dataset.view = view === 'tiles' ? 'tiles' : 'list';
+      window.__viewKey = viewKey;
+      {% endif %}
+    })();
+    </script>
   </head>
   <body>
     {% include site_header.html %}
@@ -53,5 +102,45 @@
       </div>
     </main>
     {% include site_footer.html %}
+
+    {% comment %} Kramdown emits a bare <table>, so the scroll container has to be
+    added here. Only tables that actually overflow become focusable, otherwise this
+    would add a tab stop that goes nowhere. {% endcomment %}
+    {% assign table_label = 'Таблица, прокручивается по горизонтали' %}
+    {% if page.lang == 'en' %}{% assign table_label = 'Table, scrolls horizontally' %}{% endif %}
+    <script>
+    (function () {
+      var tables = document.querySelectorAll('.prose > table');
+      if (!tables.length) return;
+
+      var label = {{ table_label | jsonify }};
+      var regions = [];
+
+      Array.prototype.forEach.call(tables, function (table) {
+        var region = document.createElement('div');
+        region.className = 'table-scroll';
+        table.parentNode.insertBefore(region, table);
+        region.appendChild(table);
+        regions.push(region);
+      });
+
+      function refresh() {
+        regions.forEach(function (region) {
+          if (region.scrollWidth > region.clientWidth) {
+            region.setAttribute('role', 'region');
+            region.setAttribute('tabindex', '0');
+            region.setAttribute('aria-label', label);
+          } else {
+            region.removeAttribute('role');
+            region.removeAttribute('tabindex');
+            region.removeAttribute('aria-label');
+          }
+        });
+      }
+
+      refresh();
+      window.addEventListener('resize', refresh);
+    })();
+    </script>
   </body>
 </html>

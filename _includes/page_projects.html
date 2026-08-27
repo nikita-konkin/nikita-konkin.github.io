@@ -12,15 +12,40 @@
   {% assign repo_default = 'Repository' %}
   {% assign demo_default = 'Demo' %}
   {% assign latest_article_label = 'Latest article' %}
+  {% assign references_label = 'Similar projects' %}
+  {% assign all_tags_label = 'All' %}
+  {% assign tag_filter_label = 'Filter projects by technology' %}
+  {% assign tag_empty_label = 'No projects use this technology yet.' %}
 {% else %}
   {% assign visible_articles = site.articles | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" %}
   {% assign updates_label = 'публикаций' %}
   {% assign repo_default = 'Репозиторий' %}
   {% assign demo_default = 'Демо' %}
   {% assign latest_article_label = 'Последняя статья' %}
+  {% assign references_label = 'Похожие проекты' %}
+  {% assign all_tags_label = 'Все' %}
+  {% assign tag_filter_label = 'Фильтр проектов по технологиям' %}
+  {% assign tag_empty_label = 'Пока нет проектов с этой технологией.' %}
 {% endif %}
 
-<div class="project-list">
+{% comment %} Collect every distinct stack entry across all projects. "||" cannot
+appear in a technology name, so it is a safe join separator before uniq/sort. {% endcomment %}
+{% assign tag_blob = '' %}
+{% for project in site.data.projects %}
+  {% for tech in project.stack %}
+    {% assign tag_blob = tag_blob | append: tech | append: '||' %}
+  {% endfor %}
+{% endfor %}
+{% assign all_tags = tag_blob | split: '||' | uniq | sort_natural %}
+
+<div class="tag-filter" data-tag-filter role="group" aria-label="{{ tag_filter_label }}">
+  <button type="button" class="tag-filter__btn" data-tag-btn data-tag="" aria-pressed="true">{{ all_tags_label }}</button>
+  {% for tech in all_tags %}
+    <button type="button" class="tag-filter__btn" data-tag-btn data-tag="{{ tech }}" aria-pressed="false">{{ tech }}</button>
+  {% endfor %}
+</div>
+
+<div class="project-list" data-project-list>
   {% for project in site.data.projects %}
     {% assign project_articles = visible_articles | where: "project", project.slug | sort: "date" | reverse %}
     {% assign latest_article = project_articles | first %}
@@ -30,7 +55,7 @@
     {% assign project_highlights = project[highlights_key] | default: project.highlights %}
     {% assign project_repo_label = project[repo_label_key] | default: repo_default %}
     {% assign project_demo_label = project[demo_label_key] | default: demo_default %}
-    <section class="project-card" id="{{ project.slug }}">
+    <section class="project-card" id="{{ project.slug }}" data-tag-card data-tags="{{ project.stack | join: '|' }}">
       <div class="project-card__meta">
         <span>{{ project_status }}</span>
         <span>{{ project_articles.size }} {{ updates_label }}</span>
@@ -41,7 +66,7 @@
 
       <div class="tag-list" style="margin-top: 1rem;">
         {% for item in project.stack %}
-          <span class="tag">{{ item }}</span>
+          <a class="tag tag--link" href="{{ page.url | relative_url }}?tag={{ item | url_encode }}" data-tag-chip data-tag="{{ item }}">{{ item }}</a>
         {% endfor %}
       </div>
 
@@ -64,6 +89,96 @@
           <a class="button button--small" href="{{ latest_article.url | relative_url }}">{{ latest_article_label }}</a>
         {% endif %}
       </div>
+
+      {% if project.references and project.references.size > 0 %}
+        <div class="project-card__references">
+          <p class="project-card__references-label">{{ references_label }}</p>
+          <ul>
+            {% for ref in project.references %}
+              {% assign ref_note = ref.note %}
+              {% if current_lang == 'en' %}{% assign ref_note = ref.note_en | default: ref.note %}{% endif %}
+              <li>
+                <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.label }}</a>
+                {% if ref_note %}<span> — {{ ref_note }}</span>{% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     </section>
   {% endfor %}
 </div>
+
+<p class="tag-empty" data-tag-empty hidden>{{ tag_empty_label }}</p>
+
+{% comment %} Turns the decorative stack chips into a live filter. The filter bar
+and the chips inside each card both drive it; the active tag is mirrored into the
+URL (?tag=) so a filtered view can be shared. Matches the small-IIFE, data-attribute
+style used by view_toggle.html and the header nav. {% endcomment %}
+<script>
+(function () {
+  var list = document.querySelector('[data-project-list]');
+  var bar = document.querySelector('[data-tag-filter]');
+  if (!list || !bar) return;
+
+  var cards = list.querySelectorAll('[data-tag-card]');
+  var buttons = bar.querySelectorAll('[data-tag-btn]');
+  var empty = document.querySelector('[data-tag-empty]');
+  var active = '';
+
+  function cardTags(card) {
+    return (card.getAttribute('data-tags') || '').split('|');
+  }
+
+  function render() {
+    var shown = 0;
+    var i;
+    for (i = 0; i < cards.length; i += 1) {
+      var match = active === '' || cardTags(cards[i]).indexOf(active) !== -1;
+      cards[i].hidden = !match;
+      if (match) shown += 1;
+    }
+    for (i = 0; i < buttons.length; i += 1) {
+      buttons[i].setAttribute('aria-pressed', String((buttons[i].getAttribute('data-tag') || '') === active));
+    }
+    var chips = list.querySelectorAll('[data-tag-chip]');
+    for (i = 0; i < chips.length; i += 1) {
+      var chipActive = active !== '' && chips[i].getAttribute('data-tag') === active;
+      chips[i].classList.toggle('is-active', chipActive);
+    }
+    if (empty) empty.hidden = shown !== 0;
+  }
+
+  function apply(tag, updateUrl) {
+    active = tag || '';
+    render();
+    if (!updateUrl) return;
+    try {
+      var url = new URL(window.location.href);
+      if (active) { url.searchParams.set('tag', active); }
+      else { url.searchParams.delete('tag'); }
+      window.history.replaceState({}, '', url.toString());
+    } catch (e) {}
+  }
+
+  function tagFromUrl() {
+    try { return new URLSearchParams(window.location.search).get('tag') || ''; }
+    catch (e) { return ''; }
+  }
+
+  function onClick(event) {
+    var el = event.target.closest('[data-tag-btn], [data-tag-chip]');
+    if (!el) return;
+    event.preventDefault();
+    var tag = el.getAttribute('data-tag') || '';
+    // A second click on the active tag clears the filter.
+    apply(tag === active ? '' : tag, true);
+  }
+
+  bar.addEventListener('click', onClick);
+  list.addEventListener('click', onClick);
+  window.addEventListener('popstate', function () { apply(tagFromUrl(), false); });
+
+  apply(tagFromUrl(), false);
+})();
+</script>

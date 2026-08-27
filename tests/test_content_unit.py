@@ -56,7 +56,7 @@ def test_projects_have_required_contract_fields() -> None:
         assert isinstance(project.get("stack"), list) and project["stack"], (
             f"{project['slug']} must declare a non-empty stack"
         )
-        assert project.get("repo") or project.get("demo"), (
+        assert project.get("repo") or project.get("demo") or project.get("references"), (
             f"{project['slug']} must have at least one public link"
         )
         if project.get("highlights"):
@@ -69,6 +69,19 @@ def test_projects_have_required_contract_fields() -> None:
             assert len(project["highlights"]) == len(project["highlights_en"]), (
                 f"{project['slug']} highlight counts must stay aligned across languages"
             )
+        if project.get("references"):
+            assert isinstance(project["references"], list) and project["references"], (
+                f"{project['slug']} references must stay a non-empty list"
+            )
+            for ref in project["references"]:
+                assert ref.get("label"), f"{project['slug']} reference needs a label"
+                assert str(ref.get("url", "")).startswith("https://"), (
+                    f"{project['slug']} reference '{ref.get('label')}' must use an https url"
+                )
+                if ref.get("note"):
+                    assert ref.get("note_en"), (
+                        f"{project['slug']} reference '{ref['label']}' must have an English note"
+                    )
         for key in ("repo", "demo"):
             if project.get(key):
                 assert str(project[key]).startswith("https://"), (
