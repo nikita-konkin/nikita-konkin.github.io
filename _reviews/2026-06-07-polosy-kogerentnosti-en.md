@@ -45,8 +45,8 @@ This is a short conference-format paper, so several points are best read as natu
 - Add a short validation: compare map-derived values with an independent measurement and report an error metric.
 - Resolve the MySQL/PostgreSQL discrepancy and sketch the database schema.
 
-## Questions for the authors
+## Heuristic
 
-- What spatial and temporal resolution do the maps reach, and has any validation against measurements been done?
-- How are oblique-sounding and trans-ionospheric data fused and cross-calibrated?
-- What motivated AutoIt for orchestration, and how does it affect the pipeline's robustness at scale?
+- A map without a stated resolution and without validation stays an illustration rather than an instrument: the spatial step, the temporal step and the uncertainty belong alongside the map itself.
+- When a result is assembled from two independent sources, cross-calibration is a stage of the pipeline, not an implementation detail. Its absence surfaces as a systematic offset that is hard to attribute after the fact.
+- A GUI automation language is convenient while the pipeline lives on one machine. Once scaling enters the picture, orchestration belongs on a tool that is not tied to an interface.

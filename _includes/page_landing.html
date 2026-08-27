@@ -17,6 +17,7 @@
   {% assign featured_project_repo_label = featured_project[repo_label_key] | default: "Repository" %}
   {% assign featured_project_demo_label = featured_project[demo_label_key] | default: "Demo" %}
   {% assign projects_path = '/en/projects/' %}
+  {% assign tags_path = '/en/tags/' %}
   {% assign blog_path = '/en/blog/' %}
   {% assign about_path = '/en/about/' %}
   {% assign hero_eyebrow = 'Personal website' %}
@@ -63,6 +64,7 @@
   {% assign featured_project_repo_label = featured_project[repo_label_key] | default: "Репозиторий" %}
   {% assign featured_project_demo_label = featured_project[demo_label_key] | default: "Демо" %}
   {% assign projects_path = '/projects/' %}
+  {% assign tags_path = '/tags/' %}
   {% assign blog_path = '/blog/' %}
   {% assign about_path = '/about/' %}
   {% assign hero_eyebrow = 'Персональный сайт' %}
@@ -198,7 +200,7 @@
 
         <div class="tag-list">
           {% for item in featured_project.stack %}
-            <span class="tag">{{ item }}</span>
+            <a class="tag tag--link" href="{{ tags_path | relative_url }}?tag={{ item | url_encode }}">{{ item }}</a>
           {% endfor %}
         </div>
 

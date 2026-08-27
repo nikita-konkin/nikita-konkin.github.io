@@ -63,14 +63,16 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - gemfiles
+  - assets/fonts/README.md
   # Test suite and publishing scripts - source only, never served
   - tests/
   - notes/
-  # The PDFs themselves are published; this is just the working links list.
-  - pdf/pdf_links.txt
   - scripts/
+  - skills
   - pytest.ini
   - .pytest_cache/
+  # The PDFs themselves are published; this is just the working links list.
+  - pdf/pdf_links.txt
   # Jekyll defaults, restored
   - .sass-cache/
   - .jekyll-cache/

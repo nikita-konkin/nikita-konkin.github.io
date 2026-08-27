@@ -18,7 +18,7 @@
   {% include view_toggle.html storage_key="articleView" view_label=view_label list_label=list_label tiles_label=tiles_label %}
 </div>
 
-<div class="card-grid card-grid--list" data-card-grid="articleView" style="margin-top: 1.5rem;">
+<div class="card-grid" data-card-grid="articleView" style="margin-top: 1.5rem;">
   {% for article in articles %}
     {% include article_card.html article=article %}
   {% endfor %}

@@ -113,3 +113,90 @@
     - "A multi-step tasting form with a localStorage draft."
     - "An infusion model: aroma and taste are recorded in stages, each infusion has its own rating and timer."
     - "An Express and MongoDB REST API with JWT authentication and a public tasting feed."
+
+- slug: gd_learn
+  name: gd-learn
+  title: "Gradient Descent Playground — интерактивный тренажёр градиентного спуска"
+  title_en: "Gradient Descent Playground — an interactive gradient-descent sandbox"
+  status: "Учебный проект"
+  status_ru: "Учебный проект"
+  status_en: "Educational project"
+  description: "Streamlit-приложение для наглядного изучения градиентного спуска: генерирует синтетические данные, обучает полиномиальные модели тремя видами спуска (Batch, SGD, Mini-batch) по MSE или MAE и показывает график потерь, анимацию шагов и 3D-поверхность функции потерь с траекторией оптимизации."
+  description_en: "A Streamlit app for learning gradient descent by sight: it generates synthetic data, trains polynomial models with three descent variants (Batch, SGD, Mini-batch) under MSE or MAE, and shows the loss curve, a step-by-step animation, and a 3D loss surface with the optimization trajectory."
+  repo: https://gitflic.ru/project/nikita-konkin/gd_learn
+  repo_label_ru: "Репозиторий (GitFlic)"
+  repo_label_en: "Repository (GitFlic)"
+  stack:
+    - Python
+    - Streamlit
+    - NumPy
+    - pandas
+    - Plotly
+    - pytest
+  highlights:
+    - "Три вида градиентного спуска (Batch, SGD, Mini-batch) и две функции потерь (MSE, MAE) на общих данных — для прямого сравнения."
+    - "Анимация шагов оптимизации и 3D-поверхность потерь с траекторией спуска по двум выбранным параметрам."
+    - "Автоматическое обнаружение расходимости: неустойчивая история обрезается на последней стабильной итерации."
+  highlights_en:
+    - "Three descent variants (Batch, SGD, Mini-batch) and two loss functions (MSE, MAE) over shared data — for direct comparison."
+    - "An animation of the optimization steps and a 3D loss surface with the descent trajectory over two chosen parameters."
+    - "Automatic divergence detection: an unstable history is truncated at the last stable iteration."
+  references:
+    - label: "TensorFlow Playground"
+      url: "https://playground.tensorflow.org/"
+      note: "Обучение нейросети прямо в браузере — канонический интерактивный тренажёр ML."
+      note_en: "Train a neural network right in the browser — the canonical interactive ML sandbox."
+    - label: "Distill — Why Momentum Really Works"
+      url: "https://distill.pub/2017/momentum/"
+      note: "Интерактивный разбор динамики градиентного спуска с моментом."
+      note_en: "An interactive account of the dynamics of gradient descent with momentum."
+    - label: "Setosa — Ordinary Least Squares"
+      url: "https://setosa.io/ev/ordinary-least-squares-regression/"
+      note: "Визуальное объяснение подгонки методом наименьших квадратов."
+      note_en: "A visual explanation of least-squares fitting."
+    - label: "3Blue1Brown — Neural networks"
+      url: "https://www.3blue1brown.com/topics/neural-networks"
+      note: "Видеокурс с наглядным объяснением градиентного спуска и обучения."
+      note_en: "A video series that explains gradient descent and learning visually."
+
+- slug: hf_fec_gan
+  name: hf-fec-gan
+  title: "HF-FEC GAN — состязательная оценка устойчивости помехоустойчивых кодов"
+  title_en: "HF-FEC GAN — adversarial robustness testing of error-correcting codes"
+  status: "Исследование"
+  status_ru: "Исследование"
+  status_en: "Research"
+  description: "Состязательная (GAN) генерация структурированных помех фиксированной мощности для оценки уязвимости FEC-кодов КВ-связи. Сравнивает BER FEC-схем (сверточный K=7 R=1/2, BCH(63,51), турбо-код) в идеальном канале, при замираниях Рэлея и Риса и под обученным генератором шума."
+  description_en: "Adversarial (GAN) generation of structured, fixed-power interference to probe the vulnerability of the FEC codes used in HF radio. It compares the BER of several FEC schemes (convolutional K=7 R=1/2, BCH(63,51), turbo) in an ideal channel, under Rayleigh and Rician fading, and against a trained noise generator."
+  stack:
+    - Python
+    - PyTorch
+    - NumPy
+    - SciPy
+    - GAN
+    - DSP
+  highlights:
+    - "FEC по стандартам КВ-связи: сверточный код с soft-decision Viterbi (MIL-STD-188-110, STANAG 4285), BCH(63,51) для ALE, заготовка турбо-кода STANAG 4539 и блоковый интерливинг 16×16."
+    - "Генератор шума (FC → Conv1D → LSTM → Conv1D) против CNN-дискриминатора, предсказывающего отказ декодирования, — помеха фиксированной мощности учится обходить именно FEC."
+    - "Модели каналов AWGN, Рэлея и Риса и спектральный анализ (FFT, PSD Уэлча) наиболее эффективных помеховых структур."
+  highlights_en:
+    - "FEC to HF communication standards: a convolutional code with soft-decision Viterbi (MIL-STD-188-110, STANAG 4285), BCH(63,51) for ALE, a STANAG 4539 turbo-code stub, and 16×16 block interleaving."
+    - "A noise generator (FC → Conv1D → LSTM → Conv1D) against a CNN discriminator that predicts a decoding failure — fixed-power interference learns to defeat the FEC specifically."
+    - "AWGN, Rayleigh, and Rician channel models, plus spectral analysis (FFT, Welch PSD) of the most effective interference structures."
+  references:
+    - label: "O'Shea & Hoydis — Deep Learning for the Physical Layer"
+      url: "https://arxiv.org/abs/1702.00832"
+      note: "Основополагающая работа о сквозном обучении физического уровня как автокодировщика."
+      note_en: "The foundational paper on learning the physical layer end-to-end as an autoencoder."
+    - label: "Nachmani et al. — Learning to Decode Linear Codes"
+      url: "https://arxiv.org/abs/1607.04793"
+      note: "Нейросетевое улучшение декодирования линейных кодов — ML со стороны декодера."
+      note_en: "Neural-network improvement of linear-code decoding — ML on the decoder side."
+    - label: "Sadeghi & Larsson — Adversarial Attacks on Radio Signal Classification"
+      url: "https://arxiv.org/abs/1808.07713"
+      note: "Состязательные возмущения в беспроводной связи — тот же ракурс атаки на приёмник."
+      note_en: "Adversarial perturbations in wireless — the same attack angle against the receiver."
+    - label: "NVIDIA Sionna"
+      url: "https://nvlabs.github.io/sionna/"
+      note: "Дифференцируемая библиотека моделирования физического уровня для исследований."
+      note_en: "A differentiable physical-layer link-level simulation library for research."

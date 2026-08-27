@@ -12,11 +12,13 @@ PUBLIC_PAGES = [
     ROOT / "index.html",
     ROOT / "blog.html",
     ROOT / "projects.html",
+    ROOT / "tags.html",
     ROOT / "about.md",
     ROOT / "404.md",
     ROOT / "en" / "index.html",
     ROOT / "en" / "blog.html",
     ROOT / "en" / "projects.html",
+    ROOT / "en" / "tags.html",
     ROOT / "en" / "about.md",
     ROOT / "en" / "404.html",
 ]
@@ -36,6 +38,7 @@ TRANSLATED_PAGE_PAIRS = [
     (ROOT / "index.html", ROOT / "en" / "index.html", "/en/", "/"),
     (ROOT / "blog.html", ROOT / "en" / "blog.html", "/en/blog/", "/blog/"),
     (ROOT / "projects.html", ROOT / "en" / "projects.html", "/en/projects/", "/projects/"),
+    (ROOT / "tags.html", ROOT / "en" / "tags.html", "/en/tags/", "/tags/"),
     (ROOT / "about.md", ROOT / "en" / "about.md", "/en/about/", "/about/"),
     (ROOT / "404.md", ROOT / "en" / "404.html", "/en/404.html", "/404.html"),
 ]
@@ -98,4 +101,21 @@ def test_public_sources_do_not_contain_common_mojibake_markers() -> None:
         text = _read_text(path)
         assert not any(marker in text for marker in MOJIBAKE_MARKERS), (
             f"{path.relative_to(ROOT)} contains mojibake markers from broken UTF-8 text"
+        )
+
+
+@pytest.mark.smoke
+def test_projects_include_exposes_tag_filter_hooks() -> None:
+    text = _read_text(ROOT / "_includes" / "page_projects.html")
+    for marker in ("data-tag-filter", "data-project-list", "data-tag-card", "data-tag-chip"):
+        assert marker in text, (
+            f"page_projects.html lost the '{marker}' hook the tag filter depends on"
+        )
+
+
+@pytest.mark.smoke
+def test_tag_hub_pages_reuse_the_project_list() -> None:
+    for path in (ROOT / "tags.html", ROOT / "en" / "tags.html"):
+        assert "page_projects.html" in _read_text(path), (
+            f"{path.relative_to(ROOT)} must render the shared project list to stay a real tag hub"
         )
