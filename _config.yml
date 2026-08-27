@@ -66,7 +66,8 @@ exclude:
   # Test suite and publishing scripts - source only, never served
   - tests/
   - notes/
-  - pdf/
+  # The PDFs themselves are published; this is just the working links list.
+  - pdf/pdf_links.txt
   - scripts/
   - pytest.ini
   - .pytest_cache/
