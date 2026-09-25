@@ -346,19 +346,22 @@ def write_notes(article: Path, config: dict, author: str | None, all_authors: bo
     `source_rev` says what a post covers up to; `source_from` says where it starts.
     Between them they pin an exact range, so this file is derived, not maintained
     by hand - regenerate it rather than editing it. It is excluded from the build.
+
+    An introductory post has no `source_from`: it covers the project from its
+    first commit, so the range is everything reachable from `source_rev`.
     """
     fm = read_front_matter(article)
     slug = fm.get("project")
     if not slug:
         sys.exit(f"{article} declares no project")
-    if not fm.get("source_from"):
-        sys.exit(f"{article} declares no source_from, so its range has no start")
+    if not fm.get("source_from") and not fm.get("source_rev"):
+        sys.exit(f"{article} declares neither source_from nor source_rev, so it has no range")
 
     clones = normalize_clones((config.get("repos") or {}).get(slug))
     if not clones:
         sys.exit(f"no local clone configured for {slug}")
 
-    starts = normalize_anchor(fm["source_from"])
+    starts = normalize_anchor(fm.get("source_from"))
     ends = normalize_anchor(fm.get("source_rev"))
 
     lines = [
@@ -374,18 +377,22 @@ def write_notes(article: Path, config: dict, author: str | None, all_authors: bo
 
     total = 0
     for name, raw_path in clones.items():
-        key = name if name in starts else ""
-        start, end = starts.get(key), ends.get(key) or "HEAD"
-        if not start:
+        key_from = name if name in starts else ""
+        key_rev = name if name in ends else ""
+        start, end = starts.get(key_from), ends.get(key_rev)
+        if not start and not end:
             continue
+        end = end or "HEAD"
         repo = Path(raw_path).expanduser()
         if not (repo / ".git").is_dir():
             continue
-        rows = commits(repo, f"{start}..{end}", None if all_authors else author)
+        rev_range = f"{start}..{end}" if start else end
+        rows = commits(repo, rev_range, None if all_authors else author)
         label = name or slug
         lines.append(f"## {label}")
         lines.append("")
-        lines.append(f"`{start[:7]}..{end[:7]}` - {len(rows)} commit(s)")
+        span = f"{start[:7]}..{end[:7]}" if start else f"start..{end[:7]}"
+        lines.append(f"`{span}` - {len(rows)} commit(s)")
         lines.append("")
         for row in rows:
             lines.append(f"- `{row['short']}` {row['date']} - {row['subject']}")

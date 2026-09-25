@@ -1339,6 +1339,40 @@ h4,
   background: rgba(var(--c-accent), 0.08);
 }
 
+/* Screenshot rows (_includes/screen.html): phone captures side by side, two
+   across on a phone, each with a short caption underneath. */
+.prose .screens {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.5rem 0 1.75rem;
+}
+
+/* Half the row minus the gap, capped: a grid with auto-fit would size its
+   column count by the 220px maximum and fall to one column on a phone. */
+.prose .screen {
+  flex: 0 1 calc((100% - 1.25rem) / 2);
+  max-width: 220px;
+  margin: 0;
+}
+
+.prose .screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.prose .screen figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
 /* Wrapper added at runtime around any table wider than its column. */
 .table-scroll {
   margin-bottom: 1rem;
