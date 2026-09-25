@@ -1339,21 +1339,34 @@ h4,
   background: rgba(var(--c-accent), 0.08);
 }
 
-/* Screenshot rows (_includes/screen.html): phone captures side by side, two
-   across on a phone, each with a short caption underneath. */
+/* Screenshot rows (_includes/screen.html): phone captures side by side, each
+   with a short caption underneath. Two columns by default, so four screens
+   read as 2x2 on a phone; on a wide screen the row gets one column per
+   screen. Counting children beats auto-fit here: auto-fit sizes its column
+   count by the 220px maximum and would leave three-plus-one at tablet width. */
 .prose .screens {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 220px));
   justify-content: center;
   gap: 1.25rem;
   margin: 1.5rem 0 1.75rem;
 }
 
-/* Half the row minus the gap, capped: a grid with auto-fit would size its
-   column count by the 220px maximum and fall to one column on a phone. */
+.prose .screens:has(> .screen:only-child) {
+  grid-template-columns: minmax(0, 220px);
+}
+
+@media (min-width: 720px) {
+  .prose .screens:has(> .screen:nth-child(3)) {
+    grid-template-columns: repeat(3, minmax(0, 220px));
+  }
+
+  .prose .screens:has(> .screen:nth-child(4)) {
+    grid-template-columns: repeat(4, minmax(0, 220px));
+  }
+}
+
 .prose .screen {
-  flex: 0 1 calc((100% - 1.25rem) / 2);
-  max-width: 220px;
   margin: 0;
 }
 
@@ -1371,6 +1384,144 @@ h4,
   font-size: 0.9rem;
   line-height: 1.4;
   color: var(--text-muted);
+}
+
+.prose .screen-zoom {
+  display: block;
+  cursor: zoom-in;
+  border-radius: var(--radius-small);
+}
+
+.prose .screen-zoom:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Zoom dialog for screenshots (script in _layouts/default.html). Dark in both
+   themes, like any photo viewer, so its colours are not theme tokens. */
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f4ede3;
+  overflow: hidden;
+}
+
+.lightbox::backdrop {
+  background: rgba(12, 10, 8, 0.86);
+}
+
+.lightbox-figure {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 3.5rem 4.5rem 1.5rem;
+}
+
+.lightbox-figure img {
+  display: block;
+  max-width: 100%;
+  /* Leaves room for a caption of up to three lines under the picture. */
+  max-height: calc(100% - 5.5rem);
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lightbox-figure figcaption {
+  max-width: 34rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.lightbox-button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(244, 237, 227, 0.28);
+  border-radius: 50%;
+  background: rgba(244, 237, 227, 0.1);
+  color: inherit;
+  font: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-button:hover,
+.lightbox-button:focus-visible {
+  background: rgba(244, 237, 227, 0.22);
+}
+
+.lightbox-button:focus-visible {
+  outline: 2px solid #f4ede3;
+  outline-offset: 2px;
+}
+
+.lightbox-button[hidden] {
+  display: none;
+}
+
+.lightbox-close {
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-prev {
+  left: 0.75rem;
+}
+
+.lightbox-next {
+  right: 0.75rem;
+}
+
+@media (max-width: 560px) {
+  .lightbox-figure {
+    padding: 3.5rem 0.75rem 4.25rem;
+  }
+
+  /* On a phone the arrows move below the caption, into the bottom padding, so
+     the picture gets the full width; a swipe works as well. */
+  .lightbox-prev,
+  .lightbox-next {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open] {
+    animation: lightbox-in 0.16s ease-out;
+  }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
 }
 
 /* Wrapper added at runtime around any table wider than its column. */

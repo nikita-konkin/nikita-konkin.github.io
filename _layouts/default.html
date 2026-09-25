@@ -46,7 +46,7 @@
     {% if page.lang == 'en' %}{% assign font_subset = 'latin' %}{% endif %}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/manrope-' | append: font_subset | append: '.woff2' | relative_url }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ '/assets/fonts/prata-' | append: font_subset | append: '.woff2' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
     {% comment %} Runs before first paint: picks the theme (explicit choice beats the
     OS preference) and marks the document as scripted, so the collapsed mobile nav
@@ -142,5 +142,94 @@
       window.addEventListener('resize', refresh);
     })();
     </script>
+
+    {% comment %} Screenshots (_includes/screen.html) are links to the full image,
+    which is what a reader without JavaScript gets. Here they open in a modal
+    <dialog> instead - it traps focus, closes on Esc and returns focus by itself -
+    with the other screenshots of the same row one arrow key or swipe away.
+    {% endcomment %}
+    {% if content contains 'class="screen-zoom"' %}
+    {% assign zoom_labels = 'Увеличенный снимок экрана|Закрыть|Предыдущий снимок|Следующий снимок' | split: '|' %}
+    {% if page.lang == 'en' %}{% assign zoom_labels = 'Enlarged screenshot|Close|Previous screenshot|Next screenshot' | split: '|' %}{% endif %}
+    <script>
+    (function () {
+      var links = document.querySelectorAll('.screen-zoom');
+      if (!links.length || typeof HTMLDialogElement !== 'function') return;
+
+      var labels = {{ zoom_labels | jsonify }};
+      var dialog = document.createElement('dialog');
+      dialog.className = 'lightbox';
+      dialog.setAttribute('aria-label', labels[0]);
+      dialog.innerHTML =
+        '<figure class="lightbox-figure"><img alt=""><figcaption></figcaption></figure>' +
+        '<button type="button" class="lightbox-button lightbox-close">&times;</button>' +
+        '<button type="button" class="lightbox-button lightbox-prev">&lsaquo;</button>' +
+        '<button type="button" class="lightbox-button lightbox-next">&rsaquo;</button>';
+      document.body.appendChild(dialog);
+
+      var image = dialog.querySelector('img');
+      var caption = dialog.querySelector('figcaption');
+      var prev = dialog.querySelector('.lightbox-prev');
+      var next = dialog.querySelector('.lightbox-next');
+      dialog.querySelector('.lightbox-close').setAttribute('aria-label', labels[1]);
+      prev.setAttribute('aria-label', labels[2]);
+      next.setAttribute('aria-label', labels[3]);
+
+      var group = [];
+      var index = 0;
+
+      function show(i) {
+        index = (i + group.length) % group.length;
+        var link = group[index];
+        var thumb = link.querySelector('img');
+        var text = link.parentNode.querySelector('figcaption');
+        image.src = link.href;
+        image.alt = thumb ? thumb.alt : '';
+        caption.textContent = text ? text.textContent : '';
+        prev.hidden = next.hidden = group.length < 2;
+      }
+
+      Array.prototype.forEach.call(links, function (link) {
+        link.addEventListener('click', function (event) {
+          // Leave modified clicks alone: they mean "open in a new tab".
+          if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          var row = link.closest('.screens');
+          group = Array.prototype.slice.call(row ? row.querySelectorAll('.screen-zoom') : [link]);
+          show(group.indexOf(link));
+          dialog.showModal();
+        });
+      });
+
+      prev.addEventListener('click', function () { show(index - 1); });
+      next.addEventListener('click', function () { show(index + 1); });
+      dialog.querySelector('.lightbox-close').addEventListener('click', function () { dialog.close(); });
+
+      // A click on the dimmed area around the picture closes it, as on most sites.
+      dialog.addEventListener('click', function (event) {
+        if (event.target === dialog || event.target.classList.contains('lightbox-figure')) dialog.close();
+      });
+
+      dialog.addEventListener('keydown', function (event) {
+        if (group.length < 2) return;
+        if (event.key === 'ArrowLeft') { event.preventDefault(); show(index - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); show(index + 1); }
+      });
+
+      var touchX = null;
+      dialog.addEventListener('touchstart', function (event) {
+        touchX = event.touches.length === 1 ? event.touches[0].clientX : null;
+      }, { passive: true });
+      dialog.addEventListener('touchend', function (event) {
+        if (touchX === null || group.length < 2) return;
+        var dx = event.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 50) show(dx < 0 ? index + 1 : index - 1);
+      });
+
+      dialog.addEventListener('close', function () { image.removeAttribute('src'); });
+    })();
+    </script>
+    {% endif %}
   </body>
 </html>
