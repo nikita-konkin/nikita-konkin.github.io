@@ -132,3 +132,18 @@ def test_translation_links_point_to_existing_articles() -> None:
             assert source in article_names, (
                 f"{path.relative_to(ROOT)} points to missing translation source '{source}'"
             )
+
+
+@pytest.mark.unit
+def test_article_images_exist() -> None:
+    # Screenshots come in through {% include screen.html src="..." %} and the social
+    # preview through `image:`; a typo in either only shows up as a broken picture.
+    for path, meta in _articles():
+        sources = re.findall(r'include\s+screen\.html\s+src="([^"]+)"', _read_text(path))
+        if meta.get("image"):
+            sources.append(meta["image"])
+        for src in sources:
+            assert src.startswith("/"), f"{path.relative_to(ROOT)}: use a site-absolute path, not '{src}'"
+            assert (ROOT / src.lstrip("/")).is_file(), (
+                f"{path.relative_to(ROOT)} references missing image '{src}'"
+            )
