@@ -8,8 +8,10 @@
 # else, so that a fork's upstream activity is never mistaken for your own work.
 owner: your-github-handle
 
-# Commit author filter, matched against both name and email.
-author: Your Name
+# Commit author filter, matched against both name and email. An email is the
+# steadier choice: commits made from other machines or the GitHub web UI often
+# carry a different name, but the same address.
+author: you@example.com
 
 # Project slug (must match a slug in _data/projects.yml) -> local clone path.
 repos:

@@ -6,11 +6,11 @@ platform: VK
 type: Engineering update
 date: 2026-09-25
 source_from: eeaecfd62af026c2112f584b9a374b1673341645
-source_rev: b7e1828efdfed32076489c0c91a99ac2ece71f3d
+source_rev: 0505871606b7018dd1d18a1fa6cfe896d9a5443a
 lang: en
 authors:
   - Nikita Konkin
-summary: "A code review and a reconciliation against real input data produced 27 defects. The worst class was silent: a student dropped out of the XML with no error. How silent gaps became explicit errors, why the date fix from the previous breakdown was itself a defect, and what remains open."
+summary: "A code review and a reconciliation against real input data produced 27 defects. The worst class was silent: a student dropped out of the XML with no error. How silent gaps became explicit errors, why the date fix from the previous breakdown was itself a defect, and how the rule for multi-semester courses was first decided and then written into code."
 translation_of: 2026-09-25-revizija-defektov.md
 links:
   demo: "https://xn----etb9agicel.xn--p1ai/"
@@ -112,11 +112,23 @@ The Python services no longer publish their ports or accept requests from a brow
 
 A separate P0 is reserved for leaks of personal data. Logs now contain row numbers rather than surnames: a row number is enough to find an error, whereas a surname in a log is a copy of personal data that outlives its need. Spreadsheets with student information are excluded from the repository by rule: only test fixtures are tracked.
 
-## What remains open
+## A question of rule
 
-Not everything is closed, and the main open defect is interesting because it is not technical. A course that ran over several semesters occupies several rows of the statement, each with its own hours and form of assessment. The parser converts each row to credits separately, and only one of them reaches the pivot.
+The most instructive defect turned out not to be technical. A course that ran over several semesters occupies several rows of the statement, each with its own hours and form of assessment. The parser converted each row to credits separately, and one of them reached the pivot along with its grade: 72 hours with a pass/fail test and 108 hours with an exam became "2 credits, passed".
 
-This cannot be fixed without deciding how it should work: whether to sum the hours of all semesters, and which grade counts as final — the last semester's, or the examination's. That is a question of rule, not of code, and it awaits a decision from the process owner. Code written before the decision would fix an arbitrary answer in place.
+This could not be fixed without deciding how it should work: whether to sum the hours of all semesters, and which grade counts as final. That is a question of rule, not of code, and the defect waited for a decision from the process owner: code written before the decision would have fixed an arbitrary answer in place.
+
+The decision has been made, and the rule now lives in the code. The semester rows of one course are merged; its credits are the hours of all its rows, course work included, divided by 36 and rounded; the final grade is the last exam grade or, if there was no exam, the last grade received.
+
+```python
+def credits_of(hours: float) -> int:
+    """Credits for hours; 106 h of a 3-credit discipline round to 3."""
+    return int(hours / HOURS_PER_CREDIT + 0.5)
+```
+
+The hours rule was checked against curricula: for 89 courses of two 2025 groups it matched the curriculum in every case. But agreement on a sample is not a guarantee, so the curriculum itself was made the source of truth. It can be uploaded as a third file, and credits are then taken from its "Всего" (total) column. If there is no curriculum, or the course is not found in it, the credits from the statement's hours remain and the row is highlighted in orange. A new sheet, "Проверка з.е." (credit check), lists for every row where its credits came from and what is worth checking: a mismatch with the curriculum, fractional credits in the curriculum, hours not divisible by 36, a semester with no grade.
+
+The review's main motif recurs here: where a result cannot be guaranteed, it should report its uncertainty rather than stay silent.
 
 ## Next
 
@@ -128,7 +140,7 @@ Alongside the review, a draft architecture was prepared for an open-source repla
 2. A warning in a log is no substitute for an error: it records the failure where no one will read it.
 3. Input errors are worth collecting all at once. Stopping at the first turns fixing a file into a loop over the number of errors.
 4. A green test proves only what it checks. A date test on a ready-made object said nothing about parsing text.
-5. A question of rule cannot be settled by code: implementing before deciding fixes an arbitrary answer in place.
+5. A question of rule cannot be settled by code: first the process owner's decision, then the implementation — checked against the primary source, not only against its own arithmetic.
 
 ## Availability
 
