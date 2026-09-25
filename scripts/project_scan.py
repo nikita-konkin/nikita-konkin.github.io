@@ -98,6 +98,18 @@ def rev_exists(repo: Path, rev: str) -> bool:
     return code == 0
 
 
+def is_ancestor(repo: Path, rev: str) -> bool:
+    """True when `rev` is still on the branch being scanned.
+
+    Existence alone is not enough. After a history rewrite (filter-repo, a
+    rebase) the old commit survives as a dangling object, so `rev_exists`
+    passes - but `rev..HEAD` then spans the whole rewritten history and the
+    report silently counts months of already-written work as new.
+    """
+    code, _ = git(repo, "merge-base", "--is-ancestor", rev, "HEAD")
+    return code == 0
+
+
 def commits(repo: Path, rev_range: str, author: str | None) -> list[dict]:
     args = ["log", rev_range, "--no-merges", "--date=short", "--format=%H%x1f%h%x1f%ad%x1f%an%x1f%s"]
     if author:
@@ -213,11 +225,18 @@ def scan(config: dict, author: str | None, all_authors: bool) -> list[dict]:
                 row["clones"].append(part)
                 continue
 
-            if not rev_exists(repo, rev):
-                part["status"] = "anchor missing"
-                row["warnings"].append(
-                    f"{prefix}{rev[:7]} is not in this repo - history rewritten, or wrong clone"
-                )
+            if not is_ancestor(repo, rev):
+                if rev_exists(repo, rev):
+                    part["status"] = "anchor orphaned"
+                    row["warnings"].append(
+                        f"{prefix}{rev[:7]} is no longer on the branch - history was rewritten; "
+                        f"re-anchor source_rev to the rewritten commit with the same message and date"
+                    )
+                else:
+                    part["status"] = "anchor missing"
+                    row["warnings"].append(
+                        f"{prefix}{rev[:7]} is not in this repo - wrong clone, or rewritten and collected"
+                    )
                 row["clones"].append(part)
                 continue
 
@@ -242,7 +261,9 @@ def scan(config: dict, author: str | None, all_authors: bool) -> list[dict]:
                 )
 
         if not scanned:
-            row["status"] = "no anchor" if not revs else "path missing"
+            # Report the first clone's actual reason rather than guessing one.
+            reasons = [p["status"] for p in row["clones"] if p.get("status")]
+            row["status"] = reasons[0] if reasons else ("no anchor" if not revs else "path missing")
             results.append(row)
             continue
 
