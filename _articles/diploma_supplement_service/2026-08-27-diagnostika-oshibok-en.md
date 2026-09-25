@@ -5,8 +5,8 @@ pair: diploma-diagnostika-oshibok
 platform: VK
 type: Engineering update
 date: 2026-08-27
-source_from: 7a0bd5cfe524785615b9b73cd6a045be3f47012e
-source_rev: 121f4c15cc732a9a6376ee2cd3a1c5264d6f44dc
+source_from: 7df8d1cdc0f353e2cf813cf8a1cfce390b370689
+source_rev: eeaecfd62af026c2112f584b9a374b1673341645
 lang: en
 authors:
   - Nikita Konkin
@@ -147,6 +147,8 @@ def date_only(value, field_name: str) -> str:
 ```
 
 What matters here is not only the truncation but the third branch: an unparseable date no longer slips through silently to become malformed XML, but stops processing with the field and the value named. Refusing at the entrance is cheaper than a document whose defect surfaces at the registrar's desk.
+
+> **Correction, 25 September 2026.** The solution shown here contained a defect: `dayfirst=True` swapped day and month in an ISO date too, so the string "2001-02-03" was read as 2 March. The test in the next section did not catch it, because it checked a ready-made date object rather than text. The defect and its fix are covered in the [next update]({% link _articles/diploma_supplement_service/2026-09-25-revizija-defektov-en.md %}).
 
 ## Tests as part of the contract
 

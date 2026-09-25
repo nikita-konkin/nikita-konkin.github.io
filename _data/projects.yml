@@ -114,6 +114,34 @@
     - "An infusion model: aroma and taste are recorded in stages, each infusion has its own rating and timer."
     - "An Express and MongoDB REST API with JWT authentication and a public tasting feed."
 
+- slug: volgatech_corp
+  name: volgatech.corp
+  title: "Волгатех.Коллектив — мобильный личный кабинет работника ПГТУ"
+  title_en: "Volgatech.Kollektiv — a mobile staff cabinet for Volgatech"
+  status: "Открытое тестирование"
+  status_ru: "Открытое тестирование"
+  status_en: "Open beta"
+  description: "Нативный клиент личного кабинета работника ПГТУ (Волгатех) для Android и iOS: расписание занятий и экзаменов, профиль с учебной нагрузкой, служебная записка по иностранным группам в формате .docx. Работает поверх существующего API университета, не изменяя его."
+  description_en: "A native client for the Volgatech (Volga State University of Technology) staff cabinet on Android and iOS: class and exam schedules, a profile with teaching load, and the foreign-groups memo as a .docx. It works on top of the university's existing API without changing it."
+  repo: https://github.com/nikita-konkin/volgatech.corp
+  demo: https://github.com/nikita-konkin/volgatech.corp/releases/latest
+  demo_label_ru: "Скачать APK"
+  demo_label_en: "Download APK"
+  stack:
+    - Flutter
+    - Dart
+    - Dio
+    - Provider
+    - GitHub Actions
+  highlights:
+    - "Расписание с офлайн-кэшем: сохранённая копия показывается сразу и обновляется в фоне, следующая неделя загружается заранее; обзор недели с «окнами» и числом пар."
+    - "Ежемесячная служебная записка по занятиям с иностранными группами собирается из расписания и выдаётся в .docx по шаблону портала."
+    - "Вход по JWT с автообновлением: токены хранятся в защищённом хранилище ОС, пароль не сохраняется; необязательная блокировка отпечатком или PIN-кодом."
+  highlights_en:
+    - "A schedule with an offline cache: the saved copy shows at once and refreshes in the background, the next week is prefetched, and a week overview shows gaps and the number of classes."
+    - "The monthly memo on classes with foreign-student groups is assembled from the schedule and shared as a .docx in the portal's own template."
+    - "JWT sign-in with automatic refresh: tokens live in the OS keystore and the password is never stored; an optional fingerprint or PIN app lock."
+
 - slug: gd_learn
   name: gd-learn
   title: "Gradient Descent Playground — интерактивный тренажёр градиентного спуска"
