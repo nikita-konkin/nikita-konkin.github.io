@@ -5,5 +5,6 @@ them out in a row; each stays on one line so kramdown keeps the block intact.
   {% include screen.html src="/assets/project/shot.webp" caption="What it shows" alt="Longer description" %}
 
 width/height default to a 540x1170 phone capture and only reserve layout space.
+The link opens the full image; the layout upgrades it to a zoom dialog.
 {%- endcomment -%}
-<figure class="screen"><img src="{{ include.src | relative_url }}" alt="{{ include.alt | default: include.caption | strip_html | escape }}" width="{{ include.width | default: 540 }}" height="{{ include.height | default: 1170 }}" loading="lazy" decoding="async"><figcaption>{{ include.caption }}</figcaption></figure>
+<figure class="screen"><a class="screen-zoom" href="{{ include.src | relative_url }}"><img src="{{ include.src | relative_url }}" alt="{{ include.alt | default: include.caption | strip_html | escape }}" width="{{ include.width | default: 540 }}" height="{{ include.height | default: 1170 }}" loading="lazy" decoding="async"></a><figcaption>{{ include.caption }}</figcaption></figure>
