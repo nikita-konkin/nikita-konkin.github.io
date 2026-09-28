@@ -8,7 +8,9 @@
 
 {% if current_lang == 'en' %}
   {% assign visible_articles = site.articles | where: "lang", "en" %}
-  {% assign updates_label = 'updates' %}
+  {% assign updates_one = 'update' %}
+  {% assign updates_few = nil %}
+  {% assign updates_many = 'updates' %}
   {% assign repo_default = 'Repository' %}
   {% assign demo_default = 'Demo' %}
   {% assign latest_article_label = 'Latest article' %}
@@ -18,7 +20,9 @@
   {% assign tag_empty_label = 'No projects use this technology yet.' %}
 {% else %}
   {% assign visible_articles = site.articles | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" %}
-  {% assign updates_label = 'публикаций' %}
+  {% assign updates_one = 'публикация' %}
+  {% assign updates_few = 'публикации' %}
+  {% assign updates_many = 'публикаций' %}
   {% assign repo_default = 'Репозиторий' %}
   {% assign demo_default = 'Демо' %}
   {% assign latest_article_label = 'Последняя статья' %}
@@ -58,7 +62,7 @@ appear in a technology name, so it is a safe join separator before uniq/sort. {%
     <section class="project-card" id="{{ project.slug }}" data-tag-card data-tags="{{ project.stack | join: '|' }}">
       <div class="project-card__meta">
         <span>{{ project_status }}</span>
-        <span>{{ project_articles.size }} {{ updates_label }}</span>
+        <span>{{ project_articles.size }} {% include plural.html n=project_articles.size one=updates_one few=updates_few many=updates_many %}</span>
       </div>
 
       <h2>{{ project_title }}</h2>

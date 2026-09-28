@@ -194,8 +194,13 @@
           // Leave modified clicks alone: they mean "open in a new tab".
           if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
           event.preventDefault();
+          // A row steps through its own screenshots; a standalone one through
+          // every standalone screenshot on the page.
           var row = link.closest('.screens');
-          group = Array.prototype.slice.call(row ? row.querySelectorAll('.screen-zoom') : [link]);
+          group = Array.prototype.filter.call(
+            row ? row.querySelectorAll('.screen-zoom') : links,
+            function (other) { return row || !other.closest('.screens'); }
+          );
           show(group.indexOf(link));
           dialog.showModal();
         });

@@ -1352,18 +1352,35 @@ h4,
   margin: 1.5rem 0 1.75rem;
 }
 
-.prose .screens:has(> .screen:only-child) {
+.prose .screens:not(.screens-wide):has(> .screen:only-child) {
   grid-template-columns: minmax(0, 220px);
 }
 
 @media (min-width: 720px) {
-  .prose .screens:has(> .screen:nth-child(3)) {
+  .prose .screens:not(.screens-wide):has(> .screen:nth-child(3)) {
     grid-template-columns: repeat(3, minmax(0, 220px));
   }
 
-  .prose .screens:has(> .screen:nth-child(4)) {
+  .prose .screens:not(.screens-wide):has(> .screen:nth-child(4)) {
     grid-template-columns: repeat(4, minmax(0, 220px));
   }
+}
+
+/* Desktop captures as a gallery: two across, one on a phone. */
+.prose .screens-wide {
+  grid-template-columns: minmax(0, 1fr);
+  justify-content: stretch;
+  row-gap: 1.75rem;
+}
+
+@media (min-width: 720px) {
+  .prose .screens-wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.prose .screens-wide .screen-wide {
+  margin: 0;
 }
 
 .prose .screen {
@@ -1384,6 +1401,15 @@ h4,
   font-size: 0.9rem;
   line-height: 1.4;
   color: var(--text-muted);
+}
+
+/* A desktop capture on its own line: the column's width, or the max= cap. */
+.prose .screen-wide {
+  margin: 1.5rem auto 1.75rem;
+}
+
+.prose .screen-wide img {
+  border-radius: 12px;
 }
 
 .prose .screen-zoom {

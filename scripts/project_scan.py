@@ -218,6 +218,16 @@ def scan(config: dict, author: str | None, all_authors: bool) -> list[dict]:
             if owner and origin and owner not in origin.lower():
                 row["warnings"].append(f"{prefix}origin is not yours ({origin}) - verify before writing")
 
+            # The scan reads the local HEAD, so a clone that was never pulled
+            # reports "up to date" while its upstream moved on - ict-hub sat 55
+            # commits behind. Compare against the last-fetched upstream ref; the
+            # scanner does not fetch, so a stale fetch can still hide commits.
+            code, behind = git(repo, "rev-list", "--count", "HEAD..@{upstream}")
+            if code == 0 and behind.strip() not in ("", "0"):
+                row["warnings"].append(
+                    f"{prefix}clone is {behind.strip()} commit(s) behind its upstream - pull before trusting this row"
+                )
+
             rev = revs.get(name) or (revs.get("") if len(clones) == 1 else None)
             if not rev:
                 part["status"] = "no anchor"

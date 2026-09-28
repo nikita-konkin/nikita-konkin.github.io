@@ -1,0 +1,16 @@
+{%- comment -%}
+The word that goes with a count: 1 публикация, 2 публикации, 5 публикаций,
+11 публикаций, 21 публикация. English passes only one= and many=.
+
+  {% include plural.html n=count one="публикация" few="публикации" many="публикаций" %}
+{%- endcomment -%}
+{%- assign plural_n = include.n | plus: 0 -%}
+{%- assign plural_10 = plural_n | modulo: 10 -%}
+{%- assign plural_100 = plural_n | modulo: 100 -%}
+{%- if include.few == nil -%}
+  {%- if plural_n == 1 -%}{{ include.one }}{%- else -%}{{ include.many }}{%- endif -%}
+{%- elsif plural_100 >= 11 and plural_100 <= 14 -%}{{ include.many }}
+{%- elsif plural_10 == 1 -%}{{ include.one }}
+{%- elsif plural_10 >= 2 and plural_10 <= 4 -%}{{ include.few }}
+{%- else -%}{{ include.many }}
+{%- endif -%}
