@@ -25,6 +25,32 @@
     - XML generation in the target “CyberDiploma 3.5.1” format.
     - Polyglot architecture with separate API, data-processing, and XML-generation layers.
 
+- slug: open_diplom
+  name: open-diplom
+  title: "Открытый диплом — открытая замена «КиберДиплома»"
+  title_en: "Otkrytyi Diplom — an open replacement for CyberDiploma"
+  status: "Прототип"
+  status_ru: "Прототип"
+  status_en: "Prototype"
+  description: "Открытая система подготовки и печати дипломов и приложений к ним для вузов, в том числе со старыми компьютерами на Windows 7 и российскими Linux. Одна сборка на Java 11 работает и на компьютере без сети, и на сервере вуза."
+  description_en: "An open system for preparing and printing diplomas and their supplements, including at universities with old Windows 7 machines and Russian Linux distributions. A single Java 11 build runs both on an offline computer and on a university server."
+  repo: https://github.com/nikita-konkin/open-diplom
+  stack:
+    - Java 11
+    - Tomcat
+    - SQLite
+    - Apache POI
+    - PDFBox
+    - Maven
+  highlights:
+    - "Импорт ведомостей «Деканата» через промежуточную зону: семестры складываются, з.е. берутся из учебного плана, спорные строки помечаются для оператора."
+    - "Учебный план из PDF «Планов» читается по сетке таблицы; шапка и итоги плана заполняют поля XML."
+    - "Печать в миллиметрах с калибровкой принтера; правила текущего сервиса перенесены и сверены с ним побайтно на архиве."
+  highlights_en:
+    - "Import of faculty grade statements through a staging area: semesters are summed, credits come from the curriculum, doubtful rows are flagged for the operator."
+    - "Curricula saved as PDF are read by the table's grid; the plan's title and totals fill the XML fields."
+    - "Printing in millimetres with printer calibration; the current service's rules are ported and checked against it byte for byte on the archive."
+
 - slug: angry_tests
   name: yegor256/at
   title: "Angry Tests — принципы тестирования от Yegor Bugayenko"
@@ -144,31 +170,32 @@
 
 - slug: gd_learn
   name: gd-learn
-  title: "Gradient Descent Playground — интерактивный тренажёр градиентного спуска"
-  title_en: "Gradient Descent Playground — an interactive gradient-descent sandbox"
+  title: "ML Playgrounds — интерактивные лабораторные курса машинного обучения"
+  title_en: "ML Playgrounds — interactive labs for a machine learning course"
   status: "Учебный проект"
   status_ru: "Учебный проект"
   status_en: "Educational project"
-  description: "Streamlit-приложение для наглядного изучения градиентного спуска: генерирует синтетические данные, обучает полиномиальные модели тремя видами спуска (Batch, SGD, Mini-batch) по MSE или MAE и показывает график потерь, анимацию шагов и 3D-поверхность функции потерь с траекторией оптимизации."
-  description_en: "A Streamlit app for learning gradient descent by sight: it generates synthetic data, trains polynomial models with three descent variants (Batch, SGD, Mini-batch) under MSE or MAE, and shows the loss curve, a step-by-step animation, and a 3D loss surface with the optimization trajectory."
-  repo: https://gitflic.ru/project/nikita-konkin/gd_learn
-  repo_label_ru: "Репозиторий (GitFlic)"
-  repo_label_en: "Repository (GitFlic)"
+  description: "Семь Streamlit-приложений, которые работают прямо в браузере: тренажёр градиентного спуска и шесть playground'ов курса «Основы машинного обучения» магистратуры лингвистики — метрики перевода, языковая модель, векторизация текста, память переводов, данные и разметка, задачи вводной лекции. Каждое воспроизводит числа своей лабораторной."
+  description_en: "Seven Streamlit apps that run right in the browser: a gradient-descent trainer and six playgrounds for the Machine Learning Fundamentals course of a linguistics master's programme — translation metrics, a language model, text vectorisation, translation memory, data and annotation, and the introductory lecture's tasks. Each reproduces its lab's numbers."
+  repo: https://github.com/nikita-konkin/gd_learn
+  demo: https://konkin-nikita.ru/gd_learn/
+  demo_label_ru: "Открыть playground'ы"
+  demo_label_en: "Open the playgrounds"
   stack:
     - Python
     - Streamlit
-    - NumPy
-    - pandas
+    - stlite / Pyodide
+    - scikit-learn
     - Plotly
     - pytest
   highlights:
-    - "Три вида градиентного спуска (Batch, SGD, Mini-batch) и две функции потерь (MSE, MAE) на общих данных — для прямого сравнения."
-    - "Анимация шагов оптимизации и 3D-поверхность потерь с траекторией спуска по двум выбранным параметрам."
-    - "Автоматическое обнаружение расходимости: неустойчивая история обрезается на последней стабильной итерации."
+    - "Числа каждой лабораторной воспроизводятся и проверяются тестами на каждом прогоне CI — вплоть до правила округления."
+    - "Всё считается в браузере: stlite запускает Python через WebAssembly, сайт отдаётся со статического хостинга без сервера."
+    - "Тренажёр градиентного спуска: три вида спуска, анимация шагов и 3D-поверхность потерь с траекторией оптимизации."
   highlights_en:
-    - "Three descent variants (Batch, SGD, Mini-batch) and two loss functions (MSE, MAE) over shared data — for direct comparison."
-    - "An animation of the optimization steps and a 3D loss surface with the descent trajectory over two chosen parameters."
-    - "Automatic divergence detection: an unstable history is truncated at the last stable iteration."
+    - "Each lab's numbers are reproduced and checked by tests on every CI run — down to the rounding rule."
+    - "Everything is computed in the browser: stlite runs Python through WebAssembly, and the site is served from static hosting with no server."
+    - "The gradient-descent trainer: three descent variants, a step-by-step animation and a 3D loss surface with the optimisation trajectory."
   references:
     - label: "TensorFlow Playground"
       url: "https://playground.tensorflow.org/"
