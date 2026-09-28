@@ -31,9 +31,9 @@ The program is a single file, `open-diplom.jar`, with an embedded Tomcat 10.1. I
 
 {% include screen.html src="/assets/open_diplom/import.webp" wide=true width=1650 height=1076 caption="Statement import: credits by hours and by the curriculum, where the final figure came from, and what the operator should check. Here and below — synthetic data from the project's examples." alt="The «statement read» page: a credits table with columns for hours, plan, result, source and what to check, and a grades table for three fictitious students" %}
 
-## Criteria measured against
+## Criteria set in advance
 
-The criteria for choosing the stack were written down before the prototype. Now almost all of them have numbers, measured in Linux containers on two architectures, arm64 and x86-64:
+The criteria for choosing the stack were written down before the prototype. Now almost all of them have numbers, measured in Linux containers on a Mac, on two architectures: arm64 and x86-64 (under Rosetta emulation):
 
 - **runs with nothing installed:** the trimmed runtime takes 51–56 MB, the program itself 39 MB;
 - **start-up time:** 0.3 s on arm64 and 0.7 s on x86-64, against a requirement of under five seconds;
@@ -66,7 +66,7 @@ Curricula arrive mostly as PDFs saved from «Планы». Such a file has text 
 
 So the plan is read by its grid: table rows are the gaps between horizontal lines, columns the gaps between vertical ones. Column numbers sit differently in different plans, so credits are taken from the first column under the heading «в зачетных единицах» (in credits), and names from the column under «Структура ОП» (programme structure). Block totals are skipped: the Excel version of a plan has none in its name column, so the same plan yields the same credits in both formats.
 
-The result on the archive: all five PDF plans with text were read; two bachelor's plans were checked against Excel plans for the same programmes and agreed in 51 of 51 and 59 of 59 credits. Two more files turned out to be scans with no text — the program refuses them and says so plainly: "this looks like a scan".
+The result on the archive: all five PDF plans with text were read; two bachelor's plans were checked against Excel plans for the same programmes a year earlier (the 2021 intake against 2022) and agreed in 51 of 51 and 59 of 59 credits. Two more files turned out to be scans with no text — the program refuses them and says so plainly: "this looks like a scan".
 
 ## XML fields from the curriculum
 
