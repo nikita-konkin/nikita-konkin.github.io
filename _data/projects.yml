@@ -48,11 +48,13 @@
     - "Учебный план из PDF «Планов» читается по сетке таблицы; шапка и итоги плана заполняют поля XML."
     - "Печать в миллиметрах с калибровкой принтера; правила текущего сервиса перенесены и сверены с ним побайтно на архиве."
     - "Учебные планы по годам набора и редакциям: контрольные суммы, сравнение с ближайшим планом и «Создать на основе» для планов, которые есть только сканом."
+    - "Выпуск от ведомости до бланка: сопоставление с планом, регистрационные номера, правки поверх файлов, печать по шаблонам типографии FastReport и учёт бланков строгой отчётности с книгой регистрации."
   highlights_en:
     - "Import of faculty grade statements through a staging area: semesters are summed, credits come from the curriculum, doubtful rows are flagged for the operator."
     - "Curricula saved as PDF are read by the table's grid; the plan's title and totals fill the XML fields."
     - "Printing in millimetres with printer calibration; the current service's rules are ported and checked against it byte for byte on the archive."
     - "Curricula by admission year and edition: checksums, comparison with the nearest plan and «Create from» for plans that exist only as scans."
+    - "A graduation from grade statement to blank: matching to the curriculum, registration numbers, corrections laid over the files, printing from the typographer's FastReport templates and strict-control blank accounting with a registration book."
 
 - slug: angry_tests
   name: yegor256/at
@@ -110,11 +112,13 @@
     - "Веб-оркестратор контейнерных конвертеров с потоковыми логами и аудитом запусков."
     - "Аналитический backend на DuckDB поверх Parquet с экспортом в JSON/CSV/XLSX и графиками."
     - "Задания переживают перезапуск хаба; AbsTEC запускается в Windows XP внутри KVM-контейнера; образы из CI выкладываются через Watchtower."
+    - "Анимации карт ионосферы строятся в фоне параллельными процессами — неделя за минуту вместо почти пяти; карта станций RINEX на подложке OpenStreetMap."
   highlights_en:
     - "An end-to-end data path: RINEX → TEC → coherence band → maps and statistics."
     - "A web orchestrator for containerised converters with streaming logs and a run audit."
     - "A DuckDB analytics backend over Parquet with JSON/CSV/XLSX export and plotting."
     - "Jobs survive a hub restart; AbsTEC runs in Windows XP inside a KVM container; CI images deploy through Watchtower."
+    - "Ionospheric map animations render in the background in parallel processes — a week in a minute instead of almost five; a map of RINEX stations on OpenStreetMap."
 
 - slug: tea_taste
   name: tea-taste
@@ -152,8 +156,8 @@
   status: "Открытое тестирование"
   status_ru: "Открытое тестирование"
   status_en: "Open beta"
-  description: "Нативный клиент личного кабинета работника ПГТУ (Волгатех) для Android и iOS: расписание занятий и экзаменов, профиль с учебной нагрузкой, служебная записка по иностранным группам в формате .docx и встроенный почтовый клиент. Работает поверх существующего API университета, не изменяя его."
-  description_en: "A native client for the Volgatech (Volga State University of Technology) staff cabinet on Android and iOS: class and exam schedules, a profile with teaching load, the foreign-groups memo as a .docx and a built-in mail client. It works on top of the university's existing API without changing it."
+  description: "Клиент личного кабинета работника ПГТУ (Волгатех) для Android, iOS и браузера: расписание занятий и экзаменов, профиль с учебной нагрузкой, служебная записка по иностранным группам в формате .docx и встроенный почтовый клиент. Работает поверх существующего API университета, не изменяя его."
+  description_en: "A client for the Volgatech (Volga State University of Technology) staff cabinet on Android, iOS and the web: class and exam schedules, a profile with teaching load, the foreign-groups memo as a .docx and a built-in mail client. It works on top of the university's existing API without changing it."
   repo: https://github.com/nikita-konkin/volgatech.corp
   demo: https://github.com/nikita-konkin/volgatech.corp/releases/latest
   demo_label_ru: "Скачать APK"
@@ -169,11 +173,13 @@
     - "Ежемесячная служебная записка по занятиям с иностранными группами собирается из расписания и выдаётся в .docx по шаблону портала."
     - "Вход по JWT с автообновлением: токены хранятся в защищённом хранилище ОС, пароль кабинета не сохраняется; необязательная блокировка отпечатком или PIN-кодом."
     - "Встроенный почтовый клиент для университетского Exchange (EWS, NTLMv2) — в отдельной сборке по выбору; пароль почты хранится в хранилище ОС и удаляется при выходе."
+    - "Браузерная версия для iPhone и компьютера, обновления из приложения с проверкой SHA-256, напоминания о парах, виджет и тема Liquid Glass с проверкой контраста тестами."
   highlights_en:
     - "A schedule with an offline cache: the saved copy shows at once and refreshes in the background, the next week is prefetched, and a week overview shows gaps and the number of classes."
     - "The monthly memo on classes with foreign-student groups is assembled from the schedule and shared as a .docx in the portal's own template."
     - "JWT sign-in with automatic refresh: tokens live in the OS keystore and the cabinet password is never stored; an optional fingerprint or PIN app lock."
     - "A built-in mail client for the university's Exchange (EWS, NTLMv2) in a separate, opt-in build; the mail password lives in the OS keystore and is removed on sign-out."
+    - "A browser version for iPhone and computers, in-app updates checked by SHA-256, lesson reminders, a widget and a Liquid Glass theme with contrast checked by tests."
 
 - slug: gd_learn
   name: gd-learn
@@ -182,8 +188,8 @@
   status: "Учебный проект"
   status_ru: "Учебный проект"
   status_en: "Educational project"
-  description: "Семь Streamlit-приложений, которые работают прямо в браузере: тренажёр градиентного спуска и шесть playground'ов курса «Основы машинного обучения» магистратуры лингвистики — метрики перевода, языковая модель, векторизация текста, память переводов, данные и разметка, задачи вводной лекции. Каждое воспроизводит числа своей лабораторной."
-  description_en: "Seven Streamlit apps that run right in the browser: a gradient-descent trainer and six playgrounds for the Machine Learning Fundamentals course of a linguistics master's programme — translation metrics, a language model, text vectorisation, translation memory, data and annotation, and the introductory lecture's tasks. Each reproduces its lab's numbers."
+  description: "Тринадцать Streamlit-приложений, которые работают прямо в браузере: тренажёр градиентного спуска, шесть площадок курса «Основы машинного обучения» магистратуры лингвистики и шесть — бакалаврского курса «Основы программирования систем искусственного интеллекта на языке Python». Каталог раскладывает их по темам, и каждое воспроизводит числа своей лабораторной."
+  description_en: "Thirteen Streamlit apps that run right in the browser: a gradient-descent trainer, six playgrounds for the Machine Learning Fundamentals course of a linguistics master's programme and six for the bachelor's course Foundations of Programming AI Systems in Python. A catalog sorts them by topic, and each reproduces its lab's numbers."
   repo: https://github.com/nikita-konkin/gd_learn
   demo: https://konkin-nikita.ru/gd_learn/
   demo_label_ru: "Открыть playground'ы"
