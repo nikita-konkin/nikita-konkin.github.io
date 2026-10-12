@@ -9,6 +9,7 @@ paper_title: "Step adjustment of the operating frequency for a panoramic SDR ion
 paper_authors: "Konkin N.A. (supervisor — Ryabova N.V.)"
 paper_year: 2019
 paper_date: "2019"
+paper_venue: "Applied Electrodynamics, Photonics and Living Systems — 2019. Conference proceedings, pp. 150–153"
 paper_link: "https://www.elibrary.ru/item.asp?id=41467774"
 tags: [SDR, GNU-Radio, USRP, ionosonde, panoramic-sounding, instrumentation]
 ---

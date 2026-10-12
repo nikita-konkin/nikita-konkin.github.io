@@ -8,7 +8,7 @@ paper_title: "Машинное обучение в задаче прогнози
 paper_authors: "Конкин Н.А., Пасова А.Д."
 paper_year: 2021
 paper_date: "2021"
-paper_venue: null
+paper_venue: "Архивариус, 2021, Т. 7, № 8 (62), С. 29–31"
 paper_link: "https://www.elibrary.ru/item.asp?id=47225839"
 tags: [ионосфера, КВ-радиоканал, МПЧ, машинное обучение, XGBoost, временные ряды]
 ---

@@ -9,7 +9,7 @@ paper_title: "Machine learning for forecasting MUF time series of HF radio chann
 paper_authors: "Konkin N.A., Pasova A.D."
 paper_year: 2021
 paper_date: "2021"
-paper_venue: null
+paper_venue: "Archivarius, 2021, vol. 7, no. 8 (62), pp. 29–31"
 paper_link: "https://www.elibrary.ru/item.asp?id=47225839"
 tags: [ionosphere, hf-channel, MUF, machine-learning, XGBoost, time-series]
 ---
