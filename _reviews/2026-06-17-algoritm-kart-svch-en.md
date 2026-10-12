@@ -9,6 +9,7 @@ paper_title: "Algorithm of simulation of coherence-bandwidth maps in a trans-ion
 paper_authors: "Konkin N.A., Kislitsyn A.A."
 paper_year: 2018
 paper_date: "2018"
+paper_venue: "Applied Electrodynamics, Photonics and Living Systems — 2018. Proceedings of the International Conference of Young Scientists, Postgraduates and Students, pp. 71–73"
 paper_link: "https://www.elibrary.ru/item.asp?id=35229514"
 tags: [ionosphere, coherence-bandwidth, trans-ionospheric-channel, GNSS, mapping, software]
 ---

@@ -9,6 +9,7 @@ paper_title: "Methods and algorithms for studying the coherence bandwidth of obl
 paper_authors: "Ivanov V.A., Ivanov D.V., Ryabova N.V., Ryabova M.I., Chernov A.A., Konkin N.A."
 paper_year: 2016
 paper_date: "2016"
+paper_venue: "Radiophysical Methods in Remote Sensing of Media. Proceedings of the VII All-Russian Scientific Conference, Murom, pp. 82–86"
 paper_link: "https://elibrary.ru/item.asp?id=26519283"
 tags: [ionosphere, radio-sounding, GNSS, coherence-bandwidth, modelling, software]
 ---

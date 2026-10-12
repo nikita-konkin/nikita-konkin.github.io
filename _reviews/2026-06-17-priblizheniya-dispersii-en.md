@@ -9,6 +9,7 @@ paper_title: "Analysis of mathematical approximations for estimating the frequen
 paper_authors: "Ivanov D.V., Ivanov V.A., Ryabova N.V., Ryabova M.I., Kislitsyn A.A., Chernov A.A., Konkin N.A."
 paper_year: 2017
 paper_date: "2017"
+paper_venue: "VII All-Russian Armand Readings “Modern Problems of Remote Sensing, Radar, Wave Propagation and Diffraction”, pp. 315–322"
 paper_link: "https://www.elibrary.ru/item.asp?id=32287865"
 tags: [ionosphere, phase-dispersion, trans-ionospheric-channel, coherence-bandwidth, NeQuick, modelling]
 ---

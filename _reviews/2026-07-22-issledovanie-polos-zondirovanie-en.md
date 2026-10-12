@@ -9,6 +9,7 @@ paper_title: "A study of coherence bandwidths in trans-ionospheric sounding"
 paper_authors: "Konkin N.A. (supervisor — Chernov A.A.)"
 paper_year: 2019
 paper_date: "2019"
+paper_venue: "Applied Electrodynamics, Photonics and Living Systems — 2019. Conference proceedings, pp. 425–427"
 paper_link: "https://www.elibrary.ru/item.asp?id=41468023"
 tags: [ionosphere, coherence-bandwidth, trans-ionospheric-sounding, PostgreSQL, AutoIt, mapping]
 ---

@@ -7,8 +7,9 @@ translation_of: 2026-07-23-optimalnaya-polosa-chastot.md
 summary: "The coherence bandwidth is taken as the optimal frequency band of a satellite communication channel, and diagnostic maps from GLONASS/GPS data as the instrument for monitoring it. A three-stage processing pipeline and a map for Mari El and Tatarstan are given."
 paper_title: "Determination of the optimal channel frequency band for satellite communication systems based on diagnostic maps of the coherence bandwidth"
 paper_authors: "Konkin N.A., Kislitsyn A.A."
-paper_year: 2020
-paper_date: "2020"
+paper_year: 2019
+paper_date: "2019"
+paper_venue: "III Scientific Forum “Telecommunications: Theory and Technologies” TTT-2019. Proceedings of the XXI International Scientific and Technical Conference, pp. 186–188"
 paper_link: "https://www.elibrary.ru/item.asp?id=42831881"
 tags: [ionosphere, coherence-bandwidth, satellite-communications, optimal-bandwidth, mapping, TEC]
 ---

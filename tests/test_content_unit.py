@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROJECTS_FILE = ROOT / "_data" / "projects.yml"
 ARTICLES_DIR = ROOT / "_articles"
 ARTICLE_FILES = sorted(ARTICLES_DIR.rglob("*.md"))
+REVIEW_FILES = sorted((ROOT / "_reviews").glob("*.md"))
 
 
 def _read_text(path: Path) -> str:
@@ -138,7 +139,9 @@ def test_translation_links_point_to_existing_articles() -> None:
 def test_article_images_exist() -> None:
     # Screenshots come in through {% include screen.html src="..." %} and the social
     # preview through `image:`; a typo in either only shows up as a broken picture.
-    for path, meta in _articles():
+    # Paper reviews carry figures through the same include.
+    pages = _articles() + [(path, _front_matter(path)) for path in REVIEW_FILES]
+    for path, meta in pages:
         sources = re.findall(r'include\s+screen\.html\s+src="([^"]+)"', _read_text(path))
         if meta.get("image"):
             sources.append(meta["image"])
