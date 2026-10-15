@@ -181,6 +181,34 @@
     - "A built-in mail client for the university's Exchange (EWS, NTLMv2) in a separate, opt-in build; the mail password lives in the OS keystore and is removed on sign-out."
     - "A browser version for iPhone and computers, in-app updates checked by SHA-256, lesson reminders, a widget and a Liquid Glass theme with contrast checked by tests."
 
+- slug: conf_kit
+  name: conf-kit
+  title: "conf-kit — программа конференции, жюри и заявки"
+  title_en: "conf-kit — a conference programme, jury and applications"
+  status: "В разработке"
+  status_ru: "В разработке"
+  status_en: "Work in progress"
+  description: "Сервис для конференций и мероприятий: программу собирает чат-бот через API, а человек принимает готовый черновик. Конструктор на телефоне и на десктопе, публичная программа с «сейчас» и «далее», документы A4 и Word, конкурс докладов с оценками жюри, которые переживают пропадание связи, и приём заявок с согласием на обработку персональных данных."
+  description_en: "A service for conferences and events: a chat bot builds the programme through an API, and a person accepts the finished draft. A builder for phone and desktop, a public programme with “now” and “next”, A4 and Word documents, a talk competition whose jury scores survive a lost connection, and talk applications with consent to personal-data processing."
+  repo: https://github.com/nikita-konkin/jury-score
+  stack:
+    - JavaScript
+    - Preact
+    - PocketBase
+    - SQLite
+    - MCP
+    - Gotenberg
+    - Playwright
+    - Docker
+  highlights:
+    - "Программа как документ conf.program/v1 со схемой: нормализация, время по регламенту и проверки с точным путём к каждой ошибке."
+    - "API, llms.txt, openapi.json и MCP-сервер для чат-ботов; черновик становится программой только после того, как человек примет приглашение."
+    - "Жюри без аккаунтов, по коду комиссии; браузеры с 2018 года и не больше 80 КБ JavaScript для участников."
+  highlights_en:
+    - "The programme as a conf.program/v1 document with a schema: normalisation, times from the rules and checks with an exact path to each error."
+    - "An API, llms.txt, openapi.json and an MCP server for chat bots; a draft becomes a programme only after a person accepts the invitation."
+    - "A jury without accounts, by commission code; browsers from 2018 onwards and at most 80 KB of JavaScript for participants."
+
 - slug: gd_learn
   name: gd-learn
   title: "ML Playgrounds — интерактивные лабораторные курса машинного обучения"
@@ -226,6 +254,65 @@
       url: "https://www.3blue1brown.com/topics/neural-networks"
       note: "Видеокурс с наглядным объяснением градиентного спуска и обучения."
       note_en: "A video series that explains gradient descent and learning visually."
+
+- slug: ionozond
+  name: ionozond
+  title: "ionozond — консоль наклонного ЛЧМ-зондирования ионосферы"
+  title_en: "ionozond — an oblique chirp-sounding console for the ionosphere"
+  status: "В разработке"
+  status_ru: "В разработке"
+  status_en: "Work in progress"
+  description: "Комплект для наклонного ЛЧМ-зондирования ионосферы: приём, консоль оператора на Qt5 и Qwt, восстановленная по бинарнику программы с утерянными исходниками, форматы записей и продуктов и документ о физике ЛЧМ-ионограмм. Консоль запускается в браузере через Docker и noVNC."
+  description_en: "A suite for oblique chirp sounding of the ionosphere: acquisition, an operator console in Qt5 and Qwt recovered from the binary of a program whose source was lost, capture and product formats, and a document on the physics of chirp ionograms. The console runs in a browser through Docker and noVNC."
+  repo: https://github.com/nikita-konkin/ionozond
+  demo: https://konkin-nikita.ru/ionozond-playground/
+  demo_label_ru: "Интерактивные модели"
+  demo_label_en: "Interactive models"
+  stack:
+    - C++
+    - Qt5
+    - Qwt
+    - FFTW
+    - Python
+    - NumPy
+    - HDF5
+    - Docker
+  highlights:
+    - "Восстановлена по неочищенному бинарнику и сверена с оригиналом: вызовы его функций под gdb, побайтная конфигурация, спектры с расхождением 1,7·10⁻¹³."
+    - "Файл продуктов .lfp в 2000 раз меньше 80-мегабайтной записи: тяжёлая обработка выполняется один раз."
+    - "Ионограмма строится во время приёма, длина БПФ задаётся для каждой станции, а расписание проверяется на потерю сеансов."
+  highlights_en:
+    - "Recovered from an unstripped binary and checked against the original: calls to its functions under gdb, a byte-identical configuration, spectra agreeing to 1.7·10⁻¹³."
+    - "An .lfp products file 2000 times smaller than the 80 MB capture: the heavy processing happens once."
+    - "The ionogram is drawn during reception, the FFT length is set per station, and the schedule is checked for lost soundings."
+
+- slug: ionozond_playground
+  name: ionozond-playground
+  title: "Практикум ionozond — интерактивные модели ЛЧМ-зондирования"
+  title_en: "The ionozond playground — interactive models of chirp sounding"
+  status: "Учебный проект"
+  status_ru: "Учебный проект"
+  status_en: "Educational project"
+  description: "Статический сайт на русском и английском: семь моделей к документу о наклонных ЛЧМ-ионограммах — дисперсия групповой задержки и предельная полоса, способы её измерить, ошибка момента старта, длина БПФ, расписание станций, суточный ход и вертикальное зондирование, — а также полный текст документа в виде вики и глоссарий."
+  description_en: "A static site in Russian and English: seven models for a document on oblique chirp ionograms — group-delay dispersion and the widest usable band, ways to measure it, start-time errors, FFT length, the station schedule, the daily course and vertical sounding — plus the document's full text as a wiki and a glossary."
+  repo: https://github.com/nikita-konkin/ionozond-playground
+  demo: https://konkin-nikita.ru/ionozond-playground/
+  demo_label_ru: "Открыть практикум"
+  demo_label_en: "Open the playground"
+  stack:
+    - JavaScript
+    - SVG
+    - Python
+    - NumPy
+    - GitHub Actions
+  highlights:
+    - "Закон дисперсии с этой трассы: медиана 19 033 оценок по 583 сеансам, b = 7,52 при R² = 0,975."
+    - "Без библиотек и без сборки: графики нарисованы вручную в SVG, сайт открывается с диска."
+    - "Каждая модель проверена независимо на Python; работа над моделями нашла противоречия в самом документе, и их исправили в исходнике."
+  highlights_en:
+    - "A dispersion law from this path: the median of 19,033 estimates over 583 soundings, b = 7.52 with R² = 0.975."
+    - "No libraries and no build: the charts are drawn by hand in SVG, and the site opens from disk."
+    - "Each model is checked independently in Python; work on the models found contradictions in the document itself, and they were fixed at the source."
 
 - slug: hf_fec_gan
   name: hf-fec-gan
