@@ -156,8 +156,8 @@
   status: "Открытое тестирование"
   status_ru: "Открытое тестирование"
   status_en: "Open beta"
-  description: "Клиент личного кабинета работника ПГТУ (Волгатех) для Android, iOS и браузера: расписание занятий и экзаменов, профиль с учебной нагрузкой, служебная записка по иностранным группам в формате .docx и встроенный почтовый клиент. Работает поверх существующего API университета, не изменяя его."
-  description_en: "A client for the Volgatech (Volga State University of Technology) staff cabinet on Android, iOS and the web: class and exam schedules, a profile with teaching load, the foreign-groups memo as a .docx and a built-in mail client. It works on top of the university's existing API without changing it."
+  description: "Клиент личного кабинета работника ПГТУ (Волгатех) для Android, iOS и браузера: расписание занятий и экзаменов, профиль с учебной нагрузкой, служебная записка по иностранным группам и отчёт о почасовой нагрузке в формате .docx и встроенный почтовый клиент. Работает поверх существующего API университета, не изменяя его."
+  description_en: "A client for the Volgatech (Volga State University of Technology) staff cabinet on Android, iOS and the web: class and exam schedules, a profile with teaching load, the foreign-groups memo and the hourly-load report as .docx files, and a built-in mail client. It works on top of the university's existing API without changing it."
   repo: https://github.com/nikita-konkin/volgatech.corp
   demo: https://github.com/nikita-konkin/volgatech.corp/releases/latest
   demo_label_ru: "Скачать APK"
@@ -170,13 +170,13 @@
     - GitHub Actions
   highlights:
     - "Расписание с офлайн-кэшем: сохранённая копия показывается сразу и обновляется в фоне, следующая неделя загружается заранее; обзор недели с «окнами» и числом пар."
-    - "Ежемесячная служебная записка по занятиям с иностранными группами собирается из расписания и выдаётся в .docx по шаблону портала."
+    - "Служебная записка по иностранным группам и приложение к форме 28 о почасовой нагрузке собираются из расписания и выдаются в .docx; темы занятий идут по плану, который продолжается от отчёта к отчёту."
     - "Вход по JWT с автообновлением: токены хранятся в защищённом хранилище ОС, пароль кабинета не сохраняется; необязательная блокировка отпечатком или PIN-кодом."
     - "Встроенный почтовый клиент для университетского Exchange (EWS, NTLMv2) — в отдельной сборке по выбору; пароль почты хранится в хранилище ОС и удаляется при выходе."
     - "Браузерная версия для iPhone и компьютера, обновления из приложения с проверкой SHA-256, напоминания о парах, виджет и тема Liquid Glass с проверкой контраста тестами."
   highlights_en:
     - "A schedule with an offline cache: the saved copy shows at once and refreshes in the background, the next week is prefetched, and a week overview shows gaps and the number of classes."
-    - "The monthly memo on classes with foreign-student groups is assembled from the schedule and shared as a .docx in the portal's own template."
+    - "The memo on foreign-student groups and the Form 28 appendix on hourly load are assembled from the schedule and shared as .docx files; class topics follow a plan that carries on from one report to the next."
     - "JWT sign-in with automatic refresh: tokens live in the OS keystore and the cabinet password is never stored; an optional fingerprint or PIN app lock."
     - "A built-in mail client for the university's Exchange (EWS, NTLMv2) in a separate, opt-in build; the mail password lives in the OS keystore and is removed on sign-out."
     - "A browser version for iPhone and computers, in-app updates checked by SHA-256, lesson reminders, a widget and a Liquid Glass theme with contrast checked by tests."
@@ -233,10 +233,12 @@
     - "Числа каждой лабораторной воспроизводятся и проверяются тестами на каждом прогоне CI — вплоть до правила округления."
     - "Всё считается в браузере: stlite запускает Python через WebAssembly, сайт отдаётся со статического хостинга без сервера."
     - "Тренажёр градиентного спуска: три вида спуска, анимация шагов и 3D-поверхность потерь с траекторией оптимизации."
+    - "Пояснения идут по шагам до графиков, а 71 термин собран в общий глоссарий: на площадках определение всплывает при наведении на подчёркнутое слово."
   highlights_en:
     - "Each lab's numbers are reproduced and checked by tests on every CI run — down to the rounding rule."
     - "Everything is computed in the browser: stlite runs Python through WebAssembly, and the site is served from static hosting with no server."
     - "The gradient-descent trainer: three descent variants, a step-by-step animation and a 3D loss surface with the optimisation trajectory."
+    - "Explanations come in steps before the charts, and 71 terms are gathered into a shared glossary: on the playgrounds a definition pops up on hovering over an underlined word."
   references:
     - label: "TensorFlow Playground"
       url: "https://playground.tensorflow.org/"
@@ -281,10 +283,12 @@
     - "Восстановлена по неочищенному бинарнику и сверена с оригиналом: вызовы его функций под gdb, побайтная конфигурация, спектры с расхождением 1,7·10⁻¹³."
     - "Файл продуктов .lfp в 2000 раз меньше 80-мегабайтной записи: тяжёлая обработка выполняется один раз."
     - "Ионограмма строится во время приёма, длина БПФ задаётся для каждой станции, а расписание проверяется на потерю сеансов."
+    - "Окно эха сохраняет фазу каждого сеанса за 1,57 МБ, побитово совпадая с эталоном; запись удаляется только после проверки окна."
   highlights_en:
     - "Recovered from an unstripped binary and checked against the original: calls to its functions under gdb, a byte-identical configuration, spectra agreeing to 1.7·10⁻¹³."
     - "An .lfp products file 2000 times smaller than the 80 MB capture: the heavy processing happens once."
     - "The ionogram is drawn during reception, the FFT length is set per station, and the schedule is checked for lost soundings."
+    - "An echo window keeps each sounding's phase in 1.57 MB, bit-identical to the reference; a capture is deleted only after its window is verified."
 
 - slug: ionozond_playground
   name: ionozond-playground
@@ -293,8 +297,8 @@
   status: "Учебный проект"
   status_ru: "Учебный проект"
   status_en: "Educational project"
-  description: "Статический сайт на русском и английском: семь моделей к документу о наклонных ЛЧМ-ионограммах — дисперсия групповой задержки и предельная полоса, способы её измерить, ошибка момента старта, длина БПФ, расписание станций, суточный ход и вертикальное зондирование, — а также полный текст документа в виде вики и глоссарий."
-  description_en: "A static site in Russian and English: seven models for a document on oblique chirp ionograms — group-delay dispersion and the widest usable band, ways to measure it, start-time errors, FFT length, the station schedule, the daily course and vertical sounding — plus the document's full text as a wiki and a glossary."
+  description: "Статический сайт на русском и английском: семь моделей к документу о наклонных ЛЧМ-ионограммах — дисперсия групповой задержки и предельная полоса, способы её измерить, ошибка момента старта, длина БПФ, расписание станций, суточный ход и вертикальное зондирование, — полный текст документа в виде вики и глоссарий, а также имитатор КВ-канала на реальных сеансах с заметками и шестью схемами."
+  description_en: "A static site in Russian and English: seven models for a document on oblique chirp ionograms — group-delay dispersion and the widest usable band, ways to measure it, start-time errors, FFT length, the station schedule, the daily course and vertical sounding — the document's full text as a wiki and a glossary, and an HF channel simulator on real soundings with notes and six boards."
   repo: https://github.com/nikita-konkin/ionozond-playground
   demo: https://konkin-nikita.ru/ionozond-playground/
   demo_label_ru: "Открыть практикум"
@@ -309,10 +313,12 @@
     - "Закон дисперсии с этой трассы: медиана 19 033 оценок по 583 сеансам, b = 7,52 при R² = 0,975."
     - "Без библиотек и без сборки: графики нарисованы вручную в SVG, сайт открывается с диска."
     - "Каждая модель проверена независимо на Python; работа над моделями нашла противоречия в самом документе, и их исправили в исходнике."
+    - "Имитатор канала проверяет себя сам: реальный сеанс ставится в ряд двенадцати копий, синтезированных по его состоянию, и вердикт выносится в сигмах."
   highlights_en:
     - "A dispersion law from this path: the median of 19,033 estimates over 583 soundings, b = 7.52 with R² = 0.975."
     - "No libraries and no build: the charts are drawn by hand in SVG, and the site opens from disk."
     - "Each model is checked independently in Python; work on the models found contradictions in the document itself, and they were fixed at the source."
+    - "The channel simulator checks itself: the real sounding is put among twelve copies synthesised from its state, and the verdict is given in sigmas."
 
 - slug: hf_fec_gan
   name: hf-fec-gan
