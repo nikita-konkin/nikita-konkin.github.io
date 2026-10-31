@@ -1,0 +1,18 @@
+{%- comment -%}
+Visit counting through GoatCounter. The visit is sent as one image request, so no
+cookies are set and no third-party code runs on the page. It renders only in the
+production build that GitHub Pages runs and only once _config.yml names the
+GoatCounter site in `goatcounter`; pages opened locally or by a browser driven by
+automation are never counted.
+{%- endcomment -%}
+{%- assign goatcounter = site.goatcounter | strip -%}
+{%- if goatcounter != "" and jekyll.environment == "production" %}
+    <script>
+    (function () {
+      if (navigator.webdriver || /^(localhost|127\.|\[::1\])/.test(location.hostname)) return;
+      new Image().src = "https://{{ goatcounter }}.goatcounter.com/count?p=" + encodeURIComponent(location.pathname) +
+        "&t=" + encodeURIComponent(document.title) + "&r=" + encodeURIComponent(document.referrer) +
+        "&rnd=" + Math.random().toString(36).slice(2);
+    })();
+    </script>
+{%- endif %}
