@@ -119,3 +119,38 @@ def test_tag_hub_pages_reuse_the_project_list() -> None:
         assert "page_projects.html" in _read_text(path), (
             f"{path.relative_to(ROOT)} must render the shared project list to stay a real tag hub"
         )
+
+
+@pytest.mark.smoke
+def test_default_layout_includes_the_analytics_snippet() -> None:
+    head = _read_text(ROOT / "_layouts" / "default.html").split("</head>")[0]
+    assert "{% include analytics.html %}" in head, (
+        "default.html dropped the analytics include from <head>, so no page is counted"
+    )
+
+
+@pytest.mark.smoke
+def test_analytics_snippet_counts_only_the_published_site() -> None:
+    text = _read_text(ROOT / "_includes" / "analytics.html")
+    assert re.search(
+        r"\{%-?\s*if\s+goatcounter\s*!=\s*\"\"\s+and\s+jekyll\.environment\s*==\s*\"production\"\s*-?%\}",
+        text,
+    ), "analytics.html must not render outside the production build or without a GoatCounter code"
+
+
+@pytest.mark.smoke
+def test_analytics_snippet_reports_to_the_configured_goatcounter_site() -> None:
+    text = _read_text(ROOT / "_includes" / "analytics.html")
+    assert "{%- assign goatcounter = site.goatcounter | strip -%}" in text and (
+        '"https://{{ goatcounter }}.goatcounter.com/count?p="' in text
+    ), (
+        "analytics.html does not send counts to the GoatCounter site named in _config.yml"
+    )
+
+
+@pytest.mark.smoke
+def test_analytics_snippet_runs_no_third_party_code() -> None:
+    text = _read_text(ROOT / "_includes" / "analytics.html")
+    assert "<script src" not in text and "gc.zgo.at" not in text, (
+        "analytics.html loads a third-party script instead of sending one image request"
+    )

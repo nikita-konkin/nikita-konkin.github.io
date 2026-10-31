@@ -15,6 +15,9 @@ author:
 social:
   github: "https://github.com/nikita-konkin"
 
+# GoatCounter site code, as in https://<code>.goatcounter.com; empty turns counting off.
+goatcounter: "konkin-nikita"
+
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
