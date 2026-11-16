@@ -297,8 +297,8 @@
   status: "Учебный проект"
   status_ru: "Учебный проект"
   status_en: "Educational project"
-  description: "Статический сайт на русском и английском: семь моделей к документу о наклонных ЛЧМ-ионограммах — дисперсия групповой задержки и предельная полоса, способы её измерить, ошибка момента старта, длина БПФ, расписание станций, суточный ход и вертикальное зондирование, — полный текст документа в виде вики и глоссарий, а также имитатор КВ-канала на реальных сеансах с заметками и шестью схемами."
-  description_en: "A static site in Russian and English: seven models for a document on oblique chirp ionograms — group-delay dispersion and the widest usable band, ways to measure it, start-time errors, FFT length, the station schedule, the daily course and vertical sounding — the document's full text as a wiki and a glossary, and an HF channel simulator on real soundings with notes and six boards."
+  description: "Статический сайт на русском и английском: семь моделей к документу о наклонных ЛЧМ-ионограммах — дисперсия групповой задержки и предельная полоса, способы её измерить, ошибка момента старта, длина БПФ, расписание станций, суточный ход и вертикальное зондирование, — полный текст документа в виде вики и глоссарий, имитатор КВ-канала на реальных сеансах с заметками, шестью схемами и блок-схемой, а также чтение АЧХ и ФЧХ моды из записи сеанса по подканалам."
+  description_en: "A static site in Russian and English: seven models for a document on oblique chirp ionograms — group-delay dispersion and the widest usable band, ways to measure it, start-time errors, FFT length, the station schedule, the daily course and vertical sounding — the document's full text as a wiki and a glossary, an HF channel simulator on real soundings with notes, six boards and a block diagram, and a mode's amplitude and phase response read off a sounding's recording by subchannel."
   repo: https://github.com/nikita-konkin/ionozond-playground
   demo: https://konkin-nikita.ru/ionozond-playground/
   demo_label_ru: "Открыть практикум"
@@ -314,11 +314,67 @@
     - "Без библиотек и без сборки: графики нарисованы вручную в SVG, сайт открывается с диска."
     - "Каждая модель проверена независимо на Python; работа над моделями нашла противоречия в самом документе, и их исправили в исходнике."
     - "Имитатор канала проверяет себя сам: реальный сеанс ставится в ряд двенадцати копий, синтезированных по его состоянию, и вердикт выносится в сигмах."
+    - "АЧХ и ФЧХ моды читаются из реальной записи по подканалам; окна с перекрытием сохраняют фазу там, где окна подряд теряют обороты: 7 из 8888 шагов против 38 из 48."
   highlights_en:
     - "A dispersion law from this path: the median of 19,033 estimates over 583 soundings, b = 7.52 with R² = 0.975."
     - "No libraries and no build: the charts are drawn by hand in SVG, and the site opens from disk."
     - "Each model is checked independently in Python; work on the models found contradictions in the document itself, and they were fixed at the source."
     - "The channel simulator checks itself: the real sounding is put among twelve copies synthesised from its state, and the verdict is given in sigmas."
+    - "A mode's amplitude and phase response is read off a real recording by subchannel; overlapping windows keep the phase where back-to-back ones lose turns, 7 in 8,888 steps against 38 in 48."
+
+- slug: ionostation_public
+  name: ionostation-public
+  title: "ionostation — открытая страница наклонного зондирования ионосферы"
+  title_en: "ionostation — an open page for oblique ionospheric sounding"
+  status: "Работает"
+  status_ru: "Работает"
+  status_en: "Live"
+  description: "Публичная страница хаба наклонного ЛЧМ-зондирования: сеанс в процессе с отставанием около 10 секунд, последние ионограммы, ряды МНЧ и ННЧ за месяц и экспериментальный прогноз МНЧ рядом с опорными методами. Хаб остаётся в закрытой сети; стек Docker на открытом сервере только копирует разрешённую папку статических файлов и отдаёт её через nginx."
+  description_en: "The public page of an oblique chirp-sounding hub: the sounding in progress about 10 seconds behind, the latest ionograms, a month of MUF and LOF series, and an experimental MUF forecast beside reference methods. The hub stays on its closed network; a Docker stack on an open server only copies an allow-listed folder of static files and serves it through nginx."
+  demo: https://ionostation.volgatech-itrc.ru/
+  demo_label_ru: "Открыть страницу"
+  demo_label_en: "Open the page"
+  stack:
+    - Docker
+    - nginx
+    - rsync
+    - JavaScript
+    - WebAssembly
+  highlights:
+    - "Хаб не выставляется наружу: публичная сторона копирует только разрешённую папку статических файлов, без проксирования к его API."
+    - "Текущий сеанс копируется каждые 10 секунд, результаты — каждые 5 минут, архив окон эха — в собственном цикле, чтобы не задерживать живую картинку."
+    - "Только GET и HEAD, строгая политика содержимого, файлы с именами по времени сеанса кэшируются на год."
+  highlights_en:
+    - "The hub is never exposed: the public side copies only an allow-listed folder of static files, with no proxying to its API."
+    - "The current sounding is copied every 10 seconds, the results every 5 minutes, and the echo-window archive on a loop of its own so it cannot delay the live picture."
+    - "GET and HEAD only, a strict content policy, and files named after their sounding's time cached for a year."
+
+- slug: ionoreview
+  name: ionoreview
+  title: "ИоноРазметка — разметка и экспертная проверка ионограмм"
+  title_en: "IonoReview — labelling and expert review of ionograms"
+  status: "В разработке"
+  status_ru: "В разработке"
+  status_en: "Work in progress"
+  description: "Настольный редактор для разметки ионограмм в формате LabelMe. К каждому кадру прилагается матрица мощности в дБ с осями в МГц и км, поэтому маски, контраст и предразметка DBSCAN или K-means работают в физических единицах. Экспертная приёмка, слепые проверки без подсказок, экспорт только принятого, сборка для Windows без Python и экспериментальное дообучение визуальной модели с QLoRA."
+  description_en: "A desktop editor for labelling ionograms in LabelMe format. Each frame comes with a power matrix in dB and axes in MHz and km, so masks, contrast and DBSCAN or K-means pre-labelling work in physical units. Expert acceptance, blind reviews without hints, export of accepted records only, a Windows build without Python, and experimental QLoRA fine-tuning of a vision model."
+  repo: https://github.com/nikita-konkin/ionoreview
+  stack:
+    - Python
+    - Tkinter
+    - NumPy
+    - scikit-learn
+    - HDF5
+    - PyInstaller
+    - QLoRA
+  highlights:
+    - "Разметка по измерению: координаты масок в МГц и км, контраст из мощности в дБ, а не из яркости картинки."
+    - "Кластеры — только кандидаты: классы ставит эксперт, в экспорт попадают лишь принятые записи, у каждой — история версий и контрольные суммы."
+    - "Проект из папки файлов H5 одной командой меню; переносимая сборка для Windows проходит самопроверку в GitHub Actions."
+  highlights_en:
+    - "Labelling by the measurement: mask coordinates in MHz and km, contrast from power in dB rather than picture brightness."
+    - "Clusters are only candidates: the expert sets the classes, only accepted records are exported, and each keeps a version history and checksums."
+    - "A project from a folder of H5 files with one menu command; the portable Windows build runs a self-test in GitHub Actions."
 
 - slug: hf_fec_gan
   name: hf-fec-gan
