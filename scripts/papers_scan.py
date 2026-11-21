@@ -5,7 +5,8 @@ Four places have to agree about which papers exist, and the eLibrary item id is
 what ties them together:
 
     pdf/pdf_links.txt        one item.asp?id=<id> URL per line
-    pdf/elibrary_<id>_*.pdf  the downloaded file
+    pdf/elibrary_<id>_*.pdf  the file downloaded from eLibrary
+    pdf/nptm_<id>.pdf        the pages cut from an open proceedings volume
     _data/papers.yml         the register - the copy of record
     _reviews/<slug>.md       the write-up, matched through its paper_link
 
@@ -39,7 +40,7 @@ REGISTER = ROOT / "_data" / "papers.yml"
 REVIEWS_DIR = ROOT / "_reviews"
 
 ID_IN_URL = re.compile(r"[?&]id=(\d+)")
-ID_IN_PDF = re.compile(r"^elibrary_(\d+)_\d+\.pdf$", re.IGNORECASE)
+ID_IN_PDF = re.compile(r"^(?:elibrary|nptm)_(\d+)(?:_\d+)?\.pdf$", re.IGNORECASE)
 FRONT_MATTER = re.compile(r"^---\r?\n(.*?)\r?\n---\r?\n", re.DOTALL)
 
 

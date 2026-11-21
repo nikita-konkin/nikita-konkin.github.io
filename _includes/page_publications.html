@@ -1,0 +1,30 @@
+{% assign current_lang = page.lang | default: site.lang %}
+{% if current_lang == 'en' %}
+  {% assign intro = 'Everything in my eLibrary profile, newest first. Titles are in the language of the paper. A write-up is linked where one exists, and a PDF where the full text is open.' %}
+  {% assign own_title = 'My papers' %}
+  {% assign supervised_title = 'Student papers I supervised' %}
+  {% assign review_label = 'Write-up' %}
+  {% assign review_suffix = '-en' %}
+  {% assign pages_label = 'pp.' %}
+{% else %}
+  {% assign intro = 'Все работы из моего профиля eLibrary, от новых к старым. У работ с разбором есть ссылка на него, у работ с открытым полным текстом — PDF.' %}
+  {% assign own_title = 'Мои публикации' %}
+  {% assign supervised_title = 'Работы студентов под моим руководством' %}
+  {% assign review_label = 'Разбор' %}
+  {% assign review_suffix = '' %}
+  {% assign pages_label = 'С.' %}
+{% endif %}
+
+{% assign papers = site.data.papers | where_exp: "paper", "paper.duplicate_of == nil" %}
+{% assign own = papers | where_exp: "paper", "paper.role != 'supervisor'" %}
+{% assign supervised = papers | where: "role", "supervisor" %}
+{% assign own_groups = own | group_by: "year" | sort: "name" | reverse %}
+{% assign supervised_groups = supervised | group_by: "year" | sort: "name" | reverse %}
+
+<p class="section-note">{{ intro }}</p>
+
+{% include publication_list.html title=own_title count=own.size groups=own_groups review_label=review_label review_suffix=review_suffix pages_label=pages_label %}
+
+{% if supervised.size > 0 %}
+  {% include publication_list.html title=supervised_title count=supervised.size groups=supervised_groups review_label=review_label review_suffix=review_suffix pages_label=pages_label %}
+{% endif %}

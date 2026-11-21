@@ -1,0 +1,20 @@
+<section class="pub-section">
+  <h2>{{ include.title }} <span class="pub-section__count">{{ include.count }}</span></h2>
+  {% for group in include.groups %}
+    <h3 class="pub-year">{{ group.name }}</h3>
+    <ol class="pub-list">
+      {% assign items = group.items | reverse %}
+      {% for paper in items %}
+        <li class="pub">
+          <span class="pub__title">{{ paper.title }}</span>
+          <span class="pub__meta">{{ paper.authors }} · {{ paper.venue }}{% if paper.pages %}, {{ include.pages_label }} {{ paper.pages }}{% endif %}</span>
+          <span class="pub__links">
+            <a href="{{ paper.link }}">eLibrary</a>
+            {% if paper.pdf %}<a href="{{ '/pdf/' | append: paper.pdf | relative_url }}">PDF</a>{% endif %}
+            {% if paper.review %}<a href="{{ '/science/' | append: paper.review | append: include.review_suffix | append: '/' | relative_url }}">{{ include.review_label }}</a>{% endif %}
+          </span>
+        </li>
+      {% endfor %}
+    </ol>
+  {% endfor %}
+</section>
