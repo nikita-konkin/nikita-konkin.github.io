@@ -1,19 +1,150 @@
 # Register of publications, keyed by eLibrary item id.
 #
 # The id is the join key across three places: the link (item.asp?id=<id>), the
-# local PDF (pdf/elibrary_<id>_*.pdf) and the review that discusses the paper
-# (_reviews/<slug>.md, matched through its paper_link). eLibrary is behind a
-# session, so nothing here can be fetched automatically - this file IS the copy
-# of record, and scripts/papers_scan.py checks it against what is on disk.
+# local PDF in pdf/ and the review that discusses the paper (_reviews/<slug>.md,
+# matched through its paper_link). The register mirrors the author's eLibrary
+# list (author_items.asp?authorid=930081, 137 records on 2026-11-21) and feeds
+# the publication list at /science/publications/. eLibrary needs a logged-in
+# session, so this file is the copy of record; scripts/papers_scan.py checks it
+# against what is on disk.
 #
 # Entries are sorted by id; `review:` is what says whether a paper is written
 # up, so do not rely on where an entry sits in the file.
 #
-# `pdf: null`    - no local copy yet.
-# `review: null` - not yet written up; this is the science backlog.
-# Fields left null are genuinely unknown. The metadata was read out of the PDF
-# text; venues, years and pages the PDFs do not name were taken from the
-# author's eLibrary list (author_items.asp?authorid=930081) on 2026-10-13.
+# `pdf:`               elibrary_<id>_<n>.pdf is an eLibrary download; when the paper
+#                      was cut from a whole downloaded volume, <n> is that volume's
+#                      file id. nptm_<id>.pdf is cut from an open volume of the
+#                      «Научному прогрессу – творчество молодых» proceedings, which
+#                      `source:` names.
+# `pdf: null`          no open full text.
+# `review: null`       not yet written up; this is the science backlog.
+# `role: supervisor`   a student paper listed through supervision, not authorship.
+# `duplicate_of:`      a second eLibrary record of the same paper; the list skips it.
+#
+# Titles, authors and venues come from the PDFs where there are any, otherwise
+# from the eLibrary records. Fields left null are genuinely unknown.
+
+- id: 23118998
+  link: "https://elibrary.ru/item.asp?id=23118998"
+  title: "Электронные диагностические карты верхней атмосферы Земли для учета влияния возмущений естественного и техногенного происхождения на работу систем связи"
+  authors: "Конкин Н.А."
+  venue: "Интеллектуальная собственность и современные техника и технологии для развития экономики. Материалы II республиканской молодёжной научно-практической конференции, Йошкар-Ола"
+  year: 2015
+  pages: "95–100"
+  pdf: null
+  review: null
+
+- id: 24966170
+  link: "https://elibrary.ru/item.asp?id=24966170"
+  title: "Определение параметров ионосферы по результатам реконструкции ионограмм наземного зондирования"
+  authors: "Конкин Н.А., Секретарев А.М. (научный руководитель — Рябова М.И.)"
+  venue: "Научному прогрессу — творчество молодых. Материалы X Международной молодёжной научной конференции по естественнонаучным и техническим дисциплинам, Йошкар-Ола"
+  year: 2015
+  pages: "21–23"
+  pdf: nptm_24966170.pdf
+  source: "https://science.volgatech.net/nm/Conferences/Young%20creations/archive/%D0%A7%D0%B0%D1%81%D1%82%D1%8C%202_2015.pdf"
+  review: 2026-11-21-rekonstruktsiya-ionogramm
+
+- id: 24966174
+  link: "https://elibrary.ru/item.asp?id=24966174"
+  title: "Разработка практикума по курсу «Теория электрических цепей»"
+  authors: "Конкин Н.А., Секретарев А.М. (научные руководители — Чернов А.А., Калачев Е.Н.)"
+  venue: "Научному прогрессу — творчество молодых. Материалы X Международной молодёжной научной конференции по естественнонаучным и техническим дисциплинам, Йошкар-Ола"
+  year: 2015
+  pages: "20–21"
+  pdf: nptm_24966174.pdf
+  source: "https://science.volgatech.net/nm/Conferences/Young%20creations/archive/%D0%A7%D0%B0%D1%81%D1%82%D1%8C%202_2015.pdf"
+  review: 2026-11-21-praktikum-tets
+
+- id: 25044501
+  link: "https://elibrary.ru/item.asp?id=25044501"
+  title: "Разработка лабораторных работ по курсу «Теория электрических цепей» на NI ELVIS II+"
+  authors: "Калачев Е.Н., Чернов А.А., Секретарев А.М., Конкин Н.А."
+  venue: "Восемнадцатые Вавиловские чтения «Социальные, естественные и технические системы в современном мире: состояние, противоречия, развитие». Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2015
+  pages: "317–320"
+  pdf: null
+  review: null
+
+- id: 25044524
+  link: "https://elibrary.ru/item.asp?id=25044524"
+  title: "Гибридный метод исследования вариаций параметров ионосферы Земли"
+  authors: "Рябова М.И., Секретарев А.М., Конкин Н.А."
+  venue: "Восемнадцатые Вавиловские чтения «Социальные, естественные и технические системы в современном мире: состояние, противоречия, развитие». Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2015
+  pages: "333–335"
+  pdf: null
+  review: null
+
+- id: 25298167
+  link: "https://elibrary.ru/item.asp?id=25298167"
+  title: "Обработка и интерпретация данных зондирования ионосферы Земли"
+  authors: "Конкин Н.А., Рябова М.И."
+  venue: "Научному прогрессу — творчество молодых. Материалы IX Международной молодёжной научной конференции по естественнонаучным и техническим дисциплинам, Йошкар-Ола"
+  year: 2014
+  pages: "178–179"
+  pdf: null
+  review: null
+
+- id: 25454128
+  link: "https://elibrary.ru/item.asp?id=25454128"
+  title: "Электронные диагностические карты верхней атмосферы Земли для учета влияния возмущений естественного и техногенного происхождения в работе систем связи"
+  authors: "Конкин Н.А., Чернов А.А."
+  venue: "Научному прогрессу — творчество молодых. Материалы Международной молодёжной научной конференции по естественнонаучным и техническим дисциплинам, Йошкар-Ола"
+  year: 2013
+  pages: "134–135"
+  pdf: null
+  review: null
+
+- id: 25602326
+  link: "https://elibrary.ru/item.asp?id=25602326"
+  title: "Исследование полосы когерентности при трансионосферном зондировании ионосферы"
+  authors: "Конев С.А., Конкин Н.А., Рябова М.И."
+  venue: "Инженерные кадры — будущее инновационной экономики России. Материалы Всероссийской студенческой конференции, Йошкар-Ола"
+  year: 2015
+  pages: "65–67"
+  pdf: null
+  review: null
+
+- id: 25602327
+  link: "https://elibrary.ru/item.asp?id=25602327"
+  title: "Разработка алгоритма и программного обеспечения автоматизации построения карт полного электронного содержания ионосферы Земли"
+  authors: "Конкин Н.А., Рябова М.И., Чернов А.А."
+  venue: "Инженерные кадры — будущее инновационной экономики России. Материалы Всероссийской студенческой конференции, Йошкар-Ола"
+  year: 2015
+  pages: "67–69"
+  pdf: null
+  review: null
+
+- id: 26129895
+  link: "https://elibrary.ru/item.asp?id=26129895"
+  title: "Программный комплекс автоматизации построения карт полос когерентности трансионосферного радиоканала"
+  authors: "Конкин Н.А., Рябова М.И., Чернов А.А."
+  venue: "Россия в пространстве глобальных трансформаций: в фокусе наук о человеке, обществе, природе и технике. Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2016
+  pages: "361–363"
+  pdf: null
+  review: null
+
+- id: 26129904
+  link: "https://elibrary.ru/item.asp?id=26129904"
+  title: "Применение гибридного метода для мониторинга состояния ионосферного ВЧ радиоканала"
+  authors: "Рябова М.И., Конев С.А., Конкин Н.А."
+  venue: "Россия в пространстве глобальных трансформаций: в фокусе наук о человеке, обществе, природе и технике. Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2016
+  pages: "382–383"
+  pdf: null
+  review: null
+
+- id: 26325052
+  link: "https://elibrary.ru/item.asp?id=26325052"
+  title: "Проблемы и направления развития организаций сферы информационно-коммуникационных технологий Республики Марий Эл"
+  authors: "Конкин Н.А., Грозова О.С."
+  venue: "Актуальные вопросы современного управления: научные парадигмы и практические аспекты. Материалы Всероссийской научно-практической конференции «Гранит науки — 2014», Йошкар-Ола"
+  year: 2015
+  pages: "64–67"
+  pdf: null
+  review: null
 
 - id: 26519283
   link: "https://elibrary.ru/item.asp?id=26519283"
@@ -21,8 +152,40 @@
   authors: "Иванов В.А., Иванов Д.В., Рябова Н.В., Рябова М.И., Чернов А.А., Конкин Н.А."
   venue: "Радиофизические методы в дистанционном зондировании сред. Материалы VII Всероссийской научной конференции, Муром"
   year: 2016
-  pdf: null
+  pdf: elibrary_26519283_65346047.pdf
   review: 2026-06-09-metodiki-algoritmy
+
+- id: 26561336
+  link: "https://elibrary.ru/item.asp?id=26561336"
+  title: "Исследование полосы когерентности при трансионосферном зондировании ионосферы"
+  authors: "Конев С.А., Конкин Н.А."
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2015, № 1-3"
+  year: 2015
+  pages: "65–67"
+  duplicate_of: 25602326
+  pdf: null
+  review: null
+
+- id: 26561337
+  link: "https://elibrary.ru/item.asp?id=26561337"
+  title: "Разработка алгоритма и программного обеспечения автоматизации построения карт полного электронного содержания ионосферы Земли"
+  authors: "Конкин Н.А."
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2015, № 1-3"
+  year: 2015
+  pages: "67–69"
+  duplicate_of: 25602327
+  pdf: null
+  review: null
+
+- id: 26670589
+  link: "https://elibrary.ru/item.asp?id=26670589"
+  title: "Исследование перемещающихся ионосферных возмущений методами наклонного и квазизенитного зондирования ионосферы Земли"
+  authors: "Иванов В.А., Рябова Н.В., Рябова М.И., Чернов А.А., Тимофеев Е.В., Конкин Н.А., Кочубейник П.В., Секретарев А.М."
+  venue: "Взаимодействие полей и излучения с веществом. Тезисы Международной Байкальской молодёжной научной школы по фундаментальной физике и XIII Конференции молодых учёных, Иркутск"
+  year: 2013
+  pages: "54"
+  pdf: elibrary_26670589_26670553.pdf
+  review: 2026-11-21-peremeshchayushchiesya-vozmushcheniya
 
 - id: 28127432
   link: "https://elibrary.ru/item.asp?id=28127432"
@@ -30,8 +193,28 @@
   authors: "Иванов В.А., Иванов Д.В., Рябова Н.В., Рябова М.И., Чернов А.А., Конкин Н.А."
   venue: "Системы синхронизации, формирования и обработки сигналов, № 4, 2016"
   year: 2016
-  pdf: null
+  pdf: elibrary_28127432_26696145.pdf
   review: 2026-06-07-polosy-kogerentnosti
+
+- id: 28801684
+  link: "https://elibrary.ru/item.asp?id=28801684"
+  title: "Комплекс программ построения электронных диагностических карт ионосферы Земли"
+  authors: "Конкин Н.А., Чернов А.А., Рябова М.И."
+  venue: "Научному прогрессу – творчество молодых, 2016, № 3"
+  year: 2016
+  pages: "24–27"
+  pdf: null
+  review: null
+
+- id: 29307442
+  link: "https://elibrary.ru/item.asp?id=29307442"
+  title: "Алгоритм оценки степени дисперсионных искажений радиосигналов СВЧ-диапазона на основе данных о полосе когерентности"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Рябова М.И., Кислицын А.А., Чернов А.А., Конкин Н.А."
+  venue: "Радиолокация, навигация, связь. Сборник трудов XXIII Международной научно-технической конференции, Воронеж"
+  year: 2017
+  pages: "541–549"
+  pdf: elibrary_29307442_29307419.pdf
+  review: 2026-11-21-dispersionnye-iskazheniya-svch
 
 - id: 29787129
   link: "https://elibrary.ru/item.asp?id=29787129"
@@ -39,8 +222,18 @@
   authors: "Иванов В.А., Конкин Н.А., Чернов А.А., Рябова М.И."
   venue: "Proceedings of CriMiCo'2016 — 26th Int. Conference «Microwave & Telecommunication Technology», Севастополь"
   year: 2016
-  pdf: null
+  pdf: elibrary_29787129_37146890.pdf
   review: 2026-06-08-elektronnye-karty
+
+- id: 31047635
+  link: "https://elibrary.ru/item.asp?id=31047635"
+  title: "Optical frequency modulated pulse power losses, caused by optical fiber material dispersion"
+  authors: "Ivanov D.V., Ivanov V.A., Ryabova N.V., Chernov A.A., Konkin N.A., Ryabova M.I."
+  venue: "Proceedings of SPIE, vol. 10342: Optical Technologies for Telecommunications 2016, 103420D"
+  year: 2017
+  pages: null
+  pdf: null
+  review: null
 
 - id: 32287865
   link: "https://elibrary.ru/item.asp?id=32287865"
@@ -48,7 +241,7 @@
   authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Рябова М.И., Кислицын А.А., Чернов А.А., Конкин Н.А."
   venue: "VII Всероссийские Армандовские чтения «Современные проблемы дистанционного зондирования, радиолокации, распространения и дифракции волн»"
   year: 2017
-  pdf: null
+  pdf: elibrary_32287865_41064889.pdf
   review: 2026-06-17-priblizheniya-dispersii
 
 - id: 35229514
@@ -57,8 +250,78 @@
   authors: "Конкин Н.А., Кислицын А.А."
   venue: "Прикладная электродинамика, фотоника и живые системы — 2018. Материалы Международной научно-технической конференции молодых учёных, аспирантов и студентов"
   year: 2018
-  pdf: null
+  pdf: elibrary_35229514_58406808.pdf
   review: 2026-06-17-algoritm-kart-svch
+
+- id: 35496889
+  link: "https://elibrary.ru/item.asp?id=35496889"
+  title: "The plotting algorithm of coherence band maps of transionospheric radio channels"
+  authors: "Ivanov D.V., Ivanov V.A., Ryabova N.V., Chernov A.A., Konkin N.A., Kislitsin A.A., Ryabova M.I."
+  venue: "Proceedings of SPIE, 2017, 104667F"
+  year: 2017
+  pages: null
+  pdf: null
+  review: null
+
+- id: 35532510
+  link: "https://elibrary.ru/item.asp?id=35532510"
+  title: "Dispersive distortions of system characteristics of broadband transionospheric radio channels"
+  authors: "Ivanov D., Ivanov V., Ryabova N., Kislitsin A., Chernov A., Konkin N., Ryabova M."
+  venue: "Journal of Applied Engineering Science, 2017, vol. 15, no. 4"
+  year: 2017
+  pages: "550–555"
+  pdf: null
+  review: null
+
+- id: 37146055
+  link: "https://elibrary.ru/item.asp?id=37146055"
+  title: "ФКМ ионозонд на универсальной SDR платформе для частотного обеспечения NVIS связи"
+  authors: "Елсуков А.А., Иванов Д.В., Овчинников В.В., Конкин Н.А., Рябова М.И."
+  venue: "Системы синхронизации, формирования и обработки сигналов, 2019, Т. 10, № 1"
+  year: 2019
+  pages: "11–16"
+  pdf: elibrary_37146055_20749795.pdf
+  review: 2026-11-21-fkm-ionozond-sdr
+
+- id: 37354041
+  link: "https://elibrary.ru/item.asp?id=37354041"
+  title: "Программный комплекс автоматизированного построения электронных карт полос когерентности ионосферных радиоканалов"
+  authors: "Конкин Н.А., Рябова Н.В."
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2018, № 3"
+  year: 2018
+  pages: "33–36"
+  pdf: null
+  review: null
+
+- id: 38625912
+  link: "https://elibrary.ru/item.asp?id=38625912"
+  title: "BPSK Ionosonde Based on SDR Platform to Support NVIS Communication"
+  authors: "Elsukov A.A., Ivanov D.V., Ovchinnikov V.V., Konkin N.A., Ryabova M.I."
+  venue: "2018 Systems of Signal Synchronization, Generating and Processing in Telecommunications (SYNCHROINFO), 8457027"
+  year: 2018
+  pages: null
+  pdf: null
+  review: null
+
+- id: 39336929
+  link: "https://elibrary.ru/item.asp?id=39336929"
+  title: "Программа определения базовых параметров высокочастотного радиоканала"
+  authors: "Иванов В.А., Иванов Д.В., Рябова М.И., Рябова Н.В., Конкин Н.А."
+  venue: "Свидетельство о регистрации программы для ЭВМ RU 2015619865 от 15.09.2015"
+  year: 2015
+  pages: null
+  pdf: elibrary_39336929_12493569.pdf
+  review: null
+
+- id: 41182667
+  link: "https://elibrary.ru/item.asp?id=41182667"
+  title: "База данных параметров систем и рекомендаций по выбору оптимальной полосы частот для устойчивой спутниковой связи с учетом геофизического фактора"
+  authors: "Иванов Д.В., Чернов А.А., Зуев А.В., Кислицын А.А., Трушкова О.А., Конкин Н.А."
+  venue: "Свидетельство о регистрации базы данных RU 2019621765 от 14.10.2019"
+  year: 2019
+  pages: null
+  pdf: elibrary_41182667_73599526.pdf
+  review: null
 
 - id: 41467774
   link: "https://elibrary.ru/item.asp?id=41467774"
@@ -82,6 +345,37 @@
   pdf: elibrary_41468023_20414712.pdf
   review: 2026-07-22-issledovanie-polos-zondirovanie
 
+- id: 41633570
+  link: "https://elibrary.ru/item.asp?id=41633570"
+  title: "Hardware software system for producing coherent bandwidth maps of transionospheric wideband radio channel"
+  authors: "Ivanov V.A., Ryabova N.V., Ryabova M.I., Kislitsin A.A., Konkin N.A."
+  venue: "2019 Systems of Signal Synchronization, Generating and Processing in Telecommunications (SYNCHROINFO), 8813934"
+  year: 2019
+  pages: null
+  pdf: null
+  review: null
+
+- id: 42316589
+  link: "https://elibrary.ru/item.asp?id=42316589"
+  title: "Активная система обеспечения безопасности водителя и пешехода на нерегулируемых дорожных переходах"
+  authors: "Заколупина У.Н."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2019, № 3"
+  year: 2019
+  pages: "41–44"
+  pdf: null
+  review: null
+
+- id: 42316595
+  link: "https://elibrary.ru/item.asp?id=42316595"
+  title: "Модернизированный аппаратно-программный комплекс для диагностики пространственно-временной изменчивости полос когерентности в трансионосферном радиоканале"
+  authors: "Конкин Н.А."
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2019, № 3"
+  year: 2019
+  pages: "58–61"
+  pdf: null
+  review: null
+
 - id: 42831881
   link: "https://elibrary.ru/item.asp?id=42831881"
   title: "Определение оптимальной полосы частот канала для систем спутниковой связи на основе диагностических карт полос когерентности"
@@ -93,6 +387,56 @@
   pdf: elibrary_42831881_75026376.pdf
   review: 2026-07-23-optimalnaya-polosa-chastot
 
+- id: 43966183
+  link: "https://elibrary.ru/item.asp?id=43966183"
+  title: "Программа автоматизированного построения абсолютного полного электронного содержания ионосферы и оценки его стохастической погрешности при измерении «AbsTecStat_graph»"
+  authors: "Иванов Д.В., Рябова М.И., Конкин Н.А., Кислицын А.А."
+  venue: "Свидетельство о регистрации программы для ЭВМ RU 2020660364 от 02.09.2020"
+  year: 2020
+  pages: null
+  pdf: elibrary_43966183_26146829.pdf
+  review: null
+
+- id: 44277705
+  link: "https://elibrary.ru/item.asp?id=44277705"
+  title: "Оценка выигрыша в пропускной способности трансионосферного радиоканала связи в условиях стохастической погрешности экспериментальной оценки полного электронного содержания ионосферы"
+  authors: "Кислицын А.А., Рябова Н.В., Конкин Н.А."
+  venue: "Системы синхронизации, формирования и обработки сигналов, 2020, Т. 11, № 4"
+  year: 2020
+  pages: "12–18"
+  pdf: elibrary_44277705_60838906.pdf
+  review: 2026-11-21-vyigrysh-propusknoy-sposobnosti
+
+- id: 45268618
+  link: "https://elibrary.ru/item.asp?id=45268618"
+  title: "Estimation of the Gain in the Transionospheric Radio Channel Capacity under the Presence of Stochastic Error in Experimental Measuring Total Electron Content of the Ionosphere"
+  authors: "Kislitsin A.A., Ryabova N.V., Konkin N.A."
+  venue: "2020 Systems of Signal Synchronization, Generating and Processing in Telecommunications (SYNCHROINFO), 9166091"
+  year: 2020
+  pages: null
+  pdf: null
+  review: null
+
+- id: 45445274
+  link: "https://elibrary.ru/item.asp?id=45445274"
+  title: "Improving the efficiency of data transmission over the HF radio channel with bandwidths of 3-24 kHz"
+  authors: "Ivanov D.V., Ivanov V.A., Belgibaev R.R., Konkin N.A."
+  venue: "2020 Wave Electronics and Its Application in Information and Telecommunication Systems (WECONF), 9131161"
+  year: 2020
+  pages: null
+  pdf: null
+  review: null
+
+- id: 45711479
+  link: "https://elibrary.ru/item.asp?id=45711479"
+  title: "Анализ занятости каналов с полосами от 3 до 24 кГц в задаче когнитивного КВ радио"
+  authors: "Иванов Д.В., Иванов В.А., Бельгибаев Р.Р., Конкин Н.А."
+  venue: "СВЧ-техника и телекоммуникационные технологии, 2020, № 1-2"
+  year: 2020
+  pages: "96–97"
+  pdf: elibrary_45711479_97779061.pdf
+  review: 2026-11-21-zanyatost-kanalov-kv
+
 - id: 47225839
   link: "https://elibrary.ru/item.asp?id=47225839"
   title: "Машинное обучение в задаче прогнозирования временных рядов МПЧ коротковолновых каналов радиосвязи"
@@ -103,6 +447,27 @@
   udk: "621/37"
   pdf: elibrary_47225839_66719338.pdf
   review: 2026-10-12-prognoz-mpch-ml
+
+- id: 47978311
+  link: "https://elibrary.ru/item.asp?id=47978311"
+  title: "Эволюция радиотехники в аспекте влияния философии науки и техники середины XX века на развитие радиотехники на материалах практического обоснования Н.Т. Петровичем метода относительной фазовой модуляции (ОФМ)"
+  authors: "Конкин Н.А."
+  venue: "Социально-гуманитарные науки и практики в XXI веке: человек и общество в меняющемся мире. Материалы семнадцатой международной весенней научной конференции, Йошкар-Ола"
+  year: 2021
+  pages: "198–200"
+  pdf: null
+  review: null
+
+- id: 48019197
+  link: "https://elibrary.ru/item.asp?id=48019197"
+  title: "Применение технологии машинного обучения для анализа параметров трансионосферных каналов связи"
+  authors: "Конкин Н.А., Пасова А.Д. (научный руководитель — Рябова Н.В.)"
+  venue: "Научному прогрессу – творчество молодых, 2021, № 2"
+  year: 2021
+  pages: "191–194"
+  pdf: nptm_48019197.pdf
+  source: "https://science.volgatech.net/upload/documents/2021nptm%202.pdf"
+  review: 2026-11-21-ml-transionosfernye-kanaly
 
 - id: 48079621
   link: "https://elibrary.ru/item.asp?id=48079621"
@@ -137,6 +502,16 @@
   pdf: elibrary_48122911_89224831.pdf
   review: 2026-10-12-mnogochastotnoe-testirovanie
 
+- id: 49439456
+  link: "https://elibrary.ru/item.asp?id=49439456"
+  title: "Оптимизация методов машинного обучения в задачах прогнозирования МПЧ коротковолнового канала связи"
+  authors: "Конкин Н.А., Пасова А.Д."
+  venue: "Безопасность человека и устойчивое развитие общества перед вызовами глобальных трансформаций. Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2022
+  pages: "77–80"
+  pdf: null
+  review: null
+
 - id: 49466078
   link: "https://elibrary.ru/item.asp?id=49466078"
   title: "Метод интеллектуального анализа данных для прогнозирования значений полосы когерентности изменяющегося трансионосферного радиоканала"
@@ -148,6 +523,17 @@
   pdf: elibrary_49466078_57618539.pdf
   review: 2026-10-12-prognoz-polosy-kogerentnosti
 
+- id: 49901168
+  link: "https://elibrary.ru/item.asp?id=49901168"
+  title: "Корреляционный анализ предикторов полного электронного содержания ионосферы Земли"
+  authors: "Конкин Н.А., Пасова А.Д."
+  venue: "Научному прогрессу – творчество молодых, 2022, № 1"
+  year: 2022
+  pages: "328–330"
+  pdf: nptm_49901168.pdf
+  source: "https://science.volgatech.net/nm/Conferences/sovremennye-problemy-tekhnicheskogo-obrazovaniya/%D0%A1%D0%B1%D0%BE%D1%80%D0%BD%D0%B8%D0%BA%20(%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD).pdf"
+  review: 2026-11-21-korrelyatsiya-prediktorov-pes
+
 - id: 49966777
   link: "https://elibrary.ru/item.asp?id=49966777"
   title: "Методика и алгоритм определения периодов оперативного прогнозирования динамики максимально применимых частот КВ-связи на основе алгоритма машинного обучения XGBoost"
@@ -158,3 +544,933 @@
   udk: "621.396; 004.89"
   pdf: elibrary_49966777_70645577.pdf
   review: 2026-10-12-periody-prognoza-xgboost
+
+- id: 50026829
+  link: "https://elibrary.ru/item.asp?id=50026829"
+  title: "Активный сенсор с дистанционным управлением для диагностики широкополосных ионосферных радиоканалов OFDM-BPSK-сигналами"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Елсуков А.А., Конкин Н.А."
+  venue: "Радиотехника, 2022, Т. 86, № 12"
+  year: 2022
+  pages: "90–104"
+  pdf: null
+  review: null
+
+- id: 50098163
+  link: "https://elibrary.ru/item.asp?id=50098163"
+  title: "Анализ методов машинного обучения с целью прогнозирования характеристик трансионосферных линий связи"
+  authors: "Антропова Е.М."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2022, № 1"
+  year: 2022
+  pages: "314–316"
+  pdf: null
+  review: null
+
+- id: 50098179
+  link: "https://elibrary.ru/item.asp?id=50098179"
+  title: "Сравнение и анализ точности алгоритмов машинного обучения с целью прогнозирования максимальной применимой частоты коротковолновых линий связи"
+  authors: "Светлаков М.Н."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2022, № 1"
+  year: 2022
+  pages: "361–363"
+  pdf: null
+  review: null
+
+- id: 50169264
+  link: "https://elibrary.ru/item.asp?id=50169264"
+  title: "Method for Detecting Modes of Received Echo Signal on Image of Ionogram of Radio Sounding with the Use of Machine Learning"
+  authors: "Ivanov D., Ivanov V., Ryabova N., Konkin N., Ovchinnikov V."
+  venue: "Wave Electronics and Its Application in Information and Telecommunication Systems, 2022, vol. 5, no. 1"
+  year: 2022
+  pages: "185–189"
+  pdf: null
+  review: null
+
+- id: 54331343
+  link: "https://elibrary.ru/item.asp?id=54331343"
+  title: "Анализ точности моделей машинного обучения при различных комбинациях признаков с целью прогнозирования МПЧ коротковолновых линий связи"
+  authors: "Светлаков М.Н., Конкин Н.А."
+  venue: "Безопасность человека и устойчивое развитие общества перед вызовами глобальных трансформаций. Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2023
+  pages: "36–39"
+  pdf: null
+  review: null
+
+- id: 54331347
+  link: "https://elibrary.ru/item.asp?id=54331347"
+  title: "Исследование применения регрессионных моделей машинного обучения с целью прогнозирования значений полосы когерентности"
+  authors: "Антропова Е.М., Конкин Н.А."
+  venue: "Безопасность человека и устойчивое развитие общества перед вызовами глобальных трансформаций. Материалы международной междисциплинарной научной конференции, Йошкар-Ола"
+  year: 2023
+  pages: "45–48"
+  pdf: null
+  review: null
+
+- id: 54474194
+  link: "https://elibrary.ru/item.asp?id=54474194"
+  title: "Гибридный метод прогнозирования МПЧ КВ-радиосвязи на основе модели SARIMA и метода машинного обучения XGBoost"
+  authors: "Конкин Н.А."
+  venue: "Распространение радиоволн. Сборник докладов XXVIII Всероссийской открытой научной конференции, Йошкар-Ола"
+  year: 2023
+  pages: "228–231"
+  pdf: elibrary_54474194_47110116.pdf
+  review: 2026-11-21-sarima-xgboost-mpch
+
+- id: 54509563
+  link: "https://elibrary.ru/item.asp?id=54509563"
+  title: "Выбор ансамблевых моделей машинного обучения для прогнозирования полосы когерентности трансионосферных каналов связи"
+  authors: "Антропова Е.М., Конкин Н.А."
+  venue: "Всероссийские открытые Армандовские чтения «Современные проблемы дистанционного зондирования, радиолокации, распространения и дифракции волн», Муром"
+  year: 2023
+  pages: "275–283"
+  pdf: elibrary_54509563_15212685.pdf
+  review: 2026-11-21-ansambli-polosa-kogerentnosti
+
+- id: 54518465
+  link: "https://elibrary.ru/item.asp?id=54518465"
+  title: "Прогнозирование полос когерентности трансионосферного радиоканала для минерально-сырьевого комплекса Сахалинской области при сейсмической активности"
+  authors: "Елчанинова А.С."
+  role: supervisor
+  venue: "Актуальные проблемы недропользования. Тезисы докладов XIX Международного форума-конкурса студентов и молодых учёных, Санкт-Петербург"
+  year: 2023
+  pages: "39–41"
+  pdf: elibrary_54518465_54518145.pdf
+  review: 2026-11-21-polosy-kogerentnosti-sakhalin
+
+- id: 54737366
+  link: "https://elibrary.ru/item.asp?id=54737366"
+  title: "Determination of Optimal Maximum Usable Frequency Prediction Periods for Ionospheric Radio Channels Using the XGBoost Machine Learning Algorithm"
+  authors: "Konkin N.A."
+  venue: "Systems of Signals Generating and Processing in the Field of on Board Communications, 2023, vol. 6, no. 1"
+  year: 2023
+  pages: "217–220"
+  pdf: null
+  review: null
+
+- id: 54740355
+  link: "https://elibrary.ru/item.asp?id=54740355"
+  title: "Подбор гиперпараметров для модели машинного обучения XGBoost с целью прогнозирования полосы когерентности"
+  authors: "Антропова Е.М."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2023, № 2"
+  year: 2023
+  pages: "3–5"
+  pdf: nptm_54740355.pdf
+  source: "https://science.volgatech.net/nm/Conferences/Young%20creations/sbornic2.pdf"
+  review: 2026-11-21-giperparametry-xgboost-pk
+
+- id: 54740358
+  link: "https://elibrary.ru/item.asp?id=54740358"
+  title: "Исследование влияния гиперпараметров модели нейронной сети MLPRegressor на точность прогнозирования ПЭС трансионосферного радиоканала"
+  authors: "Елчанинова А.С."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2023, № 2"
+  year: 2023
+  pages: "12–14"
+  pdf: nptm_54740358.pdf
+  source: "https://science.volgatech.net/nm/Conferences/Young%20creations/sbornic2.pdf"
+  review: 2026-11-21-mlpregressor-pes
+
+- id: 54740363
+  link: "https://elibrary.ru/item.asp?id=54740363"
+  title: "Приложение статистического анализа значений полного электронного содержания"
+  authors: "Штыркин И.О."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2023, № 2"
+  year: 2023
+  pages: "26–28"
+  pdf: nptm_54740363.pdf
+  source: "https://science.volgatech.net/nm/Conferences/Young%20creations/sbornic2.pdf"
+  review: 2026-11-21-statistika-pes-prilozhenie
+
+- id: 58504767
+  link: "https://elibrary.ru/item.asp?id=58504767"
+  title: "The study of machine learning features to analyze the accuracy of prediction of the coherence band of GLONASS reference stations"
+  authors: "Kislitsin A.A., Konkin N.A., Ryabova N.V."
+  venue: "Systems of Signal Synchronization, Generating and Processing in Telecommunications, 2023, vol. 6, no. 1"
+  year: 2023
+  pages: "173–177"
+  pdf: null
+  review: null
+
+- id: 59942296
+  link: "https://elibrary.ru/item.asp?id=59942296"
+  title: "Специализированная нейронная сеть для прогнозирования параметров широкополосных трансионосферных радиоканалов в составе интеллектуального сенсора"
+  authors: "Иванов Д.В., Кислицын А.А., Конкин Н.А., Елчанинова А.С., Чернов А.А."
+  venue: "Вестник ПГТУ. Сер.: Радиотехнические и инфокоммуникационные системы, 2023, № 4 (60)"
+  year: 2023
+  pages: "50–63"
+  pdf: elibrary_59942296_94160439.pdf
+  review: 2026-11-21-neyroset-intellektualnyy-sensor
+
+- id: 59996381
+  link: "https://elibrary.ru/item.asp?id=59996381"
+  title: "Прогнозирование полосы когерентности с применением ансамблевых моделей машинного обучения"
+  authors: "Антропова Е.М."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2023, № 1"
+  year: 2023
+  pages: "357–360"
+  pdf: null
+  review: null
+
+- id: 59996397
+  link: "https://elibrary.ru/item.asp?id=59996397"
+  title: "Исследование точности прогнозирования ПЭС соседних ГНСС станций с использованием LSTM нейронной сети"
+  authors: "Вершинин М.В."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2023, № 1"
+  year: 2023
+  pages: "399–402"
+  pdf: null
+  review: null
+
+- id: 59996398
+  link: "https://elibrary.ru/item.asp?id=59996398"
+  title: "Теоретический анализ методов разработки виртуальной лабораторной среды в области инфокоммуникационных технологий"
+  authors: "Жабкина Ю.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2023, № 1"
+  year: 2023
+  pages: "402–405"
+  pdf: null
+  review: null
+
+- id: 59996403
+  link: "https://elibrary.ru/item.asp?id=59996403"
+  title: "Теоретический анализ методов расчета полного электронного содержания ионосферы с использованием программно-аппаратных средств"
+  authors: "Марсюков Н.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2023, № 1"
+  year: 2023
+  pages: "418–421"
+  pdf: null
+  review: null
+
+- id: 59996417
+  link: "https://elibrary.ru/item.asp?id=59996417"
+  title: "Применение нейросетевого подхода с целью прогнозирования полного электронного содержания трансионосферного радиоканала"
+  authors: "Елчанинова А.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2023, № 1"
+  year: 2023
+  pages: "453–456"
+  pdf: null
+  review: null
+
+- id: 65241331
+  link: "https://elibrary.ru/item.asp?id=65241331"
+  title: "Сравнительный анализ регрессионных и ансамблевого методов машинного обучения с целью прогнозирования МПЧ ионосферных радиолиний связи"
+  authors: "Рябова Н.В., Конкин Н.А., Чернов А.А., Иванова Н.В."
+  venue: "VI Научный форум «Телекоммуникации: теория и технологии» ТТТ-2023. Материалы XXV Международной научно-технической конференции, Казань"
+  year: 2023
+  pages: "18–20"
+  pdf: elibrary_65241331_92284524.pdf
+  review: 2026-11-21-regressiya-ansambli-mpch
+
+- id: 65241412
+  link: "https://elibrary.ru/item.asp?id=65241412"
+  title: "Исследование нейронной сети типа LSTM с целью прогнозирования параметров трансионосферного радиоканала"
+  authors: "Елчанинова А.С., Конкин Н.А., Чернов А.А."
+  venue: "VI Научный форум «Телекоммуникации: теория и технологии» ТТТ-2023. Материалы XXV Международной научно-технической конференции, Казань"
+  year: 2023
+  pages: "129–131"
+  pdf: elibrary_65241412_74428994.pdf
+  review: 2026-11-21-lstm-transionosfernyy-kanal
+
+- id: 68558431
+  link: "https://elibrary.ru/item.asp?id=68558431"
+  title: "Синтез и анализ структур нейронных сетей для прогнозирования полного электронного содержания ионосферы Земли"
+  authors: "Рябова Н.В., Конкин Н.А., Вершинин М.В."
+  venue: "Всероссийские открытые Армандовские чтения «Современные проблемы дистанционного зондирования, радиолокации, распространения и дифракции волн», Муром"
+  year: 2024
+  pages: "445–457"
+  pdf: elibrary_68558431_23896005.pdf
+  review: 2026-11-21-neyroseti-prognoz-pes
+
+- id: 68916484
+  link: "https://elibrary.ru/item.asp?id=68916484"
+  title: "Разработка методики прогнозирования максимальной применимой частоты ионосферных КВ радиолиний на основе синтеза нейросети"
+  authors: "Рябова Н.В., Конкин Н.А., Елчанинова А.С."
+  venue: "Инфокоммуникационные и радиоэлектронные технологии, 2024, Т. 7, № 4"
+  year: 2024
+  pages: "691–705"
+  pdf: elibrary_68916484_92928597.pdf
+  review: 2026-11-21-neyroset-prognoz-mpch
+
+- id: 69593286
+  link: "https://elibrary.ru/item.asp?id=69593286"
+  title: "Программа структурно-параметрического синтеза системы прогнозирования тренда основных параметров ионосферных и трансионосферных каналов связи на основе метода XGBoost"
+  authors: "Иванов Д.В., Рябова М.И., Чернов А.А., Конкин Н.А."
+  venue: "Свидетельство о регистрации программы для ЭВМ RU 2024669452 от 19.08.2024"
+  year: 2024
+  pages: null
+  pdf: elibrary_69593286_71457192.pdf
+  review: null
+
+- id: 69595887
+  link: "https://elibrary.ru/item.asp?id=69595887"
+  title: "Программа первичной обработки данных сенсорной диагностики ионосферных и трансионосферных каналов связи"
+  authors: "Рябова Н.В., Иванов Д.В., Чернов А.А., Конкин Н.А."
+  venue: "Свидетельство о регистрации программы для ЭВМ RU 2024680270 от 27.08.2024"
+  year: 2024
+  pages: null
+  pdf: elibrary_69595887_72174050.pdf
+  review: null
+
+- id: 69596751
+  link: "https://elibrary.ru/item.asp?id=69596751"
+  title: "Программа синтеза архитектуры и параметров нейронных сетей для оперативного прогнозирования динамики изменения ключевых характеристик радиоканалов ионосферной и трансионосферной связи"
+  authors: "Рябова Н.В., Иванов Д.В., Чернов А.А., Конкин Н.А."
+  venue: "Свидетельство о регистрации программы для ЭВМ RU 2024680522 от 29.08.2024"
+  year: 2024
+  pages: null
+  pdf: elibrary_69596751_86612832.pdf
+  review: null
+
+- id: 69768721
+  link: "https://elibrary.ru/item.asp?id=69768721"
+  title: "Machine learning in the problem of forecasting the time series of MUF of short-wave radio channels"
+  authors: "Konkin N.A., Pasova A.D."
+  venue: "Archivarius, 2021, vol. 7, no. 8 (62)"
+  year: 2021
+  pages: "29–31"
+  duplicate_of: 47225839
+  pdf: null
+  review: null
+
+- id: 69910519
+  link: "https://elibrary.ru/item.asp?id=69910519"
+  title: "Исследование поведения ионосферы в разных климатических зонах"
+  authors: "Антропова Е.М."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2024, № 1"
+  year: 2024
+  pages: "279–281"
+  pdf: nptm_69910519.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic19.pdf"
+  review: 2026-11-21-ionosfera-klimaticheskie-zony
+
+- id: 69910523
+  link: "https://elibrary.ru/item.asp?id=69910523"
+  title: "Синтез структур нейронных сетей для решения задачи прогнозирования ПЭС ионосферы Земли"
+  authors: "Вершинин М.В."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2024, № 1"
+  year: 2024
+  pages: "290–292"
+  pdf: nptm_69910523.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic19.pdf"
+  review: 2026-11-21-sintez-neyrosetey-pes
+
+- id: 69910526
+  link: "https://elibrary.ru/item.asp?id=69910526"
+  title: "Исследование структур нейронной сети типа LSTM для прогноза ПЭС и полосы когерентности при различных прогнозных периодах"
+  authors: "Елчанинова А.С."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2024, № 1"
+  year: 2024
+  pages: "298–300"
+  pdf: nptm_69910526.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic19.pdf"
+  review: 2026-11-21-lstm-pes-pk
+
+- id: 69910527
+  link: "https://elibrary.ru/item.asp?id=69910527"
+  title: "Выявление статистических закономерностей при анализе данных ПЭС в периоды возмущённой и спокойной ионосферы"
+  authors: "Жабкина Ю.А."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2024, № 1"
+  year: 2024
+  pages: "301–303"
+  pdf: nptm_69910527.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic19.pdf"
+  review: 2026-11-21-statistika-vozmushcheniy-pes
+
+- id: 73539250
+  link: "https://elibrary.ru/item.asp?id=73539250"
+  title: "Интеллектуальная система диагностики с режимом прогнозирования параметров широкополосных радиоканалов по данным пассивных радиосенсоров"
+  authors: "Кислицын А.А., Рябова Н.В., Кислицына М.А., Конкин Н.А."
+  venue: "БШФФ-2024. Взаимодействие полей и излучения с веществом. Труды XVIII Конференции молодых учёных, Иркутск"
+  year: 2024
+  pages: "265–267"
+  pdf: elibrary_73539250_97595040.pdf
+  review: 2026-11-21-passivnye-radiosensory
+
+- id: 75116659
+  link: "https://elibrary.ru/item.asp?id=75116659"
+  title: "Восстановление временного хода ПЭС с использованием методов машинного обучения"
+  authors: "Рябова Н.В., Конкин Н.А., Вершинин М.В."
+  venue: "Распространение радиоволн. Сборник докладов I Всероссийской молодёжной научной школы-конференции памяти Д.С. Лукина, Йошкар-Ола"
+  year: 2024
+  pages: "113–117"
+  pdf: elibrary_75116659_77462594.pdf
+  review: 2026-11-21-vosstanovlenie-hoda-pes
+
+- id: 75254072
+  link: "https://elibrary.ru/item.asp?id=75254072"
+  title: "Исследование применимости LSTM нейронных сетей для прогнозирования характеристик КВ каналов связи"
+  authors: "Рябова Н.В., Конкин Н.А., Елчанинова А.С."
+  venue: "VII научный форум «Телекоммуникации: теория и технологии» ТТТ-2024. Материалы XXI Международной научно-технической конференции, Самара"
+  year: 2024
+  pages: "71–72"
+  pdf: elibrary_75254072_12900063.pdf
+  review: 2026-11-21-lstm-kv-kanaly
+
+- id: 75254138
+  link: "https://elibrary.ru/item.asp?id=75254138"
+  title: "Восстановление значений ПЭС с использованием методов машинного обучения"
+  authors: "Конкин Н.А., Вершинин М.В."
+  venue: "VII научный форум «Телекоммуникации: теория и технологии» ТТТ-2024. Материалы XXI Международной научно-технической конференции, Самара"
+  year: 2024
+  pages: "73–74"
+  pdf: elibrary_75254138_31564462.pdf
+  review: 2026-11-21-vosstanovlenie-pes-ttt
+
+- id: 80508548
+  link: "https://elibrary.ru/item.asp?id=80508548"
+  title: "Прогнозирование полосы прозрачности ионосферной линии КВ-радиосвязи. Ч. 1. Теоретико-экспериментальные основы нового когнитивного подхода к диагностике и прогнозированию максимально применимой частоты"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Конкин Н.А., Чернов А.А."
+  venue: "Радиотехника, 2025, Т. 89, № 2"
+  year: 2025
+  pages: "152–166"
+  pdf: null
+  review: null
+
+- id: 80513579
+  link: "https://elibrary.ru/item.asp?id=80513579"
+  title: "Prediction of Trends of Ionospheric and Transionospheric Communication Channel Characteristics by XGBoost Method"
+  authors: "Ivanov D.V., Elchaninova A.S., Konkin N.A."
+  venue: "Wave Electronics and Its Application in Information and Telecommunication Systems, 2024, vol. 7, no. 1"
+  year: 2024
+  pages: "127–130"
+  pdf: null
+  review: null
+
+- id: 80513611
+  link: "https://elibrary.ru/item.asp?id=80513611"
+  title: "Study of Applicability of LSTM Neural Networks for Predicting the Characteristics of Short-Wave Communication Channels"
+  authors: "Ryabova N.V., Elchaninova A.S., Konkin N.A."
+  venue: "Wave Electronics and Its Application in Information and Telecommunication Systems, 2024, vol. 7, no. 1"
+  year: 2024
+  pages: "282–285"
+  pdf: null
+  review: null
+
+- id: 80516931
+  link: "https://elibrary.ru/item.asp?id=80516931"
+  title: "Neural Network for Forecasting Parameters of Broadband Transionospheric Radio Channels"
+  authors: "Ivanov D.V., Kislitsin A.A., Konkin N.A., Chernov A.A."
+  venue: "Systems of Signals Generating and Processing in the Field of on Board Communications, 2024, vol. 7, no. 1"
+  year: 2024
+  pages: "156–159"
+  pdf: null
+  review: null
+
+- id: 82449572
+  link: "https://elibrary.ru/item.asp?id=82449572"
+  title: "Анализ моделей машинного обучения для прогнозирования полосы когеретности для различных сезонов года и координат ГНСС-станций"
+  authors: "Антропова Е.М., Ермохин А.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2024, № 1"
+  year: 2024
+  pages: "266–269"
+  pdf: null
+  review: null
+
+- id: 82449580
+  link: "https://elibrary.ru/item.asp?id=82449580"
+  title: "Анализ влияния степени аппроксимации временного хода ПЭС на точность его прогноза"
+  authors: "Короткова Н.А., Елчанинова А.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2024, № 1"
+  year: 2024
+  pages: "290–295"
+  pdf: null
+  review: null
+
+- id: 82449588
+  link: "https://elibrary.ru/item.asp?id=82449588"
+  title: "Прогнозирование ПЭС с применением метода машинного обучения Random Forest и динамических предикторов"
+  authors: "Вершинин М.В., Елчанинова А.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2024, № 1"
+  year: 2024
+  pages: "312–316"
+  pdf: null
+  review: null
+
+- id: 82449589
+  link: "https://elibrary.ru/item.asp?id=82449589"
+  title: "Теоретический анализ методики генерации RINEX-файлов на основе данных u-blox"
+  authors: "Марсюков Н.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2024, № 1"
+  year: 2024
+  pages: "316–318"
+  pdf: null
+  review: null
+
+- id: 82449594
+  link: "https://elibrary.ru/item.asp?id=82449594"
+  title: "Оценка пропускной способности трансионосферного радиоканала с использованием прогнозных и реальных данных ПЭС"
+  authors: "Елчанинова А.С., Ермохин А.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2024, № 1"
+  year: 2024
+  pages: "329–333"
+  pdf: null
+  review: null
+
+- id: 82449642
+  link: "https://elibrary.ru/item.asp?id=82449642"
+  title: "Разработка методики функционирования приложения для изучения иностранных языков"
+  authors: "Ермохин А.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2024, № 1"
+  year: 2024
+  pages: "478–481"
+  pdf: null
+  review: null
+
+- id: 82921991
+  link: "https://elibrary.ru/item.asp?id=82921991"
+  title: "Исследование точности восстановления сезонных значений ПЭС на основе машинного обучения и динамических предикторов"
+  authors: "Рябова Н.В., Конкин Н.А., Вершинин М.В."
+  venue: "Всероссийские открытые Армандовские чтения «Муром 2025». Материалы Всероссийской открытой научной конференции и Молодёжной школы-конференции, Муром"
+  year: 2025
+  pages: "166–171"
+  pdf: elibrary_82921991_39746529.pdf
+  review: 2026-11-21-sezonnye-znacheniya-pes
+
+- id: 83009745
+  link: "https://elibrary.ru/item.asp?id=83009745"
+  title: "Интеграция библиотеки KaTeX в работу чат-бота для отображения математических выражений"
+  authors: "Ермохин А.А."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2025, № 1"
+  year: 2025
+  pages: "30–32"
+  pdf: nptm_83009745.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic20.pdf"
+  review: 2026-11-21-katex-chat-bot
+
+- id: 83009749
+  link: "https://elibrary.ru/item.asp?id=83009749"
+  title: "Сравнение STT/TTS-технологий для транскрибирования аудиофайлов"
+  authors: "Короткова Н.А., Ермохин А.А."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2025, № 1"
+  year: 2025
+  pages: "41–43"
+  pdf: nptm_83009749.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic20.pdf"
+  review: 2026-11-21-stt-tts-transkribirovanie
+
+- id: 83009905
+  link: "https://elibrary.ru/item.asp?id=83009905"
+  title: "Исследование точности восстановления сезонных значений ПЭС с использованием метода машинного обучения и различных комбинаций предикторов"
+  authors: "Вершинин М.В."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2025, № 1"
+  year: 2025
+  pages: "481–483"
+  pdf: nptm_83009905.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic20.pdf"
+  review: 2026-11-21-kombinatsii-prediktorov-pes
+
+- id: 83009909
+  link: "https://elibrary.ru/item.asp?id=83009909"
+  title: "Прогнозирование планетарного Kp-индекса с использованием ансамблевого регрессионного метода машинного обучения"
+  authors: "Короткова Н.А."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2025, № 1"
+  year: 2025
+  pages: "492–494"
+  pdf: nptm_83009909.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic20.pdf"
+  review: 2026-11-21-kp-indeks-ansambl
+
+- id: 83009913
+  link: "https://elibrary.ru/item.asp?id=83009913"
+  title: "Разработка программно-аппаратного комплекса для автоматической ориентации спутниковой антенны на основе анализа телеметрических данных"
+  authors: "Марсюков Н.С."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2025, № 1"
+  year: 2025
+  pages: "503–505"
+  pdf: nptm_83009913.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic20.pdf"
+  review: 2026-11-21-orientatsiya-antenny
+
+- id: 83020611
+  link: "https://elibrary.ru/item.asp?id=83020611"
+  title: "Исследование точности прогнозирования МПЧ КВ-каналов связи в зависимости от сезонных изменений и сдвиговых предикторов"
+  authors: "Конкин Н.А., Елчанинова А.С."
+  venue: "Распространение радиоволн. Труды XXIX Всероссийской открытой научной конференции, Казань"
+  year: 2025
+  pages: "523–527"
+  pdf: elibrary_83020611_68139321.pdf
+  review: 2026-11-21-sdvigovye-prediktory-mpch
+
+- id: 83095325
+  link: "https://elibrary.ru/item.asp?id=83095325"
+  title: "Сравнительный анализ влияния геомагнитных и солнечных индексов на прогнозирование критической частоты ионосферного слоя F2 с использованием машинного обучения"
+  authors: "Короткова Н.А., Конкин Н.А."
+  venue: "СВЧ-техника и телекоммуникационные технологии, 2025, № 7"
+  year: 2025
+  pages: "37–38"
+  pdf: elibrary_83095325_13048379.pdf
+  review: 2026-11-21-indeksy-prognoz-fof2
+
+- id: 83095332
+  link: "https://elibrary.ru/item.asp?id=83095332"
+  title: "Анализ влияния производных и модельных предикторов на точность прогнозирования максимально применимых частот КВ радиолиний"
+  authors: "Конкин Н.А., Елчанинова А.С."
+  venue: "СВЧ-техника и телекоммуникационные технологии, 2025, № 7"
+  year: 2025
+  pages: "51–53"
+  pdf: elibrary_83095332_66154916.pdf
+  review: 2026-11-21-modelnye-prediktory-mpch
+
+- id: 83095786
+  link: "https://elibrary.ru/item.asp?id=83095786"
+  title: "Оценка влияния предикторов машинного обучения на точность восстановления тенденций вариаций ПЭС"
+  authors: "Конкин Н.А., Вершинин М.В."
+  venue: "СВЧ-техника и телекоммуникационные технологии, 2025, № 7"
+  year: 2025
+  pages: "240–242"
+  pdf: elibrary_83095786_31648232.pdf
+  review: 2026-11-21-prediktory-variatsiy-pes
+
+- id: 83252837
+  link: "https://elibrary.ru/item.asp?id=83252837"
+  title: "Ансамблевые методы машинного обучения для прогнозирования характеристик коротковолновых ионосферных каналов связи"
+  authors: "Конкин Н.А. (научный руководитель — Рябова Н.В.)"
+  venue: "Прикладная электродинамика, фотоника и живые системы — 2025. Сборник тезисов докладов XII Международной молодёжной научно-технической конференции, Казань"
+  year: 2025
+  pages: "40–45"
+  pdf: elibrary_83252837_87244546.pdf
+  review: 2026-11-21-ansambli-kv-kanaly
+
+- id: 83253100
+  link: "https://elibrary.ru/item.asp?id=83253100"
+  title: "Анализ влияния сдвиговых предикторов на точность прогнозирования МПЧ КВ линий связи"
+  authors: "Елчанинова А.С."
+  role: supervisor
+  venue: "Прикладная электродинамика, фотоника и живые системы — 2025. Сборник тезисов докладов XII Международной молодёжной научно-технической конференции, Казань"
+  year: 2025
+  pages: "554–556"
+  pdf: elibrary_83253100_69073159.pdf
+  review: 2026-11-21-sdvigovye-prediktory-tezisy
+
+- id: 83253102
+  link: "https://elibrary.ru/item.asp?id=83253102"
+  title: "Прогнозирование планетарного Kp-индекса с использованием регрессионного метода машинного обучения"
+  authors: "Короткова Н.А."
+  role: supervisor
+  venue: "Прикладная электродинамика, фотоника и живые системы — 2025. Сборник тезисов докладов XII Международной молодёжной научно-технической конференции, Казань"
+  year: 2025
+  pages: "556–558"
+  pdf: elibrary_83253102_36056497.pdf
+  review: 2026-11-21-kp-indeks-regressiya
+
+- id: 87229552
+  link: "https://elibrary.ru/item.asp?id=87229552"
+  title: "Исследование применимости методов машинного обучения для восстановления временного хода ПЭС"
+  authors: "Рябова Н.В., Конкин Н.А., Вершинин М.В."
+  venue: "Вестник ПГТУ. Сер.: Радиотехнические и инфокоммуникационные системы, 2025, № 2 (66)"
+  year: 2025
+  pages: "41–50"
+  pdf: elibrary_87229552_74564950.pdf
+  review: 2026-11-21-primenimost-ml-pes
+
+- id: 87280968
+  link: "https://elibrary.ru/item.asp?id=87280968"
+  title: "Сенсорная диагностика ионосферных КВ-радиолиний и сетевые подходы к передаче полученной информации"
+  authors: "Иванов Д.В., Иванов В.А., Рябова Н.В., Конкин Н.А., Чернов А.А."
+  venue: "T-Comm: Телекоммуникации и транспорт, 2025, Т. 19, № 11"
+  year: 2025
+  pages: "15–22"
+  pdf: elibrary_87280968_84883859.pdf
+  review: 2026-11-21-sensornaya-diagnostika-kv
+
+- id: 88853579
+  link: "https://elibrary.ru/item.asp?id=88853579"
+  title: "Метод обнаружения принимаемых мод сигнала на изображении ионограммы радиозондирования ионосферы с использованием машинного обучения"
+  authors: "Иванов В.А., Конкин Н.А., Овчинников В.В., Рябова М.И."
+  venue: "ГрафиКон 2025. Материалы 35-й Международной конференции по компьютерной графике и машинному зрению, Йошкар-Ола"
+  year: 2025
+  pages: "13–21"
+  pdf: elibrary_88853579_65027444.pdf
+  review: 2026-11-21-mody-na-ionogramme
+
+- id: 88853642
+  link: "https://elibrary.ru/item.asp?id=88853642"
+  title: "Машинное обучение для анализа доступности коротковолнового канала связи"
+  authors: "Конкин Н.А., Вершинин М.В."
+  venue: "ГрафиКон 2025. Материалы 35-й Международной конференции по компьютерной графике и машинному зрению, Йошкар-Ола"
+  year: 2025
+  pages: "505–513"
+  pdf: elibrary_88853642_25722482.pdf
+  review: 2026-11-21-dostupnost-kv-kanala
+
+- id: 88982305
+  link: "https://elibrary.ru/item.asp?id=88982305"
+  title: "Комплексный метод и средства сенсорной диагностики каналов дальней радиосвязи для увеличения достоверности и скорости передачи данных"
+  authors: "Иванов Д.В., Иванов В.А., Рябова М.И., Овчинников В.В., Конкин Н.А."
+  venue: "Электромагнитные волны и электронные системы, 2026, Т. 31, № 1"
+  year: 2026
+  pages: "38–53"
+  pdf: null
+  review: null
+
+- id: 89058955
+  link: "https://elibrary.ru/item.asp?id=89058955"
+  title: "Восстановление и прогнозирование временных рядов полного электронного содержания ионосферы с использованием машинного обучения"
+  authors: "Рябова Н.В., Овчинников В.В., Вершинин М.В., Конкин Н.А., Елчанинова А.С., Станкевич С.С."
+  venue: "Вестник ПГТУ. Сер.: Радиотехнические и инфокоммуникационные системы, 2025, № 4 (68)"
+  year: 2025
+  pages: "6–17"
+  pdf: elibrary_89058955_21259286.pdf
+  review: 2026-11-21-ryady-pes-prognoz
+
+- id: 91551790
+  link: "https://elibrary.ru/item.asp?id=91551790"
+  title: "Анализ доступности и точности ее оценки для КВ-радиоканала на прогнозируемой ОРЧ, определяемой методом машинного обучения"
+  authors: "Иванов В.А., Рябова Н.В., Конкин Н.А., Бастракова М.И., Чернов А.А."
+  venue: "Электромагнитные волны и электронные системы, 2026, Т. 31, № 2"
+  year: 2026
+  pages: "78–87"
+  pdf: null
+  review: null
+
+- id: 91582044
+  link: "https://elibrary.ru/item.asp?id=91582044"
+  title: "Влияние сезонной изменчивости полного электронного содержания на параметры чирпинг-эффекта трансионосферных каналов"
+  authors: "Елчанинова А.С., Ермохин А.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "391–394"
+  pdf: null
+  review: null
+
+- id: 91582045
+  link: "https://elibrary.ru/item.asp?id=91582045"
+  title: "Моделирование максимально применимой частоты КВ-связи по данным критических частот и ПЭС ионосферы: подход на основе машинного обучения"
+  authors: "Елчанинова А.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "394–398"
+  pdf: null
+  review: null
+
+- id: 91582048
+  link: "https://elibrary.ru/item.asp?id=91582048"
+  title: "Специфика разработки ИИ-агента для задач сенсорных радиосетей"
+  authors: "Ермохин А.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "408–411"
+  pdf: null
+  review: null
+
+- id: 91582061
+  link: "https://elibrary.ru/item.asp?id=91582061"
+  title: "Анализ структуры MAT-файлов промышленных RF-измерений для задач классификации паттернов распространения сигналов"
+  authors: "Козлова А.В."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "449–452"
+  pdf: null
+  review: null
+
+- id: 91582063
+  link: "https://elibrary.ru/item.asp?id=91582063"
+  title: "Прогнозирование критической частоты ионосферного слоя F2 в Арктическом регионе с использованием машинного обучения"
+  authors: "Короткова Н.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "456–460"
+  pdf: null
+  review: null
+
+- id: 91582064
+  link: "https://elibrary.ru/item.asp?id=91582064"
+  title: "Сравнение двух методик расчета максимальной применимой частоты"
+  authors: "Короткова Н.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "460–464"
+  pdf: null
+  review: null
+
+- id: 91582065
+  link: "https://elibrary.ru/item.asp?id=91582065"
+  title: "Анализ ошибок ГНСС и формирование признакового пространства для моделей машинного обучения"
+  authors: "Комбаров К.Н., Николаева Н.С."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "464–466"
+  pdf: null
+  review: null
+
+- id: 91582083
+  link: "https://elibrary.ru/item.asp?id=91582083"
+  title: "Сравнение методов машинного обучения для работы с графиками ионограмм наклонного зондирования ионосферы"
+  authors: "Сельдюков А.Ю., Коржавин Н.Е., Фомичев Д.А."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "520–523"
+  pdf: null
+  review: null
+
+- id: 91582089
+  link: "https://elibrary.ru/item.asp?id=91582089"
+  title: "Веб-система дистанционного управления комплексом ионосферного зондирования"
+  authors: "Титов Д.Н."
+  role: supervisor
+  venue: "Инженерные кадры — будущее инновационной экономики России, 2025, № 1"
+  year: 2025
+  pages: "537–539"
+  pdf: null
+  review: null
+
+- id: 93329690
+  link: "https://elibrary.ru/item.asp?id=93329690"
+  title: "Корреляционный анализ гелиогеофизических характеристик для анализа трансионосферных эффектов"
+  authors: "Вершинин М.В."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "696–698"
+  pdf: nptm_93329690.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-geliogeofizika-korrelyatsiya
+
+- id: 93329695
+  link: "https://elibrary.ru/item.asp?id=93329695"
+  title: "Анализ практической реализации радиочастотной системы пеленгации беспилотных летательных аппаратов"
+  authors: "Козичко В.М."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "710–712"
+  pdf: nptm_93329695.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-pelengatsiya-bpla-realizatsiya
+
+- id: 93329696
+  link: "https://elibrary.ru/item.asp?id=93329696"
+  title: "Анализ принципов построения и перспективных направлений развития радиочастотных систем пеленгации на базе беспилотных летательных аппаратов"
+  authors: "Козичко В.М."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "713–715"
+  pdf: nptm_93329696.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-pelengatsiya-bpla-printsipy
+
+- id: 93329697
+  link: "https://elibrary.ru/item.asp?id=93329697"
+  title: "Исследование зависимости качества кластеризации ошибок псевдодальности ГНСС от геомагнитных условий наблюдений"
+  authors: "Комбаров К.Н."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "716–719"
+  pdf: nptm_93329697.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-klasterizatsiya-oshibok-gnss
+
+- id: 93329698
+  link: "https://elibrary.ru/item.asp?id=93329698"
+  title: "Анализ важности признаков в задачах прогнозирования foF2 и МПЧ методами машинного обучения при сравнении с моделью IRI-2020 и аналитической моделью"
+  authors: "Короткова Н.А."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "719–722"
+  pdf: nptm_93329698.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-vazhnost-priznakov-fof2
+
+- id: 93329699
+  link: "https://elibrary.ru/item.asp?id=93329699"
+  title: "Классификация солнечных вспышек на основе ResNet-50: анализ компонентов обучения и сравнение с бейзлайнами"
+  authors: "Короткова Н.А."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "722–725"
+  pdf: nptm_93329699.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-solnechnye-vspyshki-resnet
+
+- id: 93329705
+  link: "https://elibrary.ru/item.asp?id=93329705"
+  title: "Веб-система дистанционного управления комплексом ионосферного зондирования"
+  authors: "Мухамедзянов Р.Р., Титов Д.Н."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "740–742"
+  pdf: nptm_93329705.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-veb-upravlenie-zondirovaniem
+
+- id: 93329713
+  link: "https://elibrary.ru/item.asp?id=93329713"
+  title: "Безопасность систем умного дома на базе технологии Интернета вещей"
+  authors: "Санников Ф.Б."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "764–767"
+  pdf: nptm_93329713.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-umnyy-dom-bezopasnost
+
+- id: 93329718
+  link: "https://elibrary.ru/item.asp?id=93329718"
+  title: "Фазовый метод пеленгации в системах беспилотных летательных аппаратов: принципы, алгоритмы и анализ современных подходов"
+  authors: "Смирнов В.Е."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "778–781"
+  pdf: nptm_93329718.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-fazovaya-pelengatsiya-bpla
+
+- id: 93329720
+  link: "https://elibrary.ru/item.asp?id=93329720"
+  title: "Сравнительный анализ и обоснование выбора методов и программного обеспечения распознавания лиц для систем безопасности образовательных учреждений"
+  authors: "Фомичев Д.А., Михеев С.Е."
+  role: supervisor
+  venue: "Научному прогрессу – творчество молодых, 2026, № 1"
+  year: 2026
+  pages: "785–787"
+  pdf: nptm_93329720.pdf
+  source: "https://science.volgatech.net/upload/documents/sbornic21.pdf"
+  review: 2026-11-21-raspoznavanie-lits
+
+- id: 93447831
+  link: "https://elibrary.ru/item.asp?id=93447831"
+  title: "Интерпретируемое прогнозирование максимальной применимой частоты КВ-радиолиний по данным среднеширотных ионозондов"
+  authors: "Короткова Н.А., Конкин Н.А."
+  venue: "Инфокоммуникационные и радиоэлектронные технологии, 2026, Т. 9, № 6"
+  year: 2026
+  pages: "1149–1170"
+  pdf: elibrary_93447831_19111459.pdf
+  review: 2026-11-21-interpretiruemyy-prognoz-mpch

@@ -1,19 +1,21 @@
 {% assign current_lang = page.lang | default: site.lang %}
 {% if current_lang == 'en' %}
-  {% assign reviews = site.reviews | where: "lang", "en" | sort: "date" | reverse %}
-  {% assign intro = 'My published scientific papers, each with a short analysis — a summary, the strengths, the weak spots, and concrete suggestions.' %}
+  {% assign reviews = site.reviews | where: "lang", "en" %}
+  {% assign intro = 'My published papers and the student papers I supervised, each with a short analysis: the problem, the methods, the results, the limitations and the transferable heuristics.' %}
   {% assign empty_msg = 'Nothing published here yet.' %}
   {% assign view_label = 'View' %}
   {% assign list_label = 'List' %}
   {% assign tiles_label = 'Tiles' %}
 {% else %}
-  {% assign reviews = site.reviews | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" | sort: "date" | reverse %}
-  {% assign intro = 'Мои опубликованные научные работы — каждая с коротким разбором: резюме, сильные стороны, слабые места и конкретные предложения.' %}
+  {% assign reviews = site.reviews | where: "lang", "ru" | where_exp: "item", "item.translation_of == nil" %}
+  {% assign intro = 'Мои опубликованные работы и работы студентов под моим руководством, каждая с коротким разбором: задача, методы, результаты, ограничения и переносимые приёмы.' %}
   {% assign empty_msg = 'Пока ничего не опубликовано.' %}
   {% assign view_label = 'Вид' %}
   {% assign list_label = 'Список' %}
   {% assign tiles_label = 'Плитки' %}
 {% endif %}
+
+{% assign review_years = reviews | group_by: "paper_year" | sort: "name" | reverse %}
 
 {% include science_profile.html %}
 
@@ -26,8 +28,11 @@
 
 {% if reviews.size > 0 %}
   <div class="card-grid" data-card-grid="reviewView" style="margin-top: 1.5rem;">
-    {% for review in reviews %}
-      {% include review_card.html review=review %}
+    {% for year in review_years %}
+      {% assign year_reviews = year.items | sort: "date" | reverse %}
+      {% for review in year_reviews %}
+        {% include review_card.html review=review %}
+      {% endfor %}
     {% endfor %}
   </div>
 {% else %}
