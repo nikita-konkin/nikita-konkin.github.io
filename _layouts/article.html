@@ -36,7 +36,7 @@ layout: default
 {% endif %}
 
 <article class="article">
-  <header class="article-header">
+  <header class="article-header{% if page.title.size > 80 %} article-header--long-title{% endif %}">
     <div class="article-header__meta">
       <span>{{ page.date | date: "%d.%m.%Y" }}</span>
       {% if page.type %}
